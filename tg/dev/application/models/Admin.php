@@ -24,12 +24,13 @@ class AdminModel extends F_Model_Pdo
 			'username' => '渠道帐号',
             'nickname' => '真实姓名',
             'pay_number' => '支付宝',
-			'username' => '渠道账号',
 			'boxname' => '盒子名字',
 			'divide_into' =>
                 function(&$row){
                     if( empty($row) ) return '分层比例';
-                        if($row['cps_type']!=3){
+                        $cps_type=$this->fetch(['admin_id'=>$row['admin_id']],'cps_type');
+                        $cps_type=$cps_type['cps_type'];
+                        if($cps_type!=3){
                             return '参考游戏列表';
                         }else{
                             return $row['divide_into'];
@@ -72,7 +73,7 @@ class AdminModel extends F_Model_Pdo
 //		        return $tmp['name'];
 //		    },
             'add_ip' => '添加IP',
-            'cps_type'=>'类型',
+//            'cps_type'=>'类型',
 		);
 	}
     public function getFieldsPadding()
