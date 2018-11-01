@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta name="screen-orientation" content="portrait">
-<meta name="keywords" content="H5 HTML5 H5游戏 HTML5游戏 小游戏 手机游戏 网页游戏 在线游戏 点击即玩 久乐游戏 久乐H5">
-<meta name="description" content="久乐游戏是一个行业领先的H5在线游戏平台，玩游戏不再苦苦的等待下载，点击即玩。">
-<title>BT手游-满VIP版手游-GM版手游无限元宝-久乐游戏</title>
-<link rel="stylesheet" href="/public/styles/base.css"/>
-<link rel="stylesheet" href="/styles/index.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="keywords" content="H5 HTML5 H5游戏 HTML5游戏 小游戏 手机游戏 网页游戏 在线游戏 点击即玩 久乐游戏 久乐H5">
+    <meta name="description" content="久乐游戏是一个行业领先的H5在线游戏平台，玩游戏不再苦苦的等待下载，点击即玩。">
+    <title>BT手游-满VIP版手游-GM版手游无限元宝-久乐游戏</title>
+    <link rel="stylesheet" href="/public/styles/base.css"/>
+    <link rel="stylesheet" href="/styles/index.css"/>
 </head>
 <body class="bg00">
-    <!--div.container 总外框  start-->
-    <div data-role="page" class="z_container bg01">
-        <!--div.z_min 内容区域 statr-->
-        <div class="z_main" data-role="conent">
-            <div class="banner" id="banner_silider">
-                <ul>
+<!--div.container 总外框  start-->
+<div data-role="page" class="z_container bg01">
+    <!--div.z_min 内容区域 statr-->
+    <div class="z_main" data-role="conent">
+        <div class="banner" id="banner_silider">
+            <ul>
                 <?php foreach ($banner['ads'] as &$row) { ?>
                     <li>
                         <a href="<?=$row['url']?>" class="line_01">
@@ -24,296 +24,286 @@
                         </a>
                     </li>
                 <?php } ?>
-                </ul>
-            </div>
-            <nav class="play_list">
-<!--                <i class="icons logo"></i>-->
-                <ul class="ui-grid-d" id="list_nav">
+            </ul>
+        </div>
+        <nav class="play_list">
+            <!--                <i class="icons logo"></i>-->
+            <ul class="ui-grid-d" id="list_nav">
                 <?php $i = 0; foreach ($games as $type=>&$row) { ?>
                     <li<?php echo $i==0 ? ' class="list_active"' : ''; ++$i; ?>><?=$type?></li>
                 <?php } ?>
-                </ul>
-            </nav>
+            </ul>
+        </nav>
 
-            <!--div.game_list 游戏列表  start-->
-            <section class="game_list" id="game_list">
-                <div class="slide_cont">
+        <!--div.game_list 游戏列表  start-->
+        <section class="game_list" id="game_list">
+            <div class="slide_cont">
                 <?php $i = 1; foreach ($games as $type=>&$list) { ?>
                     <!--ui#game_list_<?=$i?> <?=$type?>游戏列表  start-->
                     <ul id="game_list_<?=$i?>">
-                    <?php foreach ($list as &$row) { ?>
-                        <li>
-                            <?php if($row['corner'] != 'normal') { ?>
-                            <i class="icons i_<?=$row['corner']?>"></i>
-                            <?php } ?>
-                            <section class="list_content">
-                                <div class="game_log relative">
-                                    <a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="100%" height="auto" alt="<?=$row['name']?>"></a>
-                                </div>
-                                <div class="game_info">
-                                    <h3>
-                                        <span><a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>" title="<?=$row['name']?>" style="color:#fff;"><?=$row['name']?></a></span>
-                                    <?php if($row['label'] != 'normal') { ?>
-                                        <i class="icons <?=$row['label']?>"></i>
-                                    <?php } ?>
-                                    </h3>
-                                    <P>
+                        <?php foreach ($list as &$row) { ?>
+                            <li>
+                                <?php if($row['corner'] != 'normal') { ?>
+                                    <i class="icons i_<?=$row['corner']?>"></i>
+                                <?php } ?>
+                                <section class="list_content">
+                                    <div class="game_log relative">
+                                        <a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="100%" height="auto" alt="<?=$row['name']?>"></a>
+                                    </div>
+                                    <div class="game_info">
+                                        <h3>
+                                            <span><a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>" title="<?=$row['name']?>" style="color:#fff;"><?=$row['name']?></a></span>
+                                            <?php if($row['label'] != 'normal') { ?>
+                                                <i class="icons <?=$row['label']?>"></i>
+                                            <?php } ?>
+                                        </h3>
+                                        <P>
                                     <span class="start_list fl">
                                         <?=$row['grade']?>
                                     </span>
-                                        <span>人气：<?=$row['support']?></span>
-                                    </P>
-                                    <p><?=$row['in_short']?></p>
-                                </div>
-                                <?php if($row['giftbag']) { ?>
-                                <a href="/game/giftbag.html?gift_id=<?=$row['giftbag']?>" class="icons i_lb"></a>
-                                <?php } ?>
-                                <div class="game_btn">
-                                    <?php if($row['game_type']=='手游'):?>
-                                        <?php if(file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$row['game_id']}/".$tg_channel.'.apk')):?>
-                                            <a target="_top" onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/game/apk/'.$row['game_id'].'/'.$tg_channel.'.apk'?>" class="btn_blue">点击下载</a>
+                                            <span>人气：<?=$row['support']?></span>
+                                        </P>
+                                        <p><?=$row['in_short']?></p>
+                                    </div>
+                                    <?php if($row['giftbag']) { ?>
+                                        <a href="/game/giftbag.html?gift_id=<?=$row['giftbag']?>" class="icons i_lb"></a>
+                                    <?php } ?>
+                                    <div class="game_btn">
+                                        <?php if($row['game_type']=='手游'):?>
+                                            <?php if(file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$row['game_id']}/".$tg_channel.'.apk')):?>
+                                                <a target="_top" onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/game/apk/'.$row['game_id'].'/'.$tg_channel.'.apk'?>" class="btn_blue">点击下载</a>
+                                            <?php else:?>
+                                                <a target="_top" onclick="countDownload(<?=$row['game_id'];?>)" href="<?='http://yun.zyttx.com/index/akpgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
+                                            <?php endif;?>
                                         <?php else:?>
-                                            <a target="_top" onclick="countDownload(<?=$row['game_id'];?>)" href="<?='http://yun.zyttx.com/index/akpgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
+                                            <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
                                         <?php endif;?>
-                                    <?php else:?>
-                                        <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
-                                    <?php endif;?>
-                                </div>
-                            </section>
-                        </li>
+                                    </div>
+                                </section>
+                            </li>
                         <?php } ?>
                     </ul>
                     <!--ui#game_list_<?=$i?> <?=$type?>游戏列表  end-->
-                <?php ++$i; } ?>
-                </div>
-            </section>
-            <!--div.game_list 游戏列表  end-->
+                    <?php ++$i; } ?>
+            </div>
+        </section>
+        <!--div.game_list 游戏列表  end-->
 
-            <!--div.game_news 快速通道  statr-->
-            <section class="game_news">
-                <h2 class="title">
-                    <span class="title_name"> <i class="icons i_hand"></i>快速通道</span>
-                </h2>
-                <div class="block_bg recommend">
-                    <a href="/game/center.html">
+        <!--div.game_news 快速通道  statr-->
+        <section class="game_news">
+            <h2 class="title">
+                <span class="title_name"> <i class="icons i_hand"></i>快速通道</span>
+            </h2>
+            <div class="block_bg recommend">
+                <a href="/game/center.html">
                     <div>
                         <img src="/images/index/游戏分类.png"  height="auto" alt="游戏分类" />
                         <br/>
                         <span>游戏分类</span>
                     </div>
-                    </a>
-                    <a href="<?=empty($user)?'/user/login.html?fwd=':''?>/user/playerchannel.html">
+                </a>
+                <a href="<?=empty($user)?'/user/login.html?fwd=':''?>/user/playerchannel.html">
                     <div>
                         <img src="/images/index/领取福利.png" height="auto" alt="领取福利" />
                         <br/>
                         <span>领取福利</span>
                     </div>
-                    </a>
-                    <a href="/game/server?tc=0">
+                </a>
+                <a href="/game/server?tc=0">
                     <div>
                         <img src="/images/index/开服详情.png"  height="auto" alt="开服详情" />
                         <br/>
                         <span>开服详情</span>
                     </div>
-                    </a>
-                    <a href="/info/index.html">
+                </a>
+                <a href="/info/index.html">
                     <div>
                         <img src="/images/index/活动资讯.png"  height="auto" alt="活动资讯" />
                         <br/>
                         <span>活动资讯</span>
                     </div>
-                    </a>
-                    <?php
-                    //优先使用域名判断
-                    $url=new F_Helper_Url();
-                    $g=$url->getUrlSign();
-                    ?>
-                    <?php if(file_exists("/www2/wwwroot/xgame.zyttx.com/apk/{$g}.apk")):?>
-                        <a   href="<?="http://xgame.zyttx.com/apk/{$g}.apk"?>">
-                            <div>
-                                <img src="/images/index/盒子下载.png"  height="auto" alt="盒子下载" />
-                                <br/>
-                                <span>盒子下载</span>
-                            </div>
-                        </a>
-                    <?php else:?>
-                        <a   href="<?='http://yun.zyttx.com/index/akpgame2?&tg_channel='.$g?>">
-                            <div>
-                                <img src="/images/index/盒子下载.png"  height="auto" alt="盒子下载" />
-                                <br/>
-                                <span>盒子下载</span>
-                            </div>
-                        </a>
-                    <?php endif;?>
-                </div>
-            </section>
-            <!--div.game_news 快速通道  end-->
-            <!--figure.game_figure vip俱乐部  statr-->
-<!--            <figure class="game_figure">-->
-<!--                --><?php //if(file_exists("/www2/wwwroot/xgame.zyttx.com/apk/{$g}.apk")):?>
-<!--                    <a   href="--><?//="http://xgame.zyttx.com/apk/{$g}.apk"?><!--">-->
-<!--                        --><?php //foreach ($shortcut['ads'] as &$row) :?>
-<!--                        <img src="--><?//=$row['image']?><!--" width="100%" height="auto" alt="--><?//=$row['subject']?><!--"/>-->
-<!--                        --><?php //endforeach;?>
-<!--                    </a>-->
-<!--                --><?php //else:?>
-<!--                    <a   href="--><?//='http://yun.zyttx.com/index/akpgame2?&tg_channel='.$g?><!--">-->
-<!--                        --><?php //foreach ($shortcut['ads'] as &$row) :?>
-<!--                        <img src="--><?//=$row['image']?><!--" width="100%" height="auto" alt="--><?//=$row['subject']?><!--"/>-->
-<!--                        --><?php //endforeach;?>
-<!--                    </a>-->
-<!--                --><?php //endif;?>
-<!--            </figure>-->
-            <!--figure.game_figure vip俱乐部  end-->
-            <!--section.game_news hot 火爆新游  statr-->
-            <section class="game_news">
-                <h2 class="title">
-                    <span class="title_name"> <i class="icons i_fire"></i>火爆新游</span>
-                    <a class="more" href="/game/type.html?tc=全部分类">更多 &gt;</a>
-                </h2>
-<!--                <div class="scroll_cont">-->
-<!--                    <nav class="block_bg nav_img">-->
-<!--                    --><?php //foreach ($hotnew['ads'] as &$row) { ?>
-<!--                        <a href="--><?//=$row['url']?><!--">-->
-<!--                            <img src="--><?//=$row['image']?><!--" width="50" height="50" alt="--><?//=$row['subject']?><!--">-->
-<!--                            <h4>--><?//=$row['subject']?><!--</h4>-->
-<!--                        </a>-->
-<!--                    --><?php //} ?>
-<!--                    </nav>-->
-<!--                </div>-->
-                <section class="game_list">
+                </a>
+                <?php
+                //优先使用域名判断
+                $url=new F_Helper_Url();
+                $g=$url->getUrlSign();
+                ?>
+                <a   href="<?="http://yun.zyttx.com/index/akpgame3?tg_channel={$g}"?>">
                     <div>
-                            <ul>
-                                <?php foreach ($new_games as &$row) { ?>
-                                    <li>
-                                        <?php if($row['corner'] != 'normal') { ?>
-                                            <i class="icons i_<?=$row['corner']?>"></i>
-                                        <?php } ?>
-                                        <section class="list_content">
-                                            <div class="game_log relative">
-                                                <a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="100%" height="auto" alt="<?=$row['name']?>"></a>
-                                            </div>
-                                            <div class="game_info">
-                                                <h3>
-                                                    <span><a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>" title="<?=$row['name']?>" style="color:#fff;"><?=$row['name']?></a></span>
-                                                    <?php if($row['label'] != 'normal') { ?>
-                                                        <i class="icons <?=$row['label']?>"></i>
-                                                    <?php } ?>
-                                                </h3>
-                                                <P>
+                        <img src="/images/index/盒子下载.png"  height="auto" alt="盒子下载" />
+                        <br/>
+                        <span>盒子下载</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <!--div.game_news 快速通道  end-->
+        <!--figure.game_figure vip俱乐部  statr-->
+        <!--            <figure class="game_figure">-->
+        <!--                --><?php //if(file_exists("/www2/wwwroot/xgame.zyttx.com/apk/{$g}.apk")):?>
+        <!--                    <a   href="--><?//="http://xgame.zyttx.com/apk/{$g}.apk"?><!--">-->
+        <!--                        --><?php //foreach ($shortcut['ads'] as &$row) :?>
+        <!--                        <img src="--><?//=$row['image']?><!--" width="100%" height="auto" alt="--><?//=$row['subject']?><!--"/>-->
+        <!--                        --><?php //endforeach;?>
+        <!--                    </a>-->
+        <!--                --><?php //else:?>
+        <!--                    <a   href="--><?//='http://yun.zyttx.com/index/akpgame2?&tg_channel='.$g?><!--">-->
+        <!--                        --><?php //foreach ($shortcut['ads'] as &$row) :?>
+        <!--                        <img src="--><?//=$row['image']?><!--" width="100%" height="auto" alt="--><?//=$row['subject']?><!--"/>-->
+        <!--                        --><?php //endforeach;?>
+        <!--                    </a>-->
+        <!--                --><?php //endif;?>
+        <!--            </figure>-->
+        <!--figure.game_figure vip俱乐部  end-->
+        <!--section.game_news hot 火爆新游  statr-->
+        <section class="game_news">
+            <h2 class="title">
+                <span class="title_name"> <i class="icons i_fire"></i>火爆新游</span>
+                <a class="more" href="/game/type.html?tc=全部分类">更多 &gt;</a>
+            </h2>
+            <!--                <div class="scroll_cont">-->
+            <!--                    <nav class="block_bg nav_img">-->
+            <!--                    --><?php //foreach ($hotnew['ads'] as &$row) { ?>
+            <!--                        <a href="--><?//=$row['url']?><!--">-->
+            <!--                            <img src="--><?//=$row['image']?><!--" width="50" height="50" alt="--><?//=$row['subject']?><!--">-->
+            <!--                            <h4>--><?//=$row['subject']?><!--</h4>-->
+            <!--                        </a>-->
+            <!--                    --><?php //} ?>
+            <!--                    </nav>-->
+            <!--                </div>-->
+            <section class="game_list">
+                <div>
+                    <ul>
+                        <?php foreach ($new_games as &$row) { ?>
+                            <li>
+                                <?php if($row['corner'] != 'normal') { ?>
+                                    <i class="icons i_<?=$row['corner']?>"></i>
+                                <?php } ?>
+                                <section class="list_content">
+                                    <div class="game_log relative">
+                                        <a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="100%" height="auto" alt="<?=$row['name']?>"></a>
+                                    </div>
+                                    <div class="game_info">
+                                        <h3>
+                                            <span><a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>" title="<?=$row['name']?>" style="color:#fff;"><?=$row['name']?></a></span>
+                                            <?php if($row['label'] != 'normal') { ?>
+                                                <i class="icons <?=$row['label']?>"></i>
+                                            <?php } ?>
+                                        </h3>
+                                        <P>
                                     <span class="start_list fl">
                                         <?=$row['grade']?>
                                     </span>
-                                                    <span>人气：<?=$row['support']?></span>
-                                                </P>
-                                                <p><?=$row['in_short']?></p>
-                                            </div>
-                                            <?php if($row['giftbag']) { ?>
-                                                <a href="/game/giftbag.html?gift_id=<?=$row['giftbag']?>" class="icons i_lb"></a>
-                                            <?php } ?>
-                                            <div class="game_btn">
-                                                <?php if($row['game_type']=='手游'):?>
-                                                    <?php if(file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$row['game_id']}/".$tg_channel.'.apk')):?>
-                                                        <a target="_top"  onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/game/apk/'.$row['game_id'].'/'.$tg_channel.'.apk'?>" class="btn_blue">点击下载</a>
-                                                    <?php else:?>
-                                                        <a target="_top"  onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/index/akpgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
-                                                    <?php endif;?>
-                                                <?php else:?>
-                                                    <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
-                                                <?php endif;?>
-                                            </div>
-                                        </section>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                    </div>
-                </section>
+                                            <span>人气：<?=$row['support']?></span>
+                                        </P>
+                                        <p><?=$row['in_short']?></p>
+                                    </div>
+                                    <?php if($row['giftbag']) { ?>
+                                        <a href="/game/giftbag.html?gift_id=<?=$row['giftbag']?>" class="icons i_lb"></a>
+                                    <?php } ?>
+                                    <div class="game_btn">
+                                        <?php if($row['game_type']=='手游'):?>
+                                            <?php if(file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$row['game_id']}/".$tg_channel.'.apk')):?>
+                                                <a target="_top"  onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/game/apk/'.$row['game_id'].'/'.$tg_channel.'.apk'?>" class="btn_blue">点击下载</a>
+                                            <?php else:?>
+                                                <a target="_top"  onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/index/akpgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
+                                            <?php endif;?>
+                                        <?php else:?>
+                                            <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
+                                        <?php endif;?>
+                                    </div>
+                                </section>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
             </section>
-            <!--section.game_news 今日推荐  end-->
+        </section>
+        <!--section.game_news 今日推荐  end-->
 
-            <!--section.game_news action 最新活动  statr-->
-            <section class="game_news action">
-                <h2 class="title">
-                    <span class="title_name"> <i class="icons i_action"></i>最新活动</span>
-                    <a class="more" href="/info/index">更多 &gt;</a>
-                </h2>
-<!--            --><?php //foreach ($activity['ads'] as $row) { ?>
-<!--                <div class="actions">-->
-<!--                    <a href="--><?//=$row['url']?><!--">-->
-<!--                        <img src="--><?//=$row['image']?><!--"--><?//=$row['subject']?" alt=\"{$row['subject']}\"":''?><!-- style="width:100%">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            --><?php //} ?>
-                <ul class="game_news2">
-                    <?php foreach ($info as &$row) { ?>
-                        <li>
-                            <?php if( $row['cover'] ) { ?>
-                                <a href="/info/detail.html?type=<?=$type?>&article_id=<?=$row['article_id']?>"><img src="<?=$row['cover']?>" width="90" height="auto" alt="<?=$row['title']?>"/></a>
-                            <?php } ?>
-                            <article>
-                                <p><a href="/info/detail.html?type=<?=$type?>&article_id=<?=$row['article_id']?>"><?=$row['title']?></a></p>
-                                <div>
-                                    <span><?=$row['up_time']?></span>
-                                </div>
-                            </article>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-            <!--section.game_news action 最新活动  end-->
+        <!--section.game_news action 最新活动  statr-->
+        <section class="game_news action">
+            <h2 class="title">
+                <span class="title_name"> <i class="icons i_action"></i>最新活动</span>
+                <a class="more" href="/info/index">更多 &gt;</a>
+            </h2>
+            <!--            --><?php //foreach ($activity['ads'] as $row) { ?>
+            <!--                <div class="actions">-->
+            <!--                    <a href="--><?//=$row['url']?><!--">-->
+            <!--                        <img src="--><?//=$row['image']?><!--"--><?//=$row['subject']?" alt=\"{$row['subject']}\"":''?><!-- style="width:100%">-->
+            <!--                    </a>-->
+            <!--                </div>-->
+            <!--            --><?php //} ?>
+            <ul class="game_news2">
+                <?php foreach ($info as &$row) { ?>
+                    <li>
+                        <?php if( $row['cover'] ) { ?>
+                            <a href="/info/detail.html?type=<?=$type?>&article_id=<?=$row['article_id']?>"><img src="<?=$row['cover']?>" width="90" height="auto" alt="<?=$row['title']?>"/></a>
+                        <?php } ?>
+                        <article>
+                            <p><a href="/info/detail.html?type=<?=$type?>&article_id=<?=$row['article_id']?>"><?=$row['title']?></a></p>
+                            <div>
+                                <span><?=$row['up_time']?></span>
+                            </div>
+                        </article>
+                    </li>
+                <?php } ?>
+            </ul>
+        </section>
+        <!--section.game_news action 最新活动  end-->
 
-            <!--<div class="footer_zoom"></div>-->
-            <div class="footer_padding"></div>
-        </div>
-        <!--div.z_min 内容区域 end-->
+        <!--<div class="footer_zoom"></div>-->
+        <div class="footer_padding"></div>
     </div>
-    <!--div.container 总外框  end-->
+    <!--div.z_min 内容区域 end-->
+</div>
+<!--div.container 总外框  end-->
 <?php include $this->getScriptPath().'/footer.phtml'; ?>
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
 <script src="/jquery/swipe.js"></script>
 <script>
-$('#footer a:eq(0)').attr('id', 'footer_nav_active');
-$(function(){
-	var banner_slider = new Swipe(document.getElementById('banner_silider'), {
-	  startSlide: 0,
-	  speed: 400,
-	  auto: 3000,
-	  continuous: true
-	});
-	$('#banner_silider').css('height','auto');
+    $('#footer a:eq(0)').attr('id', 'footer_nav_active');
+    $(function(){
+        var banner_slider = new Swipe(document.getElementById('banner_silider'), {
+            startSlide: 0,
+            speed: 400,
+            auto: 3000,
+            continuous: true
+        });
+        $('#banner_silider').css('height','auto');
 
-	var game_slider = new Swipe(document.getElementById('game_list'), {
-	  startSlide: 0,
-	  speed: 400,
-	  auto: false,
-	  callback: function(index, elem) {
-		  $('#list_nav li').removeClass('list_active').eq(index).addClass('list_active');
-	  }
-	});
-	$('#list_nav li').on('tap', function(){
-		game_slider.slide($(this).index(), 400);
-		return true;
-	});
-	$('.slide_cont ul').height($('.slide_cont').height());
+        var game_slider = new Swipe(document.getElementById('game_list'), {
+            startSlide: 0,
+            speed: 400,
+            auto: false,
+            callback: function(index, elem) {
+                $('#list_nav li').removeClass('list_active').eq(index).addClass('list_active');
+            }
+        });
+        $('#list_nav li').on('tap', function(){
+            game_slider.slide($(this).index(), 400);
+            return true;
+        });
+        $('.slide_cont ul').height($('.slide_cont').height());
 
-	function getWidth(){
-	    var childLen = $(".nav_img a").length;
-	    var childWidth = $(".nav_img a").outerWidth();
-	    var widowWidth = $(window).width(); //窗口宽度
-	    var allWidth = childLen * childWidth; //计算后总宽度
-	    /**宽度不能小于100%*/
-	    if(allWidth < widowWidth){
-	        $(".nav_img").width(widowWidth);
-	    }else{
-	        $(".nav_img").width(allWidth);
-	    }
-	}
-	getWidth();
-	window.onorientationchange=window.onresize=function(){
+        function getWidth(){
+            var childLen = $(".nav_img a").length;
+            var childWidth = $(".nav_img a").outerWidth();
+            var widowWidth = $(window).width(); //窗口宽度
+            var allWidth = childLen * childWidth; //计算后总宽度
+            /**宽度不能小于100%*/
+            if(allWidth < widowWidth){
+                $(".nav_img").width(widowWidth);
+            }else{
+                $(".nav_img").width(allWidth);
+            }
+        }
         getWidth();
-    };
-});
+        window.onorientationchange=window.onresize=function(){
+            getWidth();
+        };
+    });
 </script>
 </body>
 </html>
