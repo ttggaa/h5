@@ -303,7 +303,23 @@ $(function(){
 	window.onorientationchange=window.onresize=function(){
         getWidth();
     };
+	//判断是否是安卓端，提示更新新版盒子
+
 });
 </script>
+    <script type="text/javascript">
+        function isapp() {
+            if (/^.+(Mobile\/\w+)\s?$/.test(navigator.userAgent)) {
+                    // IOS端APP
+                    console.log('app');
+
+                return true;
+            } else {
+                    // IOS端浏览器
+                    console.log('web');
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

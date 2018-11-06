@@ -125,7 +125,7 @@ class IndexController extends Yaf_Controller_Abstract
             }
             $zip->addFromString("META-INF/jiule_channelid", "{$channe_id}");
             $zip->close();
-        $this->redirect("http://xgame.zyttx.com/apk/new{$channe_id}.apk");
+            $this->redirect("http://xgame.zyttx.com/apk/new{$channe_id}.apk");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }

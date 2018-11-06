@@ -710,11 +710,14 @@ class ApiController extends Yaf_Controller_Abstract
         $now_version=$request['now_version'];
         $config = Yaf_Registry::get('config')->android;
         $server_version=$config['version'];
+        $server_version_msg=$config['version_msg'];
         if($now_version==$server_version){
             $assign['status'] = '100';
         }else{
             $channel=$request['channel'];
-            $this->redirect("http://yun.zyttx.com/index/apkgame3?tg_channel={$channel}");
+            $assign['status'] = '200';
+            $assign['msg'] = "当前版本:{$now_version}.\n,最新版本:{$server_version}.\n,更新内容:{$server_version_msg}";
+            $assign['download_url'] = "http://yun.zyttx.com/index/apkgame3?tg_channel={$channel}";
         }
         exit(json_encode($assign));
     }
