@@ -704,6 +704,20 @@ class ApiController extends Yaf_Controller_Abstract
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
+    public function checkAndroidUpdateAction(){
+        $request = $_GET;
+        $this->checkParams($request, ['now_version','channel']);
+        $now_version=$request['now_version'];
+        $config = Yaf_Registry::get('config')->android;
+        $server_version=$config['version'];
+        if($now_version==$server_version){
+            $assign['status'] = '100';
+        }else{
+            $channel=$request['channel'];
+            $this->redirect("http://yun.zyttx.com/index/apkgame3?tg_channel={$channel}");
+        }
+        exit(json_encode($assign));
+    }
     //不同环境下获取真实的IP
     function getIp()
     {
