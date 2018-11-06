@@ -99,7 +99,7 @@ class IndexController extends Yaf_Controller_Abstract
     /**
      * 新版盒子下载
      */
-    public function akpgame3Action()
+    public function apkgame3Action()
     {
         $admin_id = $_REQUEST['tg_channel'] ?? 1;
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/new{$admin_id}.apk")) {

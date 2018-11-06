@@ -76,19 +76,19 @@ class AdminModel extends F_Model_Pdo
 //            'cps_type'=>'类型',
 		);
 	}
-    public function getFieldsPadding()
-    {
-        return array(
-            'box_url' => function(&$row){
-                if(empty($row)) return '盒子链接';
-                    if(file_exists("/www2/wwwroot/xgame.zyttx.com/apk/{$row['admin_id']}.apk")){
-                        return "<a href='http://xgame.zyttx.com/apk/{$row["admin_id"]}.apk'>下载</a>";
-                    }else{
-                        return "<a href='http://yun.zyttx.com/index/akpgame2?&tg_channel={$row['admin_id']}'>点击打包</a>";
-                    }
-            },
-        );
-    }
+//    public function getFieldsPadding()
+//    {
+////        return array(
+////            'box_url' => function(&$row){
+////                if(empty($row)) return '盒子链接';
+////                    if(file_exists("/www2/wwwroot/xgame.zyttx.com/apk/{$row['admin_id']}.apk")){
+////                        return "<a href='http://xgame.zyttx.com/apk/{$row["admin_id"]}.apk'>下载</a>";
+////                    }else{
+////                        return "<a href='http://yun.zyttx.com/index/akpgame2?&tg_channel={$row['admin_id']}'>点击打包</a>";
+////                    }
+////            },
+////        );
+//    }
 	/**
 	 * 管理员登录
 	 *
