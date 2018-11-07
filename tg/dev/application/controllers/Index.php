@@ -14,7 +14,7 @@ class IndexController extends Yaf_Controller_Abstract
         $channe_id = $_GET['tg_channel'] ?? 1;
         $admin_id = $channe_id;
         if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk")) {
-            $this->redirect("http://yun.zyttx.com/apk/{$admin_id}/{$game_id}.apk");
+            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
         } else {
             $zip = new ZipArchive();
             $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
@@ -40,7 +40,7 @@ class IndexController extends Yaf_Controller_Abstract
 //        echo "status:" . $zip->status . " ";
             $zip->close();
 //            $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
-            $this->redirect("http://yun.zyttx.com/apk/{$admin_id}/{$game_id}.apk");
+            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
