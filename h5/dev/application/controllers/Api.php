@@ -672,10 +672,9 @@ class ApiController extends Yaf_Controller_Abstract
         $channel_id=$request['channel_id'];
         //判断是否有包,没有则分包后下载
         $admin_id=$channel_id;
-        if(file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/$admin_id.'.apk'")){
+        if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk")) {
             $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
-//            $this->downFile($admin_id.'.apk',"/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
-        }else {
+        } else {
             $zip = new ZipArchive();
             $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
             //复制一份到当前
