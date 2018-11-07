@@ -679,7 +679,7 @@ class ApiController extends Yaf_Controller_Abstract
             $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
             //复制一份到当前
             //判断游戏目录是否存在
-            $path = "/www2/wwwroot/code/h5/tg/dev/public/public/game/apk/{$game_id}";
+            $path = "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}";
             if (!is_dir($path)) {
                 mkdir($path);
             }
