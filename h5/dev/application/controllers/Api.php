@@ -698,6 +698,7 @@ class ApiController extends Yaf_Controller_Abstract
 //        echo "numfiles: " . $zip->numFiles . " ";
 //        echo "status:" . $zip->status . " ";
             $zip->close();
+            sleep(10);
 //            $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
             $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
         }
