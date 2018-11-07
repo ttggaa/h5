@@ -13,30 +13,35 @@ class IndexController extends Yaf_Controller_Abstract
         $game_id = $_GET['game_id'] ?? die('游戏id必须');
         $channe_id = $_GET['tg_channel'] ?? 1;
         $admin_id = $channe_id;
-        $zip = new ZipArchive();
-        $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
-        //复制一份到当前
-        //判断游戏目录是否存在
-        $path = APPLICATION_PATH . "/public/game/apk/{$game_id}";
-        if (!is_dir($path)) {
-            mkdir($path);
-        }
-        shell_exec(" 
+        if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk")) {
+            $this->redirect("http://xgame.zyttx.com/apk/{$admin_id}/{$game_id}.apk");
+        } else {
+            $zip = new ZipArchive();
+            $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
+            //复制一份到当前
+            //判断游戏目录是否存在
+            $path = APPLICATION_PATH . "/public/game/apk/{$game_id}";
+            if (!is_dir($path)) {
+                mkdir($path);
+            }
+            shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
         cp {$filename}  /www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk;
         > /dev/null 2>&1 &");
-        $now_path = $path . "/{$admin_id}.apk";
-        if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
-            exit("cannot open <$filename> ");
-        }
-        $zip->addFromString("META-INF/jiule_channelid", "{$admin_id}");
-        $zip->addFromString("META-INF/jiule_gameid", "{$game_id}");
-        //$zip->addFile($thisdir . "/too.php","/testfromfile.php");
+            $now_path = $path . "/{$admin_id}.apk";
+            if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
+                exit("cannot open <$filename> ");
+            }
+            $zip->addFromString("META-INF/jiule_channelid", "{$admin_id}");
+            $zip->addFromString("META-INF/jiule_gameid", "{$game_id}");
+            //$zip->addFile($thisdir . "/too.php","/testfromfile.php");
 //        echo "numfiles: " . $zip->numFiles . " ";
 //        echo "status:" . $zip->status . " ";
-        $zip->close();
-        $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
+            $zip->close();
+//            $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
+            $this->redirect("http://xgame.zyttx.com/apk/{$admin_id}/{$game_id}.apk");
+        }
         Yaf_Dispatcher::getInstance()->disableView();
     }
 
