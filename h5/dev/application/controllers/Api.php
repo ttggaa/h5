@@ -205,6 +205,107 @@ class ApiController extends Yaf_Controller_Abstract
         }
     }
 
+    //充值到平台
+    public function depositAction()
+    {
+//        Yaf_Dispatcher::getInstance()->disableView();
+        $params = $_GET;
+        $open_id = $params['open_id'];
+        $user_id = $open_id;
+        $m_user = new UsersModel();
+        $user = $m_user->fetch(['user_id' => $user_id]);
+        if (empty($user)) {
+            //缓存渠道id
+            $assign['status'] = 'fail';
+            $assign['msg'] = '账号异常,联系管理员';
+            exit(json_encode($assign));
+        }
+        //查询订单
+        $set_arr = array_merge(array('to_uid' => $user['user_id'], 'to_user' => $user_id), array('game_id' => 0, 'game_name' => '', 'server_id' => 0, 'server_name' => ''));
+        $pay = $this->initPayInfo($user);
+        $pay = array_merge($pay, $set_arr);
+        $conf = Yaf_Application::app()->getConfig();
+        $this->getView()->assign(array('parities' => $conf->application->parities, 'pay' => $pay));
+    }
+
+    private function initPayInfo($userinfo)
+    {
+        $this->unsetPayInfo();
+        $m_pay = new PayModel();
+        $pay = array(
+            'pay_id' => $m_pay->createPayId(),
+            'user_id' => $userinfo['user_id'],
+            'username' => $userinfo['username'],
+            'to_uid' => $userinfo['user_id'],
+            'to_user' => $userinfo['username'],
+            'game_id' => 0,
+            'game_name' => '',
+            'server_id' => 0,
+            'server_name' => '',
+            'money' => 0,
+            'deposit' => 0,
+            'type' => '',
+            'cp_order' => '',
+            'tg_channel' => $userinfo['tg_channel'],
+            'player_channel' => $userinfo['player_channel'],
+        );
+        $sess = Yaf_Session::getInstance();
+        $sess->set('pay_info', $pay);
+        return $pay;
+    }
+
+    //跳转到第三方支付网站
+    public function checkoutAction()
+    {
+        Yaf_Dispatcher::getInstance()->disableView();
+        $sess = Yaf_Session::getInstance();
+        $pay = $sess->get('pay_info');
+        $req = $this->getRequest();
+        $money = $req->get('money', 0);
+        $type = $req->get('type', '');
+        $m_pay = new PayModel();
+        $ck_arr = $m_pay->_types;
+        $ck_arr['deposit'] = '平台币';
+        if (($type && !array_key_exists($type, $ck_arr)) || ($money < 1 && $pay['money'] < 1)) {
+            echo json_encode(['code' => 1, 'message' => '订单生成失败，请重试！', 'info' => false], true);
+            return false;
+        }
+
+        $set = null;
+        if ($type) {
+            $set['type'] = $type;
+        }
+        if ($money > 0) {
+            if ($money > 60000) {
+                $money = 60000;
+            }
+            $set['money'] = $money;
+        } elseif ($pay['money'] > 60000) {
+            $set['money'] = 60000;
+        }
+        if ($set) {
+            $pay = array_merge($pay, $set);
+        }
+        $time = time();
+        $pay['trade_no'] = '';
+        $pay['add_time'] = $time;
+        $rs = $m_pay->insert($pay, false);
+        if (!$rs) {
+            $this->unsetPayInfo();
+            echo json_encode(['code' => 1, 'message' => '订单生成失败，请重试！', 'info' => false], true);
+        } else {
+            $pay_id = $pay['pay_id'];
+            echo json_encode(['code' => 0, 'message' => '订单生成功！', 'info' => $pay_id]);
+        }
+        $this->unsetPayInfo();
+    }
+
+    private function unsetPayInfo()
+    {
+        $sess = Yaf_Session::getInstance();
+        $sess->set('pay_info', null);
+    }
+
     //跳转到顶层框架
     public function gotopAction()
     {
@@ -252,12 +353,11 @@ class ApiController extends Yaf_Controller_Abstract
         $assign['hot_games'] = $m_game->getListByAttr('hot', 1, 3, $game_type);
 //        $assign['article_list'] = $m_game->getListByAttr('hot', 1, 5, $game_type);
         $m_article = new ArticleModel();
-        $list=$m_article->fetchAll("visible=1 and type!='代理公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
-        foreach ($list as &$row)
-        {
+        $list = $m_article->fetchAll("visible=1 and type!='代理公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
+        foreach ($list as &$row) {
             $row['up_time'] = $m_article->formatTime($row['up_time']);
         }
-        $assign['info'] =$list;
+        $assign['info'] = $list;
         echo json_encode($assign, true);
         die;
     }
@@ -269,12 +369,12 @@ class ApiController extends Yaf_Controller_Abstract
     public function gameListByTypeAction()
     {
         $request = $_POST;
-        $this->checkParams($request, ['game_type','tc','pn']);
+        $this->checkParams($request, ['game_type', 'tc', 'pn']);
         $game_type = $request['game_type'];
-        $tc =$request['tc'];
+        $tc = $request['tc'];
         $tc = preg_replace('/[\%\*\'\"\\\]+/', '', $tc);
-        $pn =$request['pn']??1;
-        $limit =9;
+        $pn = $request['pn'] ?? 1;
+        $limit = 9;
         $order = 'game_id DESC';
         $selects = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
         $m_game = new GameModel();
@@ -291,28 +391,29 @@ class ApiController extends Yaf_Controller_Abstract
         echo json_encode($games, true);
         die;
     }
-    function getArticleListAction(){
+
+    function getArticleListAction()
+    {
         $req = $this->getRequest();
         $type = $req->getPost('type', '');
         $type = preg_replace('/[\'\"\\\]+/', '', $type);
         $pn = $req->getPost('pn', 1);
         $limit = 13;
         $m_article = new ArticleModel();
-        if( $type == '综合' ) {
+        if ($type == '综合') {
             $conds = 'visible=1';
-        } else if( in_array($type, $m_article->_types) ) {
+        } else if (in_array($type, $m_article->_types)) {
             $conds = "type='{$type}' AND visible=1";
         } else {
             exit;
         }
         $conds .= " and type!='代理公告'";//过滤公告
         $list = $m_article->fetchAll($conds, $pn, $limit, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
-        foreach ($list as &$row)
-        {
+        foreach ($list as &$row) {
             $row['up_time'] = $m_article->formatTime($row['up_time']);
         }
-        $assign['list']=$list;
-        $assign['type']=$type;
+        $assign['list'] = $list;
+        $assign['type'] = $type;
         echo json_encode($assign, true);
         die;
     }
@@ -320,34 +421,37 @@ class ApiController extends Yaf_Controller_Abstract
     /**
      * 获取游戏
      */
-    function getGamesBySortAction(){
+    function getGamesBySortAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['game_type','pn','type']);
+        $this->checkParams($request, ['game_type', 'pn', 'type']);
         $game_type = $request['game_type'];
         $type = $request['type'];
         $m_game = new GameModel();
-        if($type=='new'){
-            $res=$m_game->getListByAttr('new', $request['pn'], 10, $game_type);
+        if ($type == 'new') {
+            $res = $m_game->getListByAttr('new', $request['pn'], 10, $game_type);
 //            $assign=$res['new_games'];
-        }elseif($type=='hot'){
-            $res=$m_game->getListByAttr('hot', $request['pn'], 10, $game_type);
+        } elseif ($type == 'hot') {
+            $res = $m_game->getListByAttr('hot', $request['pn'], 10, $game_type);
 //            $assign=$res['hot_games'];
-        }else{
+        } else {
 //            $assign='fail';
         }
         echo json_encode($res, true);
         die;
     }
+
     /**
      * 获取文章详情
      */
-    function getArticleDeatilAction(){
+    function getArticleDeatilAction()
+    {
         $request = $_GET;
         $article_id = $request['article_id'];
         $m_article = new ArticleModel();
         $assign['info'] = $m_article->fetch("article_id='{$article_id}' AND visible=1");
         //正则匹配标签，加上绝对路径<img src="/
-        $assign['info'] = str_replace("<img src=\"","<img src=\"http://h5.zyttx.com",$assign['info']);
+        $assign['info'] = str_replace("<img src=\"", "<img src=\"http://h5.zyttx.com", $assign['info']);
         echo json_encode($assign, true);
         die;
     }
@@ -355,85 +459,91 @@ class ApiController extends Yaf_Controller_Abstract
     /**
      * 获取查询列表
      */
-    public function gameSearchListAction(){
+    public function gameSearchListAction()
+    {
         $request = $_POST;
-        $this->checkParams($request, ['game_type','name','pn']);
+        $this->checkParams($request, ['game_type', 'name', 'pn']);
         $game_type = $request['game_type'];
-        $pn =$request['pn']??1;
-        $limit =20;
+        $pn = $request['pn'] ?? 1;
+        $limit = 20;
         $order = 'game_id DESC';
         $selects = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
         $m_game = new GameModel();
         $m_gift = new GiftbagModel();
         $games = $m_game->fetchAll("visible=1 and game_type='{$game_type}' and name like '%{$request['name']}%'", $pn, $limit, $selects, $order);
         $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' and h5.giftbag.game_name like '%{$request['name']}%'");
-        foreach ($gifts as &$value){
-            $value['content']=unserialize($value['content']);
-            if($request['user_id']??0){
-                $rs=$m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
+        foreach ($gifts as &$value) {
+            $value['content'] = unserialize($value['content']);
+            if ($request['user_id'] ?? 0) {
+                $rs = $m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
                 $value['cdkey'] = $rs['cdkey'];
             }
         }
-        $assign['game']=$games;
-        $assign['gift']=$gifts;
+        $assign['game'] = $games;
+        $assign['gift'] = $gifts;
         echo json_encode($assign, true);
         die;
     }
+
     /**
      * 获取查询列表
      */
-    public function giftListAction(){
+    public function giftListAction()
+    {
         $request = $_POST;
-        $this->checkParams($request, ['game_type','pn']);
+        $this->checkParams($request, ['game_type', 'pn']);
         $game_type = $request['game_type'];
-        $pn =$request['pn'];
+        $pn = $request['pn'];
         $limit = 11;
         $offset = ($pn - 1) * $limit;
         $order = 'h5.giftbag.game_id DESC';
         $m_gift = new GiftbagModel();
         $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' order by {$order}  LIMIT {$offset},{$limit} ");
 //        $log="select h5.giftbag.name,game_name,nums,used,content,h5.giftbag.gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' order by {$order}  LIMIT {$offset},{$limit}";
-        foreach ($gifts as &$value){
-            $value['content']=unserialize($value['content']);
-            if($request['user_id']??0) {
-                $rs=$m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
+        foreach ($gifts as &$value) {
+            $value['content'] = unserialize($value['content']);
+            if ($request['user_id'] ?? 0) {
+                $rs = $m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
                 $value['cdkey'] = $rs['cdkey'];
             }
         }
-        $assign['gift']=$gifts;
+        $assign['gift'] = $gifts;
         echo json_encode($assign, true);
         die;
     }
+
     /**
      * 获取区服列表
      */
-    public function serverListAction(){
+    public function serverListAction()
+    {
         $request = $_POST;
-        $this->checkParams($request, ['index','game_type','pn']);
-        $pn =$request['pn'];
+        $this->checkParams($request, ['index', 'game_type', 'pn']);
+        $pn = $request['pn'];
         $limit = 9;
         $offset = ($pn - 1) * $limit;
         $order = 'start_time asc';
         $m_server = new ServerModel();
         $servers = array();
-        $now_time=(string)date('Y-m-d H:i:s');
-        $three_day_befor=(string)date("Y-m-d H:i:s",strtotime("-3 day"));
-        $three_day_after=(string)date("Y-m-d H:i:s",strtotime("+3 day"));
-        $condition="start_time between '{$three_day_befor}' and '{$three_day_after}' and game_type='{$request['game_type']}'";
-        if( $request['index']==0 ) {
-            $condition.=" and start_time< '{$now_time}'";//已开新服,时间大于当前,前三天
+        $now_time = (string)date('Y-m-d H:i:s');
+        $three_day_befor = (string)date("Y-m-d H:i:s", strtotime("-3 day"));
+        $three_day_after = (string)date("Y-m-d H:i:s", strtotime("+3 day"));
+        $condition = "start_time between '{$three_day_befor}' and '{$three_day_after}' and game_type='{$request['game_type']}'";
+        if ($request['index'] == 0) {
+            $condition .= " and start_time< '{$now_time}'";//已开新服,时间大于当前,前三天
             $order = 'start_time desc';
             $servers_list = $m_server->fetchAllBySql("select h5.game.*,h5.server.*,h5.server.name as server_name,h5.server.add_time as server_add_time from h5.server left join h5.game on h5.game.game_id=h5.server.game_id  where {$condition}  order by {$order}  LIMIT {$offset},{$limit}");
-            $servers['start']=$servers_list;
+            $servers['start'] = $servers_list;
         }
-        if($request['index']==1) {
-            $condition.=" and start_time> '{$now_time}'";//新服预告
+        if ($request['index'] == 1) {
+            $condition .= " and start_time> '{$now_time}'";//新服预告
             $servers_list = $m_server->fetchAllBySql("select h5.game.*,h5.server.*,h5.server.name as server_name,h5.server.add_time as server_add_time from h5.server left join h5.game on h5.game.game_id=h5.server.game_id  where {$condition}  order by {$order}  LIMIT {$offset},{$limit}");
-            $servers['will_start']=$servers_list;
+            $servers['will_start'] = $servers_list;
         }
         echo json_encode($servers, true);
         die;
     }
+
     /**
      * 获取广告位列表
      * game_type
@@ -465,40 +575,48 @@ class ApiController extends Yaf_Controller_Abstract
             $json['msg'] = $error;
             exit(json_encode($json));
         } else {
-            $json['info'] = $m_user->fetch(['username' => $username]);
+            //生成唯一open_id 缓存
+            $user_info = $m_user->fetch(['username' => $username]);
+            $json['info'] = $user_info;
         }
         exit(json_encode($json));
     }
-    public function loginoutAction(){
+
+    public function loginoutAction()
+    {
         $m_user = new UsersModel();
         $m_user->logout();
-        exit(json_encode(array('status'=>'success')));
+        exit(json_encode(array('status' => 'success')));
     }
+
     //领取礼包
-    function getGiftAction(){
+    function getGiftAction()
+    {
         $request = $_POST;
         $this->checkParams($request, ['user_id', 'gift_id']);
-        $gift_id =$request['gift_id'];
-        if( $gift_id < 1 ) {
+        $gift_id = $request['gift_id'];
+        if ($gift_id < 1) {
             exit;
         }
         $cdkey = '';
         $m_gift = new GiftbagModel();
         $error = $m_gift->sendout($request['user_id'], $gift_id, $cdkey);
-        if( $error == '' ) {
-            exit(json_encode(array('msg'=>'领取成功!','cdkey'=>$cdkey)));
+        if ($error == '') {
+            exit(json_encode(array('msg' => '领取成功!', 'cdkey' => $cdkey)));
         } else {
-            exit(json_encode(array('msg'=>$error,'cdkey'=>'')));
+            exit(json_encode(array('msg' => $error, 'cdkey' => '')));
         }
     }
+
     //游戏详情
-    function getGameDeatilAction(){
+    function getGameDeatilAction()
+    {
         $request = $_POST;
         $this->checkParams($request, ['game_id']);
-        $m_game=new GameModel();
+        $m_game = new GameModel();
         $game = $m_game->fetch("game_id='{$request['game_id']}'");
-        if( empty($game) ) {
-            exit(json_encode(array('msg'=>'没有查到游戏详情!')));
+        if (empty($game)) {
+            exit(json_encode(array('msg' => '没有查到游戏详情!')));
         }
         $game['grade'] = $m_game->gradeHtml($game['grade']);
         $game['support'] = $m_game->supportFormat($game['support'] + $game['play_times']);
@@ -508,170 +626,186 @@ class ApiController extends Yaf_Controller_Abstract
         //礼包详情
         $order = 'h5.giftbag.game_id DESC';
         $m_gift = new GiftbagModel();
-        $game_id=$request['game_id'];
+        $game_id = $request['game_id'];
         $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_id =  '{$game_id}' order by {$order}");
 //        $log="select h5.giftbag.name,game_name,nums,used,content,h5.giftbag.gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' order by {$order}  LIMIT {$offset},{$limit}";
-        foreach ($gifts as &$value){
-            $value['content']=unserialize($value['content']);
-            if($request['user_id']??0) {
-                $rs=$m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
+        foreach ($gifts as &$value) {
+            $value['content'] = unserialize($value['content']);
+            if ($request['user_id'] ?? 0) {
+                $rs = $m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
                 $value['cdkey'] = $rs['cdkey'];
             }
         }
         $assign['gift'] = $gifts;
         //开服列表
-        $m_server=new ServerModel();
+        $m_server = new ServerModel();
 //        $server_list=$m_server->fetchAll(['game_id'=>$request['game_id'],'start_time'=>],1,30,'*','start_time asc');
-        $now_date=date('Y-m-d');
-        $server_list=$m_server->fetchAllBySql("select * from server where game_id={$request['game_id']} and start_time>'{$now_date}' order by start_time asc");
-        $assign['server']=$server_list;
+        $now_date = date('Y-m-d');
+        $server_list = $m_server->fetchAllBySql("select * from server where game_id={$request['game_id']} and start_time>'{$now_date}' order by start_time asc");
+        $assign['server'] = $server_list;
         //资讯列表
         $m_article = new ArticleModel();
-        $list=$m_article->fetchAll("game_id={$request['game_id']} and visible=1 and type!='代理公告'", 1, 10, 'article_id,cover,title,up_time', 'up_time DESC,weight ASC,article_id DESC');
-        foreach ($list as &$row)
-        {
+        $list = $m_article->fetchAll("game_id={$request['game_id']} and visible=1 and type!='代理公告'", 1, 10, 'article_id,cover,title,up_time', 'up_time DESC,weight ASC,article_id DESC');
+        foreach ($list as &$row) {
             $row['up_time'] = $m_article->formatTime($row['up_time']);
         }
-        $assign['info'] =$list;
+        $assign['info'] = $list;
 //        //评论列表
 //        $m_comment=new CommentModel();
 //        $comment_list=$m_comment->fetchAll(['game_id']);
         exit(json_encode($assign));
     }
-    function getCommentAction(){
+
+    function getCommentAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['game_id','pn']);
+        $this->checkParams($request, ['game_id', 'pn']);
         $pn = $request['pn'];
         $limit = 20;
-        if( $pn < 1 || $limit < 1 ) {
+        if ($pn < 1 || $limit < 1) {
             exit;
         }
-        $m_comment=new CommentModel();
-        $comment_list=$m_comment->getComment($request['game_id'],$pn,$limit);
+        $m_comment = new CommentModel();
+        $comment_list = $m_comment->getComment($request['game_id'], $pn, $limit);
         exit(json_encode($comment_list));
     }
-    function addCommentAction(){
+
+    function addCommentAction()
+    {
         $request = $_POST;
-        $this->checkParams($request, ['parent_id','game_id','comm_cont','user_id']);
-        $data=$request;
-        $data['comm_time']=time();
-        $data['like_num']=0;
-        $m_comment=new CommentModel();
-        if($m_comment->insert($data)){
-            exit(json_encode(array('status'=>'success')));
-        }else{
-            exit(json_encode(array('status'=>'fail')));
+        $this->checkParams($request, ['parent_id', 'game_id', 'comm_cont', 'user_id']);
+        $data = $request;
+        $data['comm_time'] = time();
+        $data['like_num'] = 0;
+        $m_comment = new CommentModel();
+        if ($m_comment->insert($data)) {
+            exit(json_encode(array('status' => 'success')));
+        } else {
+            exit(json_encode(array('status' => 'fail')));
         }
     }
-    function addcommentlikeAction(){
+
+    function addcommentlikeAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['comm_id','user_id']);
-        $m_commtlike=new CommentlikeModel();
-        $rs=$m_commtlike->fetch(['comm_id'=>$request['comm_id'],'user_id'=>$request['user_id']]);
-        if($rs){
-            exit(json_encode(array('status'=>'fail','info'=>'你已点过赞了!')));
-        }else{
+        $this->checkParams($request, ['comm_id', 'user_id']);
+        $m_commtlike = new CommentlikeModel();
+        $rs = $m_commtlike->fetch(['comm_id' => $request['comm_id'], 'user_id' => $request['user_id']]);
+        if ($rs) {
+            exit(json_encode(array('status' => 'fail', 'info' => '你已点过赞了!')));
+        } else {
             $m_commtlike->insert($request);
             $m_commtlike->fetchBySql("update comment set like_num = like_num+1 where comm_id={$request['comm_id']}");
-            exit(json_encode(array('status'=>'success')));
+            exit(json_encode(array('status' => 'success')));
         }
     }
 
     /**
      * 我的礼包
      */
-    function myGiftBagAction(){
+    function myGiftBagAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['user_id','pn','limit']);
+        $this->checkParams($request, ['user_id', 'pn', 'limit']);
         //礼包详情
         $m_user = new UsersModel();
         $m_game = new GameModel();
         $pn = $request['pn'];
         $limit = $request['limit'];
-        if( $pn < 1 || $limit < 1 ) {
+        if ($pn < 1 || $limit < 1) {
             exit;
         }
         $m_gift = new GiftbagModel();
         $logs = $m_user->giftLogs($request['user_id'], $pn, $limit);
-        foreach ($logs as &$value){
-            $gift=$m_gift->fetch(['gift_id'=>$value['gift_id']]);
-            $game=$m_game->fetch(['game_id'=>$gift['game_id']],'logo');
-            $value['content']=unserialize($gift['content']);
-            $value['game_name']=$gift['game_name'];
-            $value['name']=$gift['name'];
-            $value['nums']=$gift['nums'];
-            $value['used']=$gift['used'];
-            $value['logo']=$game['logo'];
+        foreach ($logs as &$value) {
+            $gift = $m_gift->fetch(['gift_id' => $value['gift_id']]);
+            $game = $m_game->fetch(['game_id' => $gift['game_id']], 'logo');
+            $value['content'] = unserialize($gift['content']);
+            $value['game_name'] = $gift['game_name'];
+            $value['name'] = $gift['name'];
+            $value['nums'] = $gift['nums'];
+            $value['used'] = $gift['used'];
+            $value['logo'] = $game['logo'];
         }
         exit(json_encode($logs));
     }
 
     /**
- * 充值记录
- */
-    function mypaylogAction(){
+     * 充值记录
+     */
+    function mypaylogAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['user_id','pn','limit']);
+        $this->checkParams($request, ['user_id', 'pn', 'limit']);
         //礼包详情
         $pn = $request['pn'];
         $limit = $request['limit'];
-        if( $pn < 1 || $limit < 1 ) {
+        if ($pn < 1 || $limit < 1) {
             exit;
         }
         $m_pay = new PayModel();
         $logs = $m_pay->fetchAll("user_id='{$request['user_id']}' and pay_time > 0", $pn, $limit, 'pay_id,to_user,game_id,game_name,money,add_time', 'add_time DESC');
         exit(json_encode($logs));
     }
+
     /**
      * 最近在玩记录
      */
-    function gamesLogsAction(){
+    function gamesLogsAction()
+    {
         $request = $_GET;
         $this->checkParams($request, ['user_id']);
         $m_user = new UsersModel();
         $games = $m_user->getPlayGames($request['user_id'], 1, 12);
         exit(json_encode($games));
     }
+
     /**
      * 收藏记录
      */
-    function favoritesAction(){
+    function favoritesAction()
+    {
         $request = $_GET;
         $this->checkParams($request, ['user_id']);
         $m_user = new UsersModel();
         $games = $m_user->getFavorites($request['user_id'], 1, 12);
         exit(json_encode($games));
     }
-    function isloginAction(){
+
+    function isloginAction()
+    {
         $m_user = new UsersModel();
-        if($m_user->getLogin()){
-            exit(json_encode(array('status'=>'success')));
-        }else{
-            exit(json_encode(array('status'=>'fail')));
+        if ($m_user->getLogin()) {
+            exit(json_encode(array('status' => 'success')));
+        } else {
+            exit(json_encode(array('status' => 'fail')));
         }
     }
 
     /**
      * 玩家推广统计
      */
-    function playerChannelAction(){
+    function playerChannelAction()
+    {
         $request = $_GET;
         $this->checkParams($request, ['user_id']);
-        $user_id=$request['user_id'];
-        $m_user=new UsersModel();
-        $count=$m_user->fetchBySql("select COUNT(*) AS number ,SUM(player_channel_get) as money  from h5.user where player_channel={$user_id}");
+        $user_id = $request['user_id'];
+        $m_user = new UsersModel();
+        $count = $m_user->fetchBySql("select COUNT(*) AS number ,SUM(player_channel_get) as money  from h5.user where player_channel={$user_id}");
         $assign['money'] = $count['money'];
         $assign['number'] = $count['number'];
         exit(json_encode($assign));
     }
-    function getGameDownloadUrlAction(){
+
+    function getGameDownloadUrlAction()
+    {
         //获取下载资源链接
         $request = $_GET;
-        $this->checkParams($request, ['game_id','channel_id']);
-        $game_id=$request['game_id'];
-        $channel_id=$request['channel_id'];
+        $this->checkParams($request, ['game_id', 'channel_id']);
+        $game_id = $request['game_id'];
+        $channel_id = $request['channel_id'];
         //判断是否有包,没有则分包后下载
-        $admin_id=$channel_id;
+        $admin_id = $channel_id;
         if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk")) {
             $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
         } else {
@@ -688,6 +822,7 @@ class ApiController extends Yaf_Controller_Abstract
         export PATH;
         cp {$filename}  /www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk;
         > /dev/null 2>&1 &");
+            sleep(5);
             $now_path = $path . "/{$admin_id}.apk";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
@@ -698,29 +833,86 @@ class ApiController extends Yaf_Controller_Abstract
 //        echo "numfiles: " . $zip->numFiles . " ";
 //        echo "status:" . $zip->status . " ";
             $zip->close();
-            sleep(10);
 //            $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
             $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
-    public function checkAndroidUpdateAction(){
+
+    public function checkAndroidUpdateAction()
+    {
         $request = $_GET;
-        $this->checkParams($request, ['now_version','channel']);
-        $now_version=$request['now_version'];
+        $this->checkParams($request, ['now_version', 'channel']);
+        $now_version = $request['now_version'];
         $config = Yaf_Registry::get('config')->android;
-        $server_version=$config['version'];
-        $server_version_msg=$config['version_msg'];
-        if($now_version==$server_version){
+        $server_version = $config['version'];
+        $server_version_msg = $config['version_msg'];
+        if ($now_version == $server_version) {
             $assign['status'] = '100';
-        }else{
-            $channel=$request['channel'];
+        } else {
+            $channel = $request['channel'];
             $assign['status'] = '200';
             $assign['msg'] = "当前版本:{$now_version}.\n,最新版本:{$server_version}.\n,更新内容:{$server_version_msg}";
             $assign['download_url'] = "http://yun.zyttx.com/index/apkgame3?tg_channel={$channel}";
         }
         exit(json_encode($assign));
     }
+
+    public function playGameAction()
+    {
+        $request = $_GET;
+        $this->checkParams($request, ['game_id', 'open_id']);
+        $game_id = $request['game_id'];
+//        $open_id=$request['open_id'];
+//        $user_id=F_Helper_Mcrypt::authcode($open_id, 'DECODE');
+//        $server_id = $request['server_id'];
+        $user_id = $request['open_id'];
+        $m_user = new UsersModel();
+        $user = $m_user->fetch(['user_id' => $user_id], 'username,user_id');
+//        var_dump($user);
+        if (empty($user)) {
+            //缓存渠道id
+            $assign['status'] = 'fail';
+            $assign['msg'] = '账号异常,联系管理员';
+            exit(json_encode($assign));
+        }
+        //选择区服 todo
+        if ($game_id < 1) {
+            $assign['status'] = 'fail';
+            $assign['msg'] = '游戏id异常1';
+            exit(json_encode($assign));
+        }
+        $m_game = new GameModel();
+        $game = $m_game->fetch("game_id='{$game_id}'", 'game_id,name,logo,login_url,sign_key,channel,load_type');
+        if (empty($game)) {
+            $assign['status'] = 'fail';
+            $assign['msg'] = '找不到对应游戏';
+            exit(json_encode($assign));
+        }
+        if ($game['login_url'] && $game['sign_key']) {
+            $m_user->addPlayGame($user['user_id'], $game_id);
+            $url = Game_Login::redirect($user['user_id'], $user['username'], $game_id, 0, $game['login_url'], $game['sign_key']);
+            $this->forward('api', 'entry', array('game_name' => $game['name'], 'url' => $url, 'load_type' => $game['load_type']));
+            return false;
+        }
+//        Yaf_Dispatcher::getInstance()->disableView();
+    }
+
+    public function entryAction()
+    {
+        $req = $this->getRequest();
+        $params = $req->getParams();
+        if (count($params) != 3 || empty($params['game_name']) || empty($params['url']) || empty($params['load_type'])) {
+            $this->redirect('/game/index.html');
+            return false;
+        }
+        if ($params['load_type'] == 'redirect') {
+            $this->redirect($params['url']);
+            return false;
+        }
+        $this->getView()->assign($params);
+    }
+
     //不同环境下获取真实的IP
     function getIp()
     {
@@ -752,7 +944,7 @@ class ApiController extends Yaf_Controller_Abstract
                 echo json_encode($rs);
                 die;
             }
-            if ($request[$value]==='') {
+            if ($request[$value] === '') {
                 $rs['status'] = 1002;
                 $rs['msg'] = $value . "参数值必须!";
                 echo json_encode($rs);

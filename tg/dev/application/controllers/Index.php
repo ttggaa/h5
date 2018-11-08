@@ -124,6 +124,7 @@ class IndexController extends Yaf_Controller_Abstract
         export PATH;
         cp {$filename}  /www2/wwwroot/xgame.zyttx.com/apk/new{$channe_id}.apk;
         > /dev/null 2>&1 &");
+            sleep(5);
             $now_path = $path . "/new{$channe_id}.apk";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
