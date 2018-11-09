@@ -15,7 +15,7 @@ class ServerController extends F_Controller_Backend
     {
         $params = parent::beforeList();
         //最多显示当前小时+12
-        $limit_time=date("Y-m-d H:i:s",time()+12*60*60);
+        $limit_time=date("Y-m-d H:i:s",time()+24*60*60);
         if ($params['conditions']) {
             $params['conditions'] .= " AND start_time > '{$limit_time}'";
         } else {
