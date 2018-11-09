@@ -107,7 +107,7 @@ class IndexController extends Yaf_Controller_Abstract
     public function apkgame3Action()
     {
         $admin_id = $_REQUEST['tg_channel'] ?? 1;
-        if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/new{$admin_id}.apk")) {
+        if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/游戏盒子{$admin_id}.apk")) {
             $this->redirect("http://xgame.zyttx.com/apk/new{$admin_id}.apk");
         } else {
             $channe_id = $admin_id ?? 1;
@@ -122,16 +122,16 @@ class IndexController extends Yaf_Controller_Abstract
             shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
-        cp {$filename}  /www2/wwwroot/xgame.zyttx.com/apk/new{$channe_id}.apk;
+        cp {$filename}  /www2/wwwroot/xgame.zyttx.com/apk/游戏盒子{$channe_id}.apk;
         > /dev/null 2>&1 &");
             sleep(5);
-            $now_path = $path . "/new{$channe_id}.apk";
+            $now_path = $path . "/游戏盒子{$channe_id}.apk";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
             }
             $zip->addFromString("META-INF/jiule_channelid", "{$channe_id}");
             $zip->close();
-            $this->redirect("http://xgame.zyttx.com/apk/new{$channe_id}.apk");
+            $this->redirect("http://xgame.zyttx.com/apk/游戏盒子{$channe_id}.apk");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
