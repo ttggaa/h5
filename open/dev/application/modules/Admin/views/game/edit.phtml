@@ -230,11 +230,14 @@
                     <p>
                         <label>下载地址</label>
                         <input type="file" name="apk_url">
+                        <input class="text-input small-input" type="text" name="info[download_name]"
+                               value="<?php echo isset($info) ? $info['download_name'] : ''; ?>"  placeholder="下载名字"/>
                         <div class='container'>
                             <span id="progress"></span>
                         </div>
                         <div id="info"></div>
                         <div id="result"></div>
+
                     <?php if (isset($info) && $info['apk_url']) echo "<a  href=\"{$info['apk_url']}\">{$info['apk_url']}</a>"; ?>
                     </p>
 
