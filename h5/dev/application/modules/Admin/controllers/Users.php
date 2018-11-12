@@ -41,6 +41,11 @@ class UsersController extends F_Controller_Backend
         if( $id ) {
             $this->_oldinfo = $this->_model->fetch(array('user_id'=>$id), 'username,money,status');
         }
+        if( $id && empty($info['password']) ) {
+            unset($info['password']);
+        } else {
+            $info['password'] = md5(trim($info['password']));
+        }
     }
     
     protected function afterUpdate($id, &$info)
