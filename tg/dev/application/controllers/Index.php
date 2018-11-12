@@ -18,7 +18,7 @@ class IndexController extends Yaf_Controller_Abstract
         $admin_id = $channe_id;
         //获取游戏名字
         $m_game=new GameModel();
-        $download_name=$m_game->fetch(['game_Id'=>$game_id],'download_name');
+        $download_name=$m_game->fetch(['game_id'=>$game_id],'download_name');
         if(!$download_name){
             die('游戏下载名字不存在,请联系客服!');
         }

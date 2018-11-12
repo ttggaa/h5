@@ -803,11 +803,17 @@ class ApiController extends Yaf_Controller_Abstract
         $request = $_GET;
         $this->checkParams($request, ['game_id', 'channel_id']);
         $game_id = $request['game_id'];
+        $m_game=new GameModel();
+        $download_name=$m_game->fetch(['game_id'=>$game_id],'download_name');
+        if(!$download_name){
+            die('游戏下载名字不存在,请联系客服!');
+        }
+        $download_name=$download_name['download_name'];
         $channel_id = $request['channel_id'];
         //判断是否有包,没有则分包后下载
         $admin_id = $channel_id;
-        if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk")) {
-            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
+        if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk")) {
+            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
         } else {
             $zip = new ZipArchive();
             $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
@@ -820,21 +826,17 @@ class ApiController extends Yaf_Controller_Abstract
             shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
-        cp {$filename}  /www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$admin_id}.apk;
+        cp {$filename}  /www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk;
         > /dev/null 2>&1 &");
             sleep(5);
-            $now_path = $path . "/{$admin_id}.apk";
+            $now_path = $path . "/{$download_name}{$admin_id}.apk";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
             }
             $zip->addFromString("META-INF/jiule_channelid", "{$admin_id}");
             $zip->addFromString("META-INF/jiule_gameid", "{$game_id}");
-            //$zip->addFile($thisdir . "/too.php","/testfromfile.php");
-//        echo "numfiles: " . $zip->numFiles . " ";
-//        echo "status:" . $zip->status . " ";
             $zip->close();
-//            $this->downFile($admin_id . '.apk', "/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/");
-            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$admin_id}.apk");
+            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
