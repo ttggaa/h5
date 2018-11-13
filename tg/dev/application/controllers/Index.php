@@ -153,7 +153,7 @@ class IndexController extends Yaf_Controller_Abstract
             die('tg_channel必须');
         }
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
-            $this->redirect("https://ipa.zyttx.com/?channel={$admin_id}");
+            $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
         } else {
             $channe_id = $admin_id;
             $zip = new ZipArchive();
@@ -222,6 +222,7 @@ class IndexController extends Yaf_Controller_Abstract
             </array>
             </dict>
             </plist>";
+            var_dump($content);die;
             file_put_contents("{$channe_id}.plist", $content);
             $now_path = $path . "/{$channe_id}.ipa";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
@@ -229,7 +230,7 @@ class IndexController extends Yaf_Controller_Abstract
             }
             $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$channe_id}");
             $zip->close();
-            $this->redirect("https://ipa.zyttx.com/?channel={$channe_id}");
+            $this->redirect("https://ipa.zyttx.com/index.php?channel={$channe_id}");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
