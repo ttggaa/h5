@@ -148,11 +148,14 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgame4Action()
     {
-        $admin_id = $_REQUEST['tg_channel'] ?? 1;
+        $admin_id = $_REQUEST['tg_channel']??null;
+        if(!$admin_id){
+            die('tg_channel必须');
+        }
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
             $this->redirect("https://ipa.zyttx.com/?channel={$admin_id}");
         } else {
-            $channe_id = $admin_id ?? 1;
+            $channe_id = $admin_id;
             $zip = new ZipArchive();
             $filename = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/base.ipa";//母包位置
             //复制一份到当前
