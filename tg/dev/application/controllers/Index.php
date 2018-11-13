@@ -155,7 +155,6 @@ class IndexController extends Yaf_Controller_Abstract
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
             $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
         } else {
-            $channe_id = $admin_id;
             $zip = new ZipArchive();
             $filename = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/base.ipa";//母包位置
             //复制一份到当前
@@ -167,8 +166,8 @@ class IndexController extends Yaf_Controller_Abstract
             shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
-        cp {$filename}  /www2/wwwroot/xgame.zyttx.com/ios/ipa/{$channe_id}.ipa;
-        cp /www2/wwwroot/xgame.zyttx.com/ios/plist/base.plist  /www2/wwwroot/xgame.zyttx.com/ios/plist/{$channe_id}.plist;
+        cp {$filename}  /www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa;
+        cp /www2/wwwroot/xgame.zyttx.com/ios/plist/base.plist  /www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist;
         > /dev/null 2>&1 &");
             //复制plist文件
             sleep(5);
@@ -184,14 +183,14 @@ class IndexController extends Yaf_Controller_Abstract
             <key>kind</key>
             <string>software-package</string>
             <key>url</key>
-            <string>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</string>
+            <string>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</string>
             </dict>
             <dict>
             <key>kind</key>
             <string>full-size-image</string>
             <key>needs-shine</key>
             <true/>
-            <key>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</key>
+            <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
             https://ipa.zyttx.com/icon.png
             </string>
@@ -201,7 +200,7 @@ class IndexController extends Yaf_Controller_Abstract
             <string>display-image</string>
             <key>needs-shine</key>
             <true/>
-            <key>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</key>
+            <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
             https://ipa.zyttx.com/icon.png
             </string>
@@ -222,14 +221,14 @@ class IndexController extends Yaf_Controller_Abstract
             </array>
             </dict>
             </plist>";
-            file_put_contents("{$channe_id}.plist", $content);
-            $now_path = $path . "/{$channe_id}.ipa";
+            file_put_contents("{$admin_id}.plist", $content);
+            $now_path = $path . "/{$admin_id}.ipa";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
             }
-            $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$channe_id}");
+            $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$admin_id}");
             $zip->close();
-            $this->redirect("https://ipa.zyttx.com/index.php?channel={$channe_id}");
+            $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
