@@ -17,12 +17,12 @@ class IndexController extends Yaf_Controller_Abstract
         $channe_id = $_GET['tg_channel'] ?? 1;
         $admin_id = $channe_id;
         //获取游戏名字
-        $m_game=new GameModel();
-        $download_name=$m_game->fetch(['game_id'=>$game_id],'download_name');
-        if(!$download_name){
+        $m_game = new GameModel();
+        $download_name = $m_game->fetch(['game_id' => $game_id], 'download_name');
+        if (!$download_name) {
             die('游戏下载名字不存在,请联系客服!');
         }
-        $download_name=$download_name['download_name'];
+        $download_name = $download_name['download_name'];
         if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk")) {
             $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
         } else {
@@ -122,7 +122,7 @@ class IndexController extends Yaf_Controller_Abstract
             $filename = "/www2/wwwroot/xgame.zyttx.com/apk/base.apk";//母包位置
             //复制一份到当前
             //判断游戏目录是否存在
-            $path ="/www2/wwwroot/xgame.zyttx.com/apk/";
+            $path = "/www2/wwwroot/xgame.zyttx.com/apk/";
             if (!is_dir($path)) {
                 mkdir($path);
             }
@@ -139,6 +139,94 @@ class IndexController extends Yaf_Controller_Abstract
             $zip->addFromString("META-INF/jiule_channelid", "{$channe_id}");
             $zip->close();
             $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$channe_id}.apk");
+        }
+        Yaf_Dispatcher::getInstance()->disableView();
+    }
+
+    /**
+     * ios盒子下载
+     */
+    public function apkgame4Action()
+    {
+        $admin_id = $_REQUEST['tg_channel'] ?? 1;
+        if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
+            $this->redirect("https://ipa.zyttx.com/?channel={$admin_id}");
+        } else {
+            $channe_id = $admin_id ?? 1;
+            $zip = new ZipArchive();
+            $filename = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/base.ipa";//母包位置
+            //复制一份到当前
+            //判断游戏目录是否存在
+            $path = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/";
+            if (!is_dir($path)) {
+                mkdir($path);
+            }
+            shell_exec(" 
+        PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
+        export PATH;
+        cp {$filename}  /www2/wwwroot/xgame.zyttx.com/ios/ipa/{$channe_id}.ipa;
+        cp /www2/wwwroot/xgame.zyttx.com/ios/plist/base.plist  /www2/wwwroot/xgame.zyttx.com/ios/plist/{$channe_id}.plist;
+        > /dev/null 2>&1 &");
+            //复制plist文件
+            sleep(5);
+            //添加下载文件
+            $content = "<plist version=\"1.0\">
+            <dict>
+            <key>items</key>
+            <array>
+            <dict>
+            <key>assets</key>
+            <array>
+            <dict>
+            <key>kind</key>
+            <string>software-package</string>
+            <key>url</key>
+            <string>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</string>
+            </dict>
+            <dict>
+            <key>kind</key>
+            <string>full-size-image</string>
+            <key>needs-shine</key>
+            <true/>
+            <key>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</key>
+            <string>
+            https://ipa.zyttx.com/icon.png
+            </string>
+            </dict>
+            <dict>
+            <key>kind</key>
+            <string>display-image</string>
+            <key>needs-shine</key>
+            <true/>
+            <key>https://ipa.zyttx.com/ipa/{$channe_id}.ipa</key>
+            <string>
+            https://ipa.zyttx.com/icon.png
+            </string>
+            </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+            <key>bundle-identifier</key>
+            <string>5</string>
+            <key>bundle-version</key>
+            <string>0.0.5</string>
+            <key>kind</key>
+            <string>software</string>
+            <key>title</key>
+            <string>游戏盒子</string>
+            </dict>
+            </dict>
+            </array>
+            </dict>
+            </plist>";
+            file_put_contents("{$channe_id}.plist", $content);
+            $now_path = $path . "/{$channe_id}.ipa";
+            if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
+                exit("cannot open <$filename> ");
+            }
+            $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$channe_id}");
+            $zip->close();
+            $this->redirect("https://ipa.zyttx.com/?channel={$channe_id}");
         }
         Yaf_Dispatcher::getInstance()->disableView();
     }
