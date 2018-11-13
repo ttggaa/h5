@@ -222,7 +222,6 @@ class IndexController extends Yaf_Controller_Abstract
             </array>
             </dict>
             </plist>";
-            var_dump($content);die;
             file_put_contents("{$channe_id}.plist", $content);
             $now_path = $path . "/{$channe_id}.ipa";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
