@@ -221,7 +221,7 @@ class IndexController extends Yaf_Controller_Abstract
             </array>
             </dict>
             </plist>";
-            file_put_contents("{$admin_id}.plist", $content);
+            file_put_contents("/www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist", $content);
             $now_path = $path . "/{$admin_id}.ipa";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
                 exit("cannot open <$filename> ");
