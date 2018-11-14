@@ -194,7 +194,7 @@ $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
             <true/>
             <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
-              https://ipa.zyttx.com/logoFull.png.png
+              https://ipa.zyttx.com/logoFull.png
             </string>
           </dict>
           <dict>
