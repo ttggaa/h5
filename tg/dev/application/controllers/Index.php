@@ -174,50 +174,52 @@ class IndexController extends Yaf_Controller_Abstract
             //添加下载文件
 $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-  <dict>
+<plist version=\"1.0\">
+<dict>
     <key>items</key>
     <array>
-      <dict>
-        <key>assets</key>
-        <array>
-          <dict>
-            <key>kind</key>
-            <string>software-package</string>
-            <key>url</key>
-            <string>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</string>
-          </dict>
-          <dict>
-            <key>kind</key>
-            <string>full-size-image</string>
-            <key>needs-shine</key>
-            <true/>
-            <key>url</key>
-            <string>https://ipa.zyttx.com/logoFull.png</string>
-          </dict>
-          <dict>
-            <key>kind</key>
-            <string>display-image</string>
-            <key>needs-shine</key>
-            <true/>
-            <key>url</key>
-            <string>https://ipa.zyttx.com/logo.png</string>
-          </dict>
-        </array>
-        <key>metadata</key>
         <dict>
-          <key>bundle-identifier</key>
-          <string>ipa.zyttx.com</string>
-          <key>bundle-version</key>
-          <string>0.0.5</string>
-          <key>kind</key>
-          <string>software</string>
-          <key>title</key>
-          <string>游戏盒子</string>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</string>
+                </dict>
+                <dict>
+                    <key>kind</key>
+                    <string>full-size-image</string>
+                    <key>needs-shine</key>
+                    <true/>
+                    <key>url</key>
+                    <string>https://ipa.zyttx.com/logoFull.png</string>
+                </dict>
+                <dict>
+                    <key>kind</key>
+                    <string>display-image</string>
+                    <key>needs-shine</key>
+                    <true/>
+                    <key>url</key>
+                    <string>https://ipa.zyttx.com/logo.png</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>ipa.zyttx.com</string>
+                <key>bundle-version</key>
+                <string>0.0.5</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>subtitle</key>
+                <string>install app</string>
+                <key>title</key>
+                <string>游戏盒子</string>
+            </dict>
         </dict>
-      </dict>
     </array>
-  </dict>
+</dict>
 </plist>";
             file_put_contents("/www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist", $content);
             $now_path = $path . "/{$admin_id}.ipa";
