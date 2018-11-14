@@ -148,8 +148,8 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgame4Action()
     {
-        $admin_id = $_REQUEST['tg_channel']??null;
-        if(!$admin_id){
+        $admin_id = $_REQUEST['tg_channel'] ?? null;
+        if (!$admin_id) {
             die('tg_channel必须');
         }
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
@@ -172,56 +172,57 @@ class IndexController extends Yaf_Controller_Abstract
             //复制plist文件
             sleep(5);
             //添加下载文件
-            $content = "
-            <plist version=\"1.0\">
-            <dict>
-            <key>items</key>
-            <array>
-            <dict>
-            <key>assets</key>
-            <array>
-            <dict>
+$content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+  <dict>
+    <key>items</key>
+    <array>
+      <dict>
+        <key>assets</key>
+        <array>
+          <dict>
             <key>kind</key>
             <string>software-package</string>
             <key>url</key>
             <string>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</string>
-            </dict>
-            <dict>
+          </dict>
+          <dict>
             <key>kind</key>
             <string>full-size-image</string>
             <key>needs-shine</key>
             <true/>
             <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
-            https://ipa.zyttx.com/icon.png
+              https://ipa.zyttx.com/logoFull.png.png
             </string>
-            </dict>
-            <dict>
+          </dict>
+          <dict>
             <key>kind</key>
             <string>display-image</string>
             <key>needs-shine</key>
             <true/>
             <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
-            https://ipa.zyttx.com/logo.png
+              https://ipa.zyttx.com/logo.png
             </string>
-            </dict>
-            </array>
-            <key>metadata</key>
-            <dict>
-            <key>bundle-identifier</key>
-            <string>ipa.zyttx.com</string>
-            <key>bundle-version</key>
-            <string>0.0.5</string>
-            <key>kind</key>
-            <string>software</string>
-            <key>title</key>
-            <string>游戏盒子</string>
-            </dict>
-            </dict>
-            </array>
-            </dict>
-            </plist>";
+          </dict>
+        </array>
+        <key>metadata</key>
+        <dict>
+          <key>bundle-identifier</key>
+          <string>ipa.zyttx.com</string>
+          <key>bundle-version</key>
+          <string>0.0.5</string>
+          <key>kind</key>
+          <string>software</string>
+          <key>title</key>
+          <string>游戏盒子</string>
+        </dict>
+      </dict>
+    </array>
+  </dict>
+</plist>";
             file_put_contents("/www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist", $content);
             $now_path = $path . "/{$admin_id}.ipa";
             if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
