@@ -192,20 +192,16 @@ $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
             <string>full-size-image</string>
             <key>needs-shine</key>
             <true/>
-            <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
-            <string>
-              https://ipa.zyttx.com/logoFull.png
-            </string>
+            <key>url</key>
+            <string>https://ipa.zyttx.com/logoFull.png</string>
           </dict>
           <dict>
             <key>kind</key>
             <string>display-image</string>
             <key>needs-shine</key>
             <true/>
-            <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
-            <string>
-              https://ipa.zyttx.com/logo.png
-            </string>
+            <key>url</key>
+            <string>https://ipa.zyttx.com/logo.png</string>
           </dict>
         </array>
         <key>metadata</key>
