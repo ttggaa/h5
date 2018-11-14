@@ -16,6 +16,7 @@ class ChannelController extends Yaf_Controller_Abstract
         $channel_info=$admin->fetch(['admin_id'=>$channel]);
         $channel_info['boxname']=$channel_info['boxname']?$channel_info['boxname']:'久乐盒子';
         $channel_info['download_url']="http://yun.zyttx.com/index/apkgame3?tg_channel={$channel_info['admin_id']}";
+        $channel_info['download_url2']="http://yun.zyttx.com/index/apkgame4?tg_channel={$channel_info['admin_id']}";
         $channel_info['play_url']="http://{$channel_info['admin_id']}.h5.zyttx.com";
         $assign['info']=$channel_info;
         $this->getView()->assign($assign);
