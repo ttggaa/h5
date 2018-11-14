@@ -210,7 +210,7 @@ class IndexController extends Yaf_Controller_Abstract
             <key>metadata</key>
             <dict>
             <key>bundle-identifier</key>
-            <string>5</string>
+            <string>ipa.zyttx.com</string>
             <key>bundle-version</key>
             <string>0.0.5</string>
             <key>kind</key>
