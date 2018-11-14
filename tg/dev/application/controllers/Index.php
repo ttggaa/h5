@@ -172,7 +172,8 @@ class IndexController extends Yaf_Controller_Abstract
             //复制plist文件
             sleep(5);
             //添加下载文件
-            $content = "<plist version=\"1.0\">
+            $content = "
+            <plist version=\"1.0\">
             <dict>
             <key>items</key>
             <array>
@@ -202,7 +203,7 @@ class IndexController extends Yaf_Controller_Abstract
             <true/>
             <key>https://ipa.zyttx.com/ipa/{$admin_id}.ipa</key>
             <string>
-            https://ipa.zyttx.com/icon.png
+            https://ipa.zyttx.com/logo.png
             </string>
             </dict>
             </array>
