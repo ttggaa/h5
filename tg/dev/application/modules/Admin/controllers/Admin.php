@@ -5,7 +5,7 @@ class AdminController extends F_Controller_Backend
 
     protected function beforeList()
     {
-        $params['op'] = F_Helper_Html::Op_Null;
+
         $conds = '';
         $search = $this->getRequest()->getQuery('search', array());
         $s = Yaf_Session::getInstance();
@@ -33,6 +33,12 @@ class AdminController extends F_Controller_Backend
             $conds.="  AND parent_id in {$channel_ids_condition} or admin_id = {$_SESSION['admin_id']}";
         }else{
             $conds.="parent_id in {$channel_ids_condition} or admin_id = {$_SESSION['admin_id']}";
+        }
+        $params['op'] = F_Helper_Html::Op_Null;
+        if($_SESSION['admin_id']==1){
+            $params['op'] = F_Helper_Html::Op_Null;
+        }else{
+            $params['op'] = F_Helper_Html::Op_Edit;
         }
         $params['conditions']=$conds;
         return $params;
