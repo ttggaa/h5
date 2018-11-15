@@ -36,9 +36,9 @@ class AdminController extends F_Controller_Backend
         }
         $params['op'] = F_Helper_Html::Op_Null;
         if($_SESSION['admin_id']==1){
-            $params['op'] = F_Helper_Html::Op_Null;
-        }else{
             $params['op'] = F_Helper_Html::Op_Edit;
+        }else{
+            $params['op'] = F_Helper_Html::Op_Null;
         }
         $params['conditions']=$conds;
         return $params;
