@@ -5,7 +5,7 @@ class AdminController extends F_Controller_Backend
 
     protected function beforeList()
     {
-        $params['op'] = F_Helper_Html::Op_Edit;
+        $params['op'] = F_Helper_Html::Op_Null;
         $conds = '';
         $search = $this->getRequest()->getQuery('search', array());
         $s = Yaf_Session::getInstance();
