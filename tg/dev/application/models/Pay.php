@@ -165,7 +165,7 @@ class PayModel extends F_Model_Pdo
             'pay_id' => array('支付ID', 'input', null, ''),
             'username' => array('用户名', 'input', null, ''),
             'game_id' => array('游戏ID', 'input', null, ''),
-            'server_id' => array('区/服ID', 'input', null, ''),
+            'game_name' => array('游戏名字', 'input', null, ''),
             'trade_no' => array('流水号', 'input', null, ''),
         );
     }

@@ -27,7 +27,14 @@ class PayController extends F_Controller_Backend
                 $cmm = '';
             }
             unset($search['add_begin'], $search['add_end']);
-
+            if(!empty($search['game_name'])){
+                if($conds){
+                    $conds .= " AND {$cmm}game_name LIKE '%{$search['game_name']}%'";
+                }else{
+                    $conds .= "{$cmm}game_name LIKE '%{$search['game_name']}%'";
+                }
+                unset($search['game_name']);
+            }
             foreach ($search as $k=>$v)
             {
                 if( empty($v) ) {
