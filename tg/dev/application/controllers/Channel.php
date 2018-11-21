@@ -21,5 +21,8 @@ class ChannelController extends Yaf_Controller_Abstract
         $assign['info']=$channel_info;
         $this->getView()->assign($assign);
     }
+    public function addChannelAction(){
+        $this->redirect("/www2/wwwroot/code/h5/tg/dev/public/channel_add/public");
+    }
 
 }
