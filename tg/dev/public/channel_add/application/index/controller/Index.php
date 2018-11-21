@@ -5,11 +5,17 @@ namespace app\index\controller;
 use app\index\model\User as UserModel;
 use think\captcha\Captcha;
 use think\Controller;
+use think\Session;
 
 class Index extends Controller
 {
     public function index()
     {
+//        dump(Session::get('admin_id'));
+//        dump(Session::get('admin_name'));
+//        dump(Session::get('admin_status'));
+//        dump(Session::get('boxname'));
+//        die;
         return $this->fetch();
     }
 

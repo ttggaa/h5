@@ -11,7 +11,7 @@ use think\Validate;
 class User extends Validate
 {
     protected $rule = [
-        'username|账户' => 'require|max:25',
+        'username|账户' => 'require|max:25|unique:admin',
         'password|密码' => 'require|max:25',
         'nickname|真实姓名' => 'require',
         'pay_number|支付宝账号' => 'require',

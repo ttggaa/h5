@@ -452,12 +452,12 @@ $(document).ready(function () {
         rules: {
             username: {
                 required: true,
-                minlength: 6,
+                // minlength: 6,
                 maxlength: 20
             },
             password: {
                 required: true,
-                minlength: 6,
+                // minlength: 6,
                 maxlength: 20
             },
             captcha: "required",
@@ -465,12 +465,12 @@ $(document).ready(function () {
         messages: {
             username: {
                 required: "请输入用户名",
-                minlength: "用户名至少6个字符",
+                // minlength: "用户名至少6个字符",
                 maxlength: "用户名最多20个字符",
             },
             password: {
                 required: "请输入密码",
-                minlength: "密码至少6个字符",
+                // minlength: "密码至少6个字符",
                 maxlength: "密码最多20个字符",
             },
             captcha: "验证码必须"
@@ -485,6 +485,7 @@ $(document).ready(function () {
                     if (result.code) {
                         alert(result.mgs);
                         $('.Login-Pop').trigger('click');
+                        window.location.href="/"
                     } else {
                         alert(result.mgs);
                         //刷新验证码
@@ -505,7 +506,8 @@ $('#loginBtn').click(function () {
 //刷新验证码
 function refreshVerify(obj, id) {
     var img = obj;
-    img.src = "/index/index/getVerify?id=" + id;
+    var src=$(obj).attr('src');
+    img.src = src;
 
 }
 //弹窗
