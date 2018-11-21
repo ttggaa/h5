@@ -22,7 +22,7 @@ class ChannelController extends Yaf_Controller_Abstract
         $this->getView()->assign($assign);
     }
     public function addChannelAction(){
-        $this->redirect("/channel_add/public");
+        $this->redirect("/channeladd/public");
     }
 
 }
