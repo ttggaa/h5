@@ -429,10 +429,10 @@ $(document).ready(function () {
                 data: data,
                 success: function (result) {//返回数据根据结果进行相应的处理
                     if (result.code) {
-                        alert(result.mgs);
+                        alert(result.msg);
                         $('.Login-Pop').trigger('click');
                     } else {
-                        alert(result.mgs);
+                        alert(result.msg);
                         //刷新验证码
                         $('.register_captcha').trigger('click');
                         // $("#tipMsg").text("删除数据失败");
@@ -483,11 +483,11 @@ $(document).ready(function () {
                 data: data,
                 success: function (result) {//返回数据根据结果进行相应的处理
                     if (result.code) {
-                        alert(result.mgs);
+                        alert('登陆成功');
                         $('.Login-Pop').trigger('click');
-                        window.location.href="/"
+                        window.location.href=result.msg;
                     } else {
-                        alert(result.mgs);
+                        alert(result.msg);
                         //刷新验证码
                         $('.login_captcha').trigger('click');
                         // $("#tipMsg").text("删除数据失败");

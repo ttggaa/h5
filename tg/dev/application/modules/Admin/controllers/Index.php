@@ -34,7 +34,7 @@ class IndexController extends Yaf_Controller_Abstract
 		$u = substr($req->getPost('username', ''), 0, 16);
 		$p = substr($req->getPost('password', ''), 0, 31);
 		$r = $req->getPost('remember', 0);
-		
+
 		$error = $this->m_admin->login($u, $p, $r, 1);
 		if( $error != '' ) {
 			Yaf_Registry::set('error', $error);
@@ -44,6 +44,21 @@ class IndexController extends Yaf_Controller_Abstract
 		}
 		return false;
 	}
+    public function ajaxLoginAction()
+    {
+        $u = substr($_GET['username'], 0, 16);
+        $p = substr($_GET['password'], 0, 31);
+        $r = $_GET['remember']??0;
+        $error = $this->m_admin->login($u, $p, $r, 1);
+        if( $error != '' ) {
+//            return ['code'=>0,'msg'=>$error];
+            die($error);
+        } else {
+//            return ['code'=>1,'msg'=>'success'];
+            $this->redirect('/admin/index/main');
+        }
+        return false;
+    }
 	
 	public function logoutAction()
 	{

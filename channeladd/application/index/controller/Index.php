@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use app\index\model\User as UserModel;
 use think\captcha\Captcha;
+use think\Config;
 use think\Controller;
 use think\Session;
 
@@ -48,7 +49,7 @@ class Index extends Controller
             $rs = $user->register($data);
             return $rs;
         }else{
-            return ['code'=>0,'mgs'=>'验证码错误'];
+            return ['code'=>0,'msg'=>'验证码错误'];
         }
 
     }
@@ -60,7 +61,7 @@ class Index extends Controller
             $rs = $user->login($data);
             return $rs;
         }else{
-            return ['code'=>0,'mgs'=>'验证码错误'];
+            return ['code'=>0,'msg'=>'验证码错误'];
         }
     }
 }
