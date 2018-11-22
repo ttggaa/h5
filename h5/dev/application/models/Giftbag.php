@@ -63,9 +63,9 @@ class GiftbagModel extends F_Model_Pdo
 	public function getFieldsSearch()
 	{
 	    return array(
-	        'gift_id' => array('礼包ID', 'input', null, ''),
-	        'game_id' => array('游戏ID', 'input', null, ''),
-	        'server_id' => array('区/服ID', 'input', null, ''),
+            'gift_id' => array('礼包ID', 'input', null, ''),
+            'game_id' => array('游戏ID', 'input', null, ''),
+            'game_name' => array('游戏名字', 'input', null, ''),
 	    );
 	}
 	

@@ -17,7 +17,7 @@
     <section class="main">
         <h2 class="title"><i class="i_lb2"></i>热门礼包</h2>
         <ul id="gift_list" class="gift_list">
-            <li id="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+            <li id="loading"><span>查看更多</span></li>
         </ul>
         <div class="footer_padding"></div>
     </section>
@@ -75,15 +75,18 @@ $(function(){
     }
     pull();
 
-    $(window).on('scrollstop', function(){
-        var t_h = $('.z_header').height() + $('.main').height();
-        var c_h = $(document).scrollTop();
-        if( c_h == 0 ) c_h = $('.z_header').scrollTop();
-        c_h += $(window).height() + 10;
-        if( c_h >= t_h ) {
-            pull();
-        }
+    $("#loading").on('tap',function(){
+        pull();
     });
+    // $(window).on('scrollstop', function(){
+    //     var t_h = $('.z_header').height() + $('.main').height();
+    //     var c_h = $(document).scrollTop();
+    //     if( c_h == 0 ) c_h = $('.z_header').scrollTop();
+    //     c_h += $(window).height() + 10;
+    //     if( c_h >= t_h ) {
+    //         pull();
+    //     }
+    // });
 });
 </script>
 </html>

@@ -820,11 +820,14 @@ html body .ui-group-theme-a a:hover {
   width: 100%;
   position: relative;
 }
-#loading,
-.loading {
+#loading,.loading {
+  cursor:pointer;
+  background-color: rgba(115, 136, 133, 0.18);
+  text-align: center;
   display: block;
   height: 40px;
   padding: 5px 12px;
+  font-size: 1rem;
 }
 #loading img,
 .loading img {
@@ -835,6 +838,7 @@ html body .ui-group-theme-a a:hover {
 }
 #loading span,
 .loading span {
+  color: #FFFFFF;
   line-height: 40px;
   margin-left: 19px;
 }

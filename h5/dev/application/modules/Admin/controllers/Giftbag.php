@@ -7,7 +7,7 @@ class GiftbagController extends F_Controller_Backend
     protected function beforeList()
     {
         $params = parent::beforeList();
-        $params['orderby'] = 'weight ASC';
+        $params['orderby'] = 'add_time DESC';
         return $params;
     }
     
