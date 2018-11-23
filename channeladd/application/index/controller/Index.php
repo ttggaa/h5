@@ -19,6 +19,42 @@ class Index extends Controller
 //        die;
         return $this->fetch();
     }
+    public function index2()
+    {
+//        dump(Session::get('admin_id'));
+//        dump(Session::get('admin_name'));
+//        dump(Session::get('admin_status'));
+//        dump(Session::get('boxname'));
+//        die;
+        return $this->fetch();
+    }
+    public function index3()
+    {
+//        dump(Session::get('admin_id'));
+//        dump(Session::get('admin_name'));
+//        dump(Session::get('admin_status'));
+//        dump(Session::get('boxname'));
+//        die;
+        return $this->fetch();
+    }
+    public function index4()
+    {
+//        dump(Session::get('admin_id'));
+//        dump(Session::get('admin_name'));
+//        dump(Session::get('admin_status'));
+//        dump(Session::get('boxname'));
+//        die;
+        return $this->fetch();
+    }
+    public function index5()
+    {
+//        dump(Session::get('admin_id'));
+//        dump(Session::get('admin_name'));
+//        dump(Session::get('admin_status'));
+//        dump(Session::get('boxname'));
+//        die;
+        return $this->fetch();
+    }
 
     //登录验证码1 ,注册验证码2
     public function getVerify($id = '')

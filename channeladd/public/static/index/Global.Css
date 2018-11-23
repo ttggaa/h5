@@ -15,25 +15,26 @@ input{font-family:"微软雅黑"; color:#666;}
 
 
 /* 头部 */
-.Head-Menu{background-color:rgba(255,255,255,0.95); width:100%; position:fixed; top:0; left:0; z-index:11; height:70px;}
-.Head-Menu .m1200{position:relative; width:1200px; margin:auto; background:#fff;}
+.Head-Menu{background-color:rgba(255,255,255,0.95); width:100%; position:fixed; top:0; left:0; z-index:11; height:80px;}
+
+.Head-Menu .m1200{position:relative; width:64%; margin:auto; background:#fff;}
 .Head-Menu .logo{height:35px; width:217px; float:left; overflow:hidden; background:url(./Images/VV-Pic.png); margin-top:18px; font-size:14px;}
-.Head-Menu .nav{float:left; margin-left:100px;}
-.Head-Menu .nav li{float:left; padding:0 20px; position:relative;}
-.Head-Menu .nav li:after{content:''; width:4px; height:4px; background-color:#999; border-radius:2px; position:absolute; right:0; top:39px;}
+.Head-Menu .nav{float:left;}
+.Head-Menu .nav li{float:left; position:relative;}
+/*.Head-Menu .nav li:after{content:''; width:4px; height:4px; background-color:#999; border-radius:2px; position:absolute; right:0; top:39px;}*/
 .Head-Menu .nav li:last-child:after{display:none;}
 .Head-Menu .nav li a{font-size:16px; height:55px; line-height:65px; display:block; position:relative; margin-right:48px;}
 .Head-Menu .nav li a:before{content:''; position:absolute; left:0; right:0; bottom:0; margin:auto; width:0px; height:2px; background:#0077ff; transition:0.3s;}
 .Head-Menu .nav li a:hover:before,.Head-Menu .nav li a.on:before{width:100%;}
 .Head-Menu .nav li a:hover,.Head-Menu .nav li a.on{color:#0077ff;}
 .Head-Menu .Login-Box{overflow:hidden; float:right;margin-left: 10px;}
-.Head-Menu .Login-Box a{display:block; padding-left:15px; margin-top:20px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:14px;}
+.Head-Menu .Login-Box a{display:block; padding-left:15px; margin-top:20px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:1rem;}
 .Head-Menu .Login-Box a:hover,.Head-Menu .User-Box a:hover{background:#fe8900;}
 .Head-Menu .Register-Box{overflow:hidden; float:right;}
-.Head-Menu .Register-Box a{display:block; padding-left:15px; margin-top:20px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:14px;}
+.Head-Menu .Register-Box a{display:block; padding-left:15px; margin-top:20px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:1rem;}
 .Head-Menu .Register-Box a:hover,.Head-Menu .User-Box a:hover{background:#fe8900;}
 .Head-Menu .User-Box{overflow:hidden; float:right; color:#484d4d; font-size:14px; display:none; margin-top:20px; line-height:28px; height:28px;}
-.Head-Menu .User-Box a{padding-left:15px; height:28px; margin-left:15px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:14px;}
+.Head-Menu .User-Box a{padding-left:15px; height:28px; margin-left:15px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:1rem;}
 .Head-Menu .User-Box span{color:#0077ff; padding-left:5px; padding-right:5px;}
 
 
@@ -64,6 +65,7 @@ input{font-family:"微软雅黑"; color:#666;}
 /*登录输入框*/
 .Login h1{color:#0077ff; font-size:20px; font-weight:bold; margin-bottom:15px;}
 .Form{width:310px; height:40px; line-height:40px; margin-bottom:25px; position:relative; z-index:1; margin-top:10px;}
+
 .Input{width:270px; height:38px; line-height:36px; padding-left:40px; border:1px solid #e6e6e6; border-radius:3px; position:absolute; z-index:2;}
 .Input-Code{width:120px; height:38px; float:left; line-height:36px; padding-left:40px; border:1px solid #e6e6e6; border-radius:3px; position:absolute; z-index:2;}
 .Form input:focus{outline:solid 1px #0077ff; border:0px; color:#0077ff; height:40px; border-radius:3px;}
@@ -112,3 +114,12 @@ input{font-family:"微软雅黑"; color:#666;}
 .Copyright .Copyright-Box .Box-Right ul li{width:120px; height:40px; margin-right:20px; float:left; line-height:55px;}
 .Copyright .Copyright-Box .Box-Right ul li img{width:120px;}
 
+
+@media screen and (max-device-width: 700px) {
+    .Head-Menu .Login-Box a{ font-size:1.1rem;}
+    .Head-Menu .Register-Box a { font-size:1.1rem;}
+    .Head-Menu .m1200{position:relative; width:90%; margin:auto; background:#fff;}
+    .Head-Menu{background-color:rgba(255,255,255,0.95); width:100%; position:fixed; top:0; left:0; z-index:11; height:120px;}
+    .Form{width:500px; height:40px; line-height:40px; margin-bottom:25px; position:relative; z-index:1; margin-top:10px;}
+
+}

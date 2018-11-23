@@ -188,13 +188,13 @@ function jqalert(param) {
 
 /*弹窗内容*/
 $(function () {
-    $('.demo1').click(function () {
-        jqalert({
-            title: 'VV游戏推广平台更新公告<em></em>',
-            content: ' <p class="font">11月11日版本更新公告</p>   																																							<p>11月11日 7:00-9:00，更新期间用户可正常注册、登陆、充值，或出现后台短时登出，或无法登入，给您带来不便敬请谅解。</p>      																							<p class="font">一、更新内容：</p>																																						   <p>1、推广员业绩汇总页面，添加搜索条件推广员名称，默认显示全部推广员，下拉可显示单个推广员姓名</p>																																								<p>2、新增改绑功能，公会可对渠道下的玩家进行改绑</p>																																										<p>3、老板后台能够跨小组进行操作，跨小组所下的扶持扣除该小组的元宝池余额</p>																																						<p>4、公会后台新增页面</p>																																						                <p class="font">二、财务结算单：</p>																																						   <p>1、游戏收入对账表</p>          																																						   <p>2、补款扣款记录</p>',
-            notext: ''
-        })
-    })
+    // $('.demo1').click(function () {
+    //     jqalert({
+    //         title: 'VV游戏推广平台更新公告<em></em>',
+    //         content: ' <p class="font">11月11日版本更新公告</p>   																																							<p>11月11日 7:00-9:00，更新期间用户可正常注册、登陆、充值，或出现后台短时登出，或无法登入，给您带来不便敬请谅解。</p>      																							<p class="font">一、更新内容：</p>																																						   <p>1、推广员业绩汇总页面，添加搜索条件推广员名称，默认显示全部推广员，下拉可显示单个推广员姓名</p>																																								<p>2、新增改绑功能，公会可对渠道下的玩家进行改绑</p>																																										<p>3、老板后台能够跨小组进行操作，跨小组所下的扶持扣除该小组的元宝池余额</p>																																						<p>4、公会后台新增页面</p>																																						                <p class="font">二、财务结算单：</p>																																						   <p>1、游戏收入对账表</p>          																																						   <p>2、补款扣款记录</p>',
+    //         notext: ''
+    //     })
+    // })
 });
 
 
@@ -516,6 +516,11 @@ $('.Login-Pop').click(function() {
     $('.goodcover').show();
     $('.code').fadeIn();
 });
+$('.Register-Pop').click(function () {
+    $('.code2').center();
+    $('.goodcover').show();
+    $('.code2').fadeIn();
+});
 $('.closebt').click(function() {
     $('.code').hide();
     $('.goodcover').hide();
@@ -526,3 +531,27 @@ $('.goodcover').click(function() {
     $('.goodcover').hide();
     $('.Login')[0].reset();
 });
+$(function() {
+    var $this = $("#news");
+    var scrollTimer;
+    $this.hover(function() {
+        clearInterval(scrollTimer);
+    }, function() {
+        scrollTimer = setInterval(function() {
+            scrollNews($this);
+        }, 2500);
+    }).trigger("mouseleave");
+
+    function scrollNews(obj) {
+        var $self = obj.find("ul");
+        var lineHeight = $self.find("li:first").height();
+
+        $self.animate({
+            "marginTop": -lineHeight + "px"
+        }, 500, function() {
+            $self.css({
+                marginTop: 0
+            }).find("li:first").appendTo($self);
+        })
+    }
+})
