@@ -1,83 +1,539 @@
 ﻿/* 游戏广告图 */
-.lubo{width:100%;clear:both; position:relative; height:600px;}
-.lubo_box{position:relative; width:100%; height:600px;}
-.lubo_box li{float:left;position:absolute; top:0; left:0; width:100%; height:auto; opacity:0;filter:alpha(opacity=0);}
-.lubo_box li a{display:block; width:100%; height:600px;}
-.lubo_box li img{width:100%; height:100%;}
-/*圆点*/
-.cir_box{overflow:hidden; position:absolute; z-index:1;}
-.cir_box li{float:left; width:8px; height:8px; margin:0 3px; cursor:pointer; background:#fff; border-radius:4px;}
-.cir_on{background:#0077ff !important; width:18px !important; height:8px;}
-/*按钮*/
-.lubo_btn{position:relative; width:100%; top:-310px;}
-.left_btn, .right_btn{width:30px; height:80px; background:#000; opacity:0.8;filter:alpha(opacity=80); cursor:pointer; color:#fff; line-height:80px; font-size:30px; text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none; font-family:'宋体'; font-size:40px;}
+.lubo {
+    width: 100%;
+    clear: both;
+    position: relative;
+    height: 600px;
+}
 
+.lubo_box {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.lubo_box li {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.lubo_box li a {
+    display: block;
+    width: 100%;
+    height: 600px;
+}
+
+.lubo_box li img {
+    width: 100%;
+    height: 100%;
+}
+
+/*圆点*/
+.cir_box {
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+.cir_box li {
+    float: left;
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.cir_on {
+    background: #0077ff !important;
+    width: 18px !important;
+    height: 8px;
+}
+
+/*按钮*/
+.lubo_btn {
+    position: relative;
+    width: 100%;
+    top: -310px;
+}
+
+.left_btn, .right_btn {
+    width: 30px;
+    height: 80px;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: pointer;
+    color: #fff;
+    line-height: 80px;
+    font-size: 30px;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: '宋体';
+    font-size: 40px;
+}
 
 /* 功能说明 */
-.Index-Platform{width:100%; height:550px; background:url(./Images/Content-Bj.jpg) center; border-bottom:1px solid #f8f8f9; padding-top:6px;}
-.Index-Platform .Version{width:64%; height:50px; background:#fff; box-shadow:0px 0px 10px rgba(0,0,0,0.08); margin:20px auto; border-radius:4px;}
-.Index-Platform .Version .Font-Box{font-size:14px;line-height: 50px;height: 50px!important; font-weight:bold; color:#484d4d; float:left; background:url(./Images/Lb.png) 15px 17px no-repeat; padding-left:50px;}
-.Index-Platform .Version .Font-Box a{color:#909c9c; line-height:50px; font-size:14px; margin-left:5px; font-weight:normal;}
-.Index-Platform .Version .Font-Box a em{padding-left:15px; color:#0077ff;}
-.Index-Platform .Title{width:500px; height:50px; background:url(./Images/VV-Pic.png) 0px -35px; margin:auto; margin-bottom:45px;}
-.Index-Platform .Instructions{width:64%; height:310px; background:#fff; box-shadow:0px 0px 10px rgba(0,0,0,0.08); margin:auto; border-radius:4px; overflow:hidden;}
-.Index-Platform .Instructions ul{width:100%;}
-.Index-Platform .Instructions ul li{float:left; width:24%; height:310px; border-right:1px solid #f1f1f1; overflow:hidden; position:relative; cursor:pointer;}
-.Index-Platform .Instructions .Function-Name{width:100%; height:270px; position:absolute; z-index:5; padding-top:40px; text-align:center;}
-.Index-Platform .Instructions .Function-Name em{display:inline-block; width:130px; height:110px; background:url(./Images/VV-Pic.png);}
-.Index-Platform .Instructions .Function-Name .Pic-One{background-position:0px -145px;}
-.Index-Platform .Instructions .Function-Name .Pic-Two{background-position:-130px -145px;}
-.Index-Platform .Instructions .Function-Name .Pic-Three{background-position:-390px -145px;}
-.Index-Platform .Instructions .Function-Name .Pic-Four{background-position:-260px -145px;}
-.Index-Platform .Instructions .Function-Name h1{font-size:18px; margin-top:20px;}
-.Index-Platform .Instructions .Function-Name p{color:#909c9c; font-size:14px; padding-left:42px; padding-right:42px; text-align:left; padding-top:15px; line-height:22px;}
-.Index-Platform .Instructions .Detail-Box{width:300px; height:310px; background:#fff; position:absolute; z-index:5; top:-312px; border-bottom:2px solid #0077ff; position:relative;}
-.Index-Platform .Instructions .Detail-Box h1{font-size:20px; font-weight:bold; color:#0077ff; text-align:center; padding-top:15px; padding-bottom:15px;}
-.Index-Platform .Instructions .Detail-Box h1 em{width:65px; height:3px; border-radius:2px; background:#0077ff; display:block; margin:auto; margin-top:12px;}
-.Index-Platform .Instructions .Detail-Box p{padding-left:20px; padding-right:20px; font-size:14px; line-height:24px; position:relative; z-index:3;}
-.Index-Platform .Instructions .Detail-Box i{display:inline-block; width:163px; height:169px; background:url(./Images/VV-Pic.png); position:absolute; bottom:7px; right:2px; z-index:2;}
-.Index-Platform .Instructions .Detail-Box .Pic-One{background-position:-31px -420px;}
-.Index-Platform .Instructions .Detail-Box .Pic-Two{background-position:-205px -420px;}
-.Index-Platform .Instructions .Detail-Box .Pic-Three{background-position:-629px -420px;}
-.Index-Platform .Instructions .Detail-Box .Pic-Four{background-position:-420px -420px;}
-.Index-Platform .Instructions ul li:hover .Detail-Box{z-index:7; transition:all ease-in-out .7s; -o-transition:all ease-in-out .7s; -ms-transition:all ease-in-out .7s; -moz-transition:all ease-in-out .7s; -webkit-transition:all ease-in-out .7s; top:0px; content:''; border-top:5px solid #0077ff;}
-.Index-Platform .Instructions .Detail-Box .Qd{width:300px; height:20px; margin-top:28%; color:#484d4d; font-size:20px; font-weight:bold; text-align:center;}
+.Index-Platform {
+    width: 100%;
+    height: 550px;
+    background: url(./Images/Content-Bj.jpg) center;
+    border-bottom: 1px solid #f8f8f9;
+    padding-top: 6px;
+}
 
+.Index-Platform .Version {
+    width: 64%;
+    height: 50px;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+    margin: 20px auto;
+    border-radius: 4px;
+}
+
+.Index-Platform .Version .Font-Box {
+    font-size: 14px;
+    line-height: 50px;
+    height: 50px !important;
+    font-weight: bold;
+    color: #484d4d;
+    float: left;
+    background: url(./Images/Lb.png) 15px 17px no-repeat;
+    padding-left: 50px;
+}
+
+.Index-Platform .Version .Font-Box a {
+    color: #909c9c;
+    line-height: 50px;
+    font-size: 14px;
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.Index-Platform .Version .Font-Box a em {
+    padding-left: 15px;
+    color: #0077ff;
+}
+
+.Index-Platform .Title {
+    width: 500px;
+    height: 53px;
+    background: url(./Images/VV-Pic.png) 0px -35px;
+    margin: auto;
+    margin-bottom: 45px;
+}
+
+.Index-Platform .Instructions {
+    width: 64%;
+    height: 310px;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+    margin: auto;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.Index-Platform .Instructions ul {
+    width: 100%;
+}
+
+.Index-Platform .Instructions ul li {
+    float: left;
+    width: 33.22%;
+    height: 310px;
+    border-right: 1px solid #f1f1f1;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.Index-Platform .Instructions .Function-Name {
+    width: 100%;
+    height: 270px;
+    position: absolute;
+    z-index: 5;
+    padding-top: 40px;
+    text-align: center;
+}
+
+.Index-Platform .Instructions .Function-Name em {
+    display: inline-block;
+    width: 130px;
+    height: 110px;
+    background: url(./Images/VV-Pic.png);
+}
+
+.Index-Platform .Instructions .Function-Name .Pic-One {
+    background-position: 0px -145px;
+}
+
+.Index-Platform .Instructions .Function-Name .Pic-Two {
+    background-position: -130px -145px;
+}
+
+.Index-Platform .Instructions .Function-Name .Pic-Three {
+    background-position: -390px -145px;
+}
+
+.Index-Platform .Instructions .Function-Name .Pic-Four {
+    background-position: -260px -145px;
+}
+
+.Index-Platform .Instructions .Function-Name h1 {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.Index-Platform .Instructions .Function-Name p {
+    color: #909c9c;
+    font-size: 14px;
+    padding-left: 42px;
+    padding-right: 42px;
+    text-align: left;
+    padding-top: 15px;
+    line-height: 22px;
+}
+
+.Index-Platform .Instructions .Detail-Box {
+    width: 300px;
+    height: 310px;
+    background: #fff;
+    position: absolute;
+    z-index: 5;
+    top: -312px;
+    border-bottom: 2px solid #0077ff;
+    position: relative;
+}
+
+.Index-Platform .Instructions .Detail-Box h1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0077ff;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Index-Platform .Instructions .Detail-Box h1 em {
+    width: 65px;
+    height: 3px;
+    border-radius: 2px;
+    background: #0077ff;
+    display: block;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.Index-Platform .Instructions .Detail-Box p {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    line-height: 24px;
+    position: relative;
+    z-index: 3;
+}
+
+.Index-Platform .Instructions .Detail-Box i {
+    display: inline-block;
+    width: 163px;
+    height: 169px;
+    background: url(./Images/VV-Pic.png);
+    position: absolute;
+    bottom: 7px;
+    right: 2px;
+    z-index: 2;
+}
+
+.Index-Platform .Instructions .Detail-Box .Pic-One {
+    background-position: -31px -420px;
+}
+
+.Index-Platform .Instructions .Detail-Box .Pic-Two {
+    background-position: -205px -420px;
+}
+
+.Index-Platform .Instructions .Detail-Box .Pic-Three {
+    background-position: -629px -420px;
+}
+
+.Index-Platform .Instructions .Detail-Box .Pic-Four {
+    background-position: -420px -420px;
+}
+
+.Index-Platform .Instructions ul li:hover .Detail-Box {
+    z-index: 7;
+    transition: all ease-in-out .7s;
+    -o-transition: all ease-in-out .7s;
+    -ms-transition: all ease-in-out .7s;
+    -moz-transition: all ease-in-out .7s;
+    -webkit-transition: all ease-in-out .7s;
+    top: 0px;
+    content: '';
+    border-top: 5px solid #0077ff;
+}
+
+.Index-Platform .Instructions .Detail-Box .Qd {
+    width: 300px;
+    height: 20px;
+    margin-top: 28%;
+    color: #484d4d;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
 
 /* 游戏图标 */
-.Game-Box{width:64%; overflow:hidden; margin:auto; padding-top:45px;text-align: center}
-.Game-Box .Title{width:494px; height:53px; background:url(./Images/VV-Pic.png) 0px -88px; margin:auto; margin-bottom:45px;}
-.Game-Box .Game-Icon{width:100%; overflow:hidden;margin: auto}
-.Game-Box .Game-Icon ul{width:100%;}
-.Game-Box .Game-Icon ul li{width:20%; height:126px; float:left; margin-bottom:53px;text-align: center}
+.Game-Box {
+    width: 64%;
+    overflow: hidden;
+    margin: auto;
+    padding-top: 45px;
+    text-align: center
+}
+
+.Game-Box .Title {
+    width: 494px;
+    height: 53px;
+    background: url(./Images/VV-Pic.png) 0px -88px;
+    margin: auto;
+    margin-bottom: 45px;
+}
+
+.Game-Box .Game-Icon {
+    width: 100%;
+    overflow: hidden;
+    margin: auto
+}
+
+.Game-Box .Game-Icon ul {
+    width: 100%;
+}
+
+.Game-Box .Game-Icon ul li {
+    width: 25%;
+    height: 126px;
+    float: left;
+    margin-bottom: 53px;
+    text-align: center
+}
 
 /* 登录 */
-.Access{width:100%; height:255px; background:url(./Images/JieRu.jpg) center;}
-.Access h1{width:100%; margin:auto; font-size:48px; font-weight:bold; color:#fff; padding-top:60px; text-align:center;}
-.Access h1 a{width:150px; height:45px; background:#ff255d; display:block; margin:auto; text-align:center; line-height:45px; font-size:18px; margin-top:20px; font-weight:normal; border-radius:5px; color:#fff;}
-.Access h1 a:hover{background:#0077ff;}
+.Access {
+    width: 100%;
+    height: 255px;
+    background: url(./Images/JieRu.jpg) center;
+}
 
+.Access h1 {
+    width: 100%;
+    margin: auto;
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    padding-top: 60px;
+    text-align: center;
+}
 
+.Access h1 a {
+    width: 150px;
+    height: 45px;
+    background: #ff255d;
+    display: block;
+    margin: auto;
+    text-align: center;
+    line-height: 45px;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: normal;
+    border-radius: 5px;
+    color: #fff;
+}
 
+.Access h1 a:hover {
+    background: #0077ff;
+}
 
- /*弹层*/
-.AlertTc{position:fixed; top:0; left:0; width:100%; height:100%; display:-webkit-box; display:-webkit-flex; display:-ms-flexbox; display:flex; -webkit-flex-direction:row; flex-direction:row; -webkit-justify-content:center; -webkit-align-items:center; justify-content:center; align-items:center; background-color:rgba(0,0,0,.8); z-index:299;}
-.AlertTc .Alert{width:779px; border-radius:8px; background:#fff; overflow:hidden; padding-bottom:30px;}
-.AlertTc .Alert .title{position:relative; margin:0; font-size:20px; font-weight:bold; color:#0077ff; text-align:center; padding-top:15px; padding-bottom:15px;}
-.AlertTc .Alert .title em{width:65px; height:3px; border-radius:2px; background:#0077ff; display:block; margin:auto; margin-top:12px;}
-.AlertTc .Alert .content{font-size:14px; padding-left:32px; padding-right:40px; width:729px; line-height:25px; color:#909c9c; overflow:hidden;}
-.AlertTc .Alert .content .font{font-weight:bold; color:#0077ff; font-size:15px;}
-.AlertTc .Alert .fd-btn{position:absolute; display:-webkit-box; display:-webkit-flex; display:-ms-flexbox; display:flex; -webkit-flex-direction:row; flex-direction:row; -webkit-justify-content:center; -webkit-align-items:center; justify-content:center; align-items:center; left:49%;}
-.AlertTc .Alert .fd-btn a{font-size:.26rem; width:30px; height:30px; background:url(./Images/QxTb.png) no-repeat; background-size:100%; margin-top:60px;}
+/*弹层*/
+.AlertTc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 299;
+}
+
+.AlertTc .Alert {
+    width: 779px;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.AlertTc .Alert .title {
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0077ff;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.AlertTc .Alert .title em {
+    width: 65px;
+    height: 3px;
+    border-radius: 2px;
+    background: #0077ff;
+    display: block;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.AlertTc .Alert .content {
+    font-size: 14px;
+    padding-left: 32px;
+    padding-right: 40px;
+    width: 729px;
+    line-height: 25px;
+    color: #909c9c;
+    overflow: hidden;
+}
+
+.AlertTc .Alert .content .font {
+    font-weight: bold;
+    color: #0077ff;
+    font-size: 15px;
+}
+
+.AlertTc .Alert .fd-btn {
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    align-items: center;
+    left: 49%;
+}
+
+.AlertTc .Alert .fd-btn a {
+    font-size: .26rem;
+    width: 30px;
+    height: 30px;
+    background: url(./Images/QxTb.png) no-repeat;
+    background-size: 100%;
+    margin-top: 60px;
+}
+
 /*弹出层*/
-.jq-toast{z-index:999; position:fixed; top:0; left:0; width:100%; height:100%; display:-webkit-box; display:-webkit-flex; display:-ms-flexbox; display:flex; flex-direction:row; -webkit-flex-direction:row; -ms-flex-direction:row; justify-content:center; -webkit-justify-content:center; align-items:center; -webkit-align-items:center;}
-.jq-toast .toast{max-width:64%; padding:.1rem .2rem; background-color:rgba(0,0,0,.48); color:#0b0301; border-radius:4px;}
+.jq-toast {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.jq-toast .toast {
+    max-width: 64%;
+    padding: .1rem .2rem;
+    background-color: rgba(0, 0, 0, .48);
+    color: #0b0301;
+    border-radius: 4px;
+}
 
 @media screen and (max-device-width: 700px) {
-    .Head-Menu .nav li a{font-size: 24px;font-weight: bold}
     /*.logo{display: none}*/
-    .Index-Platform .Version{width:90%; height:50px; background:#fff; box-shadow:0px 0px 10px rgba(0,0,0,0.08); margin:20px auto; border-radius:4px;}
-    .Index-Platform .Instructions{width:90%; height:310px; background:#fff; box-shadow:0px 0px 10px rgba(0,0,0,0.08); margin:auto; border-radius:4px; overflow:hidden;}
-    .Game-Box{width:90%; overflow:hidden; margin:auto; padding-top:45px;text-align: center}
-    .jq-toast .toast{max-width:90%; padding:.1rem .2rem; background-color:rgba(0,0,0,.48); color:#0b0301; border-radius:4px;}
+    .Index-Platform .Version {
+        width: 90%;
+        height: 50px;
+        background: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+        margin: 20px auto;
+        border-radius: 4px;
+    }
+
+    .Index-Platform .Instructions {
+        width: 90%;
+        height: 800px;
+        background: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+        margin: auto;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .Game-Box {
+        width: 90%;
+        overflow: hidden;
+        margin: auto;
+        padding-top: 45px;
+        text-align: center
+    }
+
+    .jq-toast .toast {
+        max-width: 90%;
+        padding: .1rem .2rem;
+        background-color: rgba(0, 0, 0, .48);
+        color: #0b0301;
+        border-radius: 4px;
+    }
+
+    .Index-Platform .Version .Font-Box {
+        font-size: 30px;
+        font-weight: bold;
+        color: #484d4d;
+        float: left;
+        background: url(./Images/Lb.png) 15px 17px no-repeat;
+        padding-left: 50px;
+    }
+
+    .lubo {
+        width: 100%;
+        clear: both;
+        position: relative;
+        height: 600px;
+        margin-top: 120px
+    }
+
 }

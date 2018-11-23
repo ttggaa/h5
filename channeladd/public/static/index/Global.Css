@@ -19,14 +19,14 @@ input{font-family:"微软雅黑"; color:#666;}
 
 .Head-Menu .m1200{position:relative; width:64%; margin:auto; background:#fff;}
 .Head-Menu .logo{height:35px; width:217px; float:left; overflow:hidden; background:url(./Images/VV-Pic.png); margin-top:18px; font-size:14px;}
-.Head-Menu .nav{float:left;}
-.Head-Menu .nav li{float:left; position:relative;}
-/*.Head-Menu .nav li:after{content:''; width:4px; height:4px; background-color:#999; border-radius:2px; position:absolute; right:0; top:39px;}*/
-.Head-Menu .nav li:last-child:after{display:none;}
-.Head-Menu .nav li a{font-size:16px; height:55px; line-height:65px; display:block; position:relative; margin-right:48px;}
-.Head-Menu .nav li a:before{content:''; position:absolute; left:0; right:0; bottom:0; margin:auto; width:0px; height:2px; background:#0077ff; transition:0.3s;}
-.Head-Menu .nav li a:hover:before,.Head-Menu .nav li a.on:before{width:100%;}
-.Head-Menu .nav li a:hover,.Head-Menu .nav li a.on{color:#0077ff;}
+.nav{float:left;}
+.nav li{float:left; position:relative;}
+/*.nav li:after{content:''; width:4px; height:4px; background-color:#999; border-radius:2px; position:absolute; right:0; top:39px;}*/
+.nav li:last-child:after{display:none;}
+.nav li a{font-size:16px; height:55px; line-height:65px; display:block; position:relative; margin-right:48px;}
+.nav li a:before{content:''; position:absolute; left:0; right:0; bottom:0; margin:auto; width:0px; height:2px; background:#0077ff; transition:0.3s;}
+.nav li a:hover:before,.nav li a.on:before{width:100%;}
+.nav li a:hover,.nav li a.on{color:#0077ff;}
 .Head-Menu .Login-Box{overflow:hidden; float:right;margin-left: 10px;}
 .Head-Menu .Login-Box a{display:block; padding-left:15px; margin-top:20px; padding-right:15px; overflow:hidden; padding-top:5px; padding-bottom:5px; background:#0077ff; border-radius:4px; color:#fff; font-size:1rem;}
 .Head-Menu .Login-Box a:hover,.Head-Menu .User-Box a:hover{background:#fe8900;}
@@ -107,7 +107,7 @@ input{font-family:"微软雅黑"; color:#666;}
 
 /* 尾部版权 */
 .Copyright{width:100%; height:100px; overflow:hidden; background:url(./Images/Copyright-Top-Bj.png) no-repeat;}
-.Copyright .Copyright-Box{width:1200px; overflow:hidden; margin:auto; margin-top:20px; height:80px;}
+.Copyright .Copyright-Box{width:350px; overflow:hidden; margin:0 auto; margin-top:20px; height:80px;text-align: center}
 .Copyright .Copyright-Box .Box-Left{/*width:590px;*/ width:1200px; font-size:14px; line-height:22px; float:left; overflow:hidden; text-align:center;}
 .Copyright .Copyright-Box .Box-Right{width:541px; float:right; margin-top:10px;}
 .Copyright .Copyright-Box .Box-Right ul{width:610px;}
@@ -116,9 +116,17 @@ input{font-family:"微软雅黑"; color:#666;}
 
 
 @media screen and (max-device-width: 700px) {
-    .Head-Menu .Login-Box a{ font-size:1.1rem;}
-    .Head-Menu .Register-Box a { font-size:1.1rem;}
+    .Head-Menu .Login-Box a{ font-size:2rem;}
+    .Head-Menu .Register-Box a { font-size:2rem;}
     .Head-Menu .m1200{position:relative; width:90%; margin:auto; background:#fff;}
     .Form{width:500px; height:40px; line-height:40px; margin-bottom:25px; position:relative; z-index:1; margin-top:10px;}
-
+    .Head-Menu{background-color:rgba(255,255,255,0.95); width:100%; position:fixed; top:0; left:0; z-index:11; height:120px;line-height: 60px}
+    .Head-Menu .logo {
+        /*height: 34px;*/
+        /*width: 200px;*/
+        margin-left: 20px;
+        float: left;
+        overflow: hidden;
+        margin-top: 40px;
+    }
 }
