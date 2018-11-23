@@ -119,7 +119,6 @@ input{font-family:"微软雅黑"; color:#666;}
     .Head-Menu .Login-Box a{ font-size:1.1rem;}
     .Head-Menu .Register-Box a { font-size:1.1rem;}
     .Head-Menu .m1200{position:relative; width:90%; margin:auto; background:#fff;}
-    .Head-Menu{background-color:rgba(255,255,255,0.95); width:100%; position:fixed; top:0; left:0; z-index:11; height:120px;}
     .Form{width:500px; height:40px; line-height:40px; margin-bottom:25px; position:relative; z-index:1; margin-top:10px;}
 
 }
