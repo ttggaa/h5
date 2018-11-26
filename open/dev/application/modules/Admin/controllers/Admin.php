@@ -54,7 +54,7 @@ class AdminController extends Yaf_Controller_Abstract
     	    $this->m_admin->update($info, 'admin_id='.$id);
     	    $this->redirect('/admin/admin/list?pn='.$this->_pn);
 	    } else {
-	        $info['add_by'] = Yaf_Session::getInstance()->get('username');
+	        $info['add_by'] = Yaf_Session::getInstance()->get('admin_name');
 	        $info['add_ip'] = $_SERVER['REMOTE_ADDR'];
 	        $ins_id = $this->m_admin->insert($info);
 	        if( $ins_id ) {
