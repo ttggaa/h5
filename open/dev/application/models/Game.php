@@ -5,6 +5,7 @@ class GameModel extends F_Model_Pdo
 	protected $_table = 'game';
 	protected $_primary = 'game_id';
     public $_game_types = array('h5','手游');
+
 	//类型
 	public $_types = array('推荐','独家','BT版','满V版','GM版');
 	//经典分类
@@ -141,6 +142,7 @@ class GameModel extends F_Model_Pdo
 	{
 	    return array(
 	        'type' => array('分类', 'select', $this->_types, null),
+            'game_type' => array('游戏类型', 'select', $this->_game_types, null),
 	        'name' => array('游戏名字', 'input', null, ''),
 	        'game_id' => array('游戏ID', 'input', null, ''),
 	        'add_begin' => array('开始日期', 'datepicker', null, ''),
