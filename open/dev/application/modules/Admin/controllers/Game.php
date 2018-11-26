@@ -51,6 +51,9 @@ class GameController extends F_Controller_Backend
         $params['conditions'] = $conds;
         
         $params['orderby'] = 'game_id desc';
+        if($_SESSION['admin_status']!='super'){
+            $params['op'] = F_Helper_Html::Op_Edit;
+        }
         return $params;
     }
     

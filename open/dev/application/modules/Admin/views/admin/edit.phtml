@@ -32,7 +32,10 @@
               </select>
               <script>$('#info_status').val('<?php echo isset($info) ? $info['status'] : 'normal'; ?>');</script>
             </p>
-           
+           <p>
+              <label>权限组</label>
+              <?=$groups?>
+            </p>
             <p>
               <input class="button" type="submit" value="提交" />
             </p>
