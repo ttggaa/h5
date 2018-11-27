@@ -21,7 +21,7 @@ class F_Helper_Url
         if(is_numeric($info[0])){
             return $info[0];//三级代理域名
         }else{
-            return $_GET['user']??1;//一级域名，支持带参数
+            return false;//一级域名，支持带参数
         }
     }
 }

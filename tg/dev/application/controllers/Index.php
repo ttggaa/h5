@@ -4,10 +4,84 @@ class IndexController extends Yaf_Controller_Abstract
 {
     public function indexAction()
     {
-        $url = 'http://' . $_SERVER['SERVER_NAME'] . '/admin/index/index';
-        $this->redirect($url);
+//        $url=new F_Helper_Url();
+//        $channel_id=$url->getUrlSign();
+//        if($channel_id){
+//            $info['channel_id']=$channel_id;
+//            $this->getView()->assign($info);
+//        }else{
+//            $url = 'http://' . $_SERVER['SERVER_NAME'] . '/admin/index/index';
+//            $this->redirect($url);
+//        }
+    }
+//    public function channelAction(){
+//        $url=new F_Helper_Url();
+//        $channel_id=$url->getUrlSign();
+//        $info['channel_id']=$channel_id;
+//        $this->getView()->assign($info);
+//    }
+    public function getVerifyAction(){
+        $id=$_GET['id'];
+        $ic = new F_Helper_ImgCode();
+        $ic->sess_name=$id;
+        $ic->create();
+        return false;
+    }
+    public function ajaxloginAction()
+    {
+        $m_admin=new AdminModel();
+        $req = $this->getRequest();
+        $u = substr($req->getPost('username', ''), 0, 16);
+        $p = substr($req->getPost('password', ''), 0, 31);
+        $xcode = substr($req->getPost('captcha', ''), 0, 4);
+        //判断验证码
+        $imgcode = new F_Helper_ImgCode();
+        $imgcode->sess_name='login';
+        if( ! $imgcode->check($xcode) ) {
+            $json['msg'] = '验证码错误！';
+            $json['code'] = 0;
+            exit(json_encode($json));
+        }
+        $error = $m_admin->login($u, $p, 0);
+        if( $error != '' ) {
+            $json['msg'] = $error;
+            $json['code'] = 0;
+            exit(json_encode($json));
+        } else {
+            $json['msg'] = '/admin/index/main';
+            $json['code'] = 1;
+            exit(json_encode($json));
+        }
+        return false;
     }
 
+    public function ajaxRegisterAction()
+    {
+        $m_admin=new AdminModel();
+        $req = $this->getRequest();
+        $u = substr($req->getPost('username', ''), 0, 16);
+        $p = substr($req->getPost('password', ''), 0, 31);
+        $xcode = substr($req->getPost('captcha', ''), 0, 4);
+        //判断验证码
+        $imgcode = new F_Helper_ImgCode();
+        $imgcode->sess_name='login';
+        if( ! $imgcode->check($xcode) ) {
+            $json['msg'] = '验证码错误！';
+            $json['code'] = 0;
+            exit(json_encode($json));
+        }
+        $error = $m_admin->login($u, $p, 0);
+        if( $error != '' ) {
+            $json['msg'] = $error;
+            $json['code'] = 0;
+            exit(json_encode($json));
+        } else {
+            $json['msg'] = '/admin/index/main';
+            $json['code'] = 1;
+            exit(json_encode($json));
+        }
+        return false;
+    }
     /**
      * 游戏下载
      */

@@ -30,6 +30,11 @@ class GameController extends F_Controller_Backend
             $conds = "{$comma}add_time BETWEEN '{$search['add_begin']}' AND '{$search['add_end']}'";
         }
         unset($search['add_begin'], $search['add_end']);
+        if( !empty($search['dev_id'])){
+            $m_developer=new DeveloperModel();
+            $developer=$m_developer->fetch(['com_short'=>$search['dev_id']],'dev_id');
+            $search['dev_id']=$developer['dev_id'];
+        }
         if(!empty($search['name'])){
             if($conds){
                 $conds .= " AND {$comma}name LIKE '%{$search['name']}%'";

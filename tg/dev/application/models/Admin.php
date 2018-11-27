@@ -125,6 +125,7 @@ class AdminModel extends F_Model_Pdo
         }
         array_push($channel_ids,$user['admin_id']);
         $channel_ids=array_unique($channel_ids);
+        $user['group_id']=0;
 		$s = Yaf_Session::getInstance();
 		$s->set('admin_id', $user['admin_id']);
 		$s->set('admin_name', $user['username']);
