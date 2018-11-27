@@ -19,42 +19,42 @@ class Index extends Controller
 //        die;
         return $this->fetch();
     }
-    public function index2()
-    {
-//        dump(Session::get('admin_id'));
-//        dump(Session::get('admin_name'));
-//        dump(Session::get('admin_status'));
-//        dump(Session::get('boxname'));
-//        die;
-        return $this->fetch();
-    }
-    public function index3()
-    {
-//        dump(Session::get('admin_id'));
-//        dump(Session::get('admin_name'));
-//        dump(Session::get('admin_status'));
-//        dump(Session::get('boxname'));
-//        die;
-        return $this->fetch();
-    }
-    public function index4()
-    {
-//        dump(Session::get('admin_id'));
-//        dump(Session::get('admin_name'));
-//        dump(Session::get('admin_status'));
-//        dump(Session::get('boxname'));
-//        die;
-        return $this->fetch();
-    }
-    public function index5()
-    {
-//        dump(Session::get('admin_id'));
-//        dump(Session::get('admin_name'));
-//        dump(Session::get('admin_status'));
-//        dump(Session::get('boxname'));
-//        die;
-        return $this->fetch();
-    }
+//    public function index2()
+//    {
+////        dump(Session::get('admin_id'));
+////        dump(Session::get('admin_name'));
+////        dump(Session::get('admin_status'));
+////        dump(Session::get('boxname'));
+////        die;
+//        return $this->fetch();
+//    }
+//    public function index3()
+//    {
+////        dump(Session::get('admin_id'));
+////        dump(Session::get('admin_name'));
+////        dump(Session::get('admin_status'));
+////        dump(Session::get('boxname'));
+////        die;
+//        return $this->fetch();
+//    }
+//    public function index4()
+//    {
+////        dump(Session::get('admin_id'));
+////        dump(Session::get('admin_name'));
+////        dump(Session::get('admin_status'));
+////        dump(Session::get('boxname'));
+////        die;
+//        return $this->fetch();
+//    }
+//    public function index5()
+//    {
+////        dump(Session::get('admin_id'));
+////        dump(Session::get('admin_name'));
+////        dump(Session::get('admin_status'));
+////        dump(Session::get('boxname'));
+////        die;
+//        return $this->fetch();
+//    }
 
     //登录验证码1 ,注册验证码2
     public function getVerify($id = '')
@@ -70,7 +70,6 @@ class Index extends Controller
         $captcha = new Captcha($config);
         return $captcha->entry($id);
     }
-
     // 检测输入的验证码是否正确，$code为用户输入的验证码字符串，$id多个验证码标识
     protected function check_verify($code, $id = '')
     {
