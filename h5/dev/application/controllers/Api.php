@@ -903,15 +903,35 @@ class ApiController extends Yaf_Controller_Abstract
     public function playGameOAuthAction()
     {
         $request = $_GET;
-        $this->checkParams($request, ['game_id', 'account','password','username']);
-        $accounts=[['account'=>'moyou','password'=>'123456']];
+        $this->checkParams($request, ['game_id', 'account','password','username','sign','timestamp']);
+        //时效验证
+        if(time()-$request['timestamp']>300){
+            $assign['status'] = 'fail';
+            $assign['msg'] = 'time error';
+            exit(json_encode($assign));
+        }
+
+        $accounts=[['account'=>'moyou','password'=>'123456','key'=>'jdashdgkjsahdjkhasd']];
         $search_id= array_search( $_GET['account'],array_column($accounts, 'account'));
-        if($search_id===false){
+        if($search_id!==false){
             $arr=$accounts[$search_id];
             if($_GET['password']!=$arr['password']){
                 $assign['status'] = 'fail';
                 $assign['msg'] = '账号或密码错误';
                 exit(json_encode($assign));
+            }
+            //验证签名
+            $arr2['game_id']=$request['game_id'];
+            $arr2['account']=$request['account'];
+            $arr2['password']=$request['password'];
+            $arr2['username']=$request['username'];
+            $arr2['timestamp']=$request['timestamp'];
+            ksort($arr2);
+            $sign_key=$arr['key'];
+            $md5 = md5(implode('', $arr2) . $sign_key);
+            $sign=$request['timestamp'];
+            if (strcmp($sign, $md5) != 0) {
+                exit('Sign error.');
             }
         }else{
             $assign['status'] = 'fail';
