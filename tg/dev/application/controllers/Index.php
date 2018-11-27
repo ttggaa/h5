@@ -4,15 +4,15 @@ class IndexController extends Yaf_Controller_Abstract
 {
     public function indexAction()
     {
-//        $url=new F_Helper_Url();
-//        $channel_id=$url->getUrlSign();
-//        if($channel_id){
-//            $info['channel_id']=$channel_id;
-//            $this->getView()->assign($info);
-//        }else{
-//            $url = 'http://' . $_SERVER['SERVER_NAME'] . '/admin/index/index';
-//            $this->redirect($url);
-//        }
+        $url=new F_Helper_Url();
+        $channel_id=$url->getUrlSign();
+        if($channel_id){
+            $info['channel_id']=$channel_id;
+            $this->getView()->assign($info);
+        }else{
+            $url = 'http://' . $_SERVER['SERVER_NAME'] . '/admin/index/index';
+            $this->redirect($url);
+        }
     }
 //    public function channelAction(){
 //        $url=new F_Helper_Url();
