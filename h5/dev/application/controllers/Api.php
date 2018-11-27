@@ -899,6 +899,79 @@ class ApiController extends Yaf_Controller_Abstract
         }
 //        Yaf_Dispatcher::getInstance()->disableView();
     }
+    //三方进入游戏
+    public function playGameOAuthAction()
+    {
+        $request = $_GET;
+        $this->checkParams($request, ['game_id', 'account','password','username']);
+        $accounts=[['account'=>'moyou1','password'=>'123456']];
+        $search_id= array_search( $_GET['account'],array_column($accounts, 'account'));
+        if($search_id===false){
+            $arr=$accounts[$search_id];
+            if($_GET['password']!=$arr['password']){
+                $assign['status'] = 'fail';
+                $assign['msg'] = '账号或密码错误';
+                exit(json_encode($assign));
+            }
+        }else{
+            $assign['status'] = 'fail';
+            $assign['msg'] = '账号或密码错误';
+            exit(json_encode($assign));
+        }
+        $game_id = $request['game_id'];
+        $username = $request['username'];
+        $m_user = new UsersModel();
+        $open_id=md5($username.$search_id);
+        $user = $m_user->fetch(['openid' =>$open_id], 'user_id,username');
+        $url=new F_Helper_Url();
+        $channel_id = $url->getUrlSign();
+        if(!$user){
+            //创建
+            $user_id = $m_user->insert(array(
+                'username' => $arr['account'].'_'.$username,
+                'openid' => $open_id,
+                'password' => md5($arr['account'].'_'.$username),
+                'reg_time' => time(),
+                'check_status' => 0,
+                'tg_channel' => $channel_id,
+            ));
+            if($user_id){
+                $user['user_id']=$user_id;
+                $user['username']=$arr['account'].'_'.$username;
+            }else{
+                $assign['status'] = 'fail';
+                $assign['msg'] = '账号创建失败';
+                exit(json_encode($assign));
+            }
+        }
+//        var_dump($user);
+        if (empty($user)) {
+            //缓存渠道id
+            $assign['status'] = 'fail';
+            $assign['msg'] = '账号异常,联系管理员';
+            exit(json_encode($assign));
+        }
+        //选择区服 todo
+        if ($game_id < 1) {
+            $assign['status'] = 'fail';
+            $assign['msg'] = '游戏id异常1';
+            exit(json_encode($assign));
+        }
+        $m_game = new GameModel();
+        $game = $m_game->fetch("game_id='{$game_id}'", 'game_id,name,logo,login_url,sign_key,channel,load_type');
+        if (empty($game)) {
+            $assign['status'] = 'fail';
+            $assign['msg'] = '找不到对应游戏';
+            exit(json_encode($assign));
+        }
+        if ($game['login_url'] && $game['sign_key']) {
+            $m_user->addPlayGame($user['user_id'], $game_id);
+            $url = Game_Login::redirect($user['user_id'], $user['username'], $game_id, 0, $game['login_url'], $game['sign_key']);
+            $this->forward('api', 'entry', array('game_name' => $game['name'], 'url' => $url, 'load_type' => $game['load_type']));
+            return false;
+        }
+//        Yaf_Dispatcher::getInstance()->disableView();
+    }
 
     public function entryAction()
     {
