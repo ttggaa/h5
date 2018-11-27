@@ -904,7 +904,7 @@ class ApiController extends Yaf_Controller_Abstract
     {
         $request = $_GET;
         $this->checkParams($request, ['game_id', 'account','password','username']);
-        $accounts=[['account'=>'moyou1','password'=>'123456']];
+        $accounts=[['account'=>'moyou','password'=>'123456']];
         $search_id= array_search( $_GET['account'],array_column($accounts, 'account'));
         if($search_id===false){
             $arr=$accounts[$search_id];
