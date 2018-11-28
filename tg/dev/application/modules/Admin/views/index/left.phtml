@@ -28,9 +28,10 @@
       <!-- Logo (221px wide) -->
       <a href="#"><img id="logo" src="/admin/images/logo.png" alt="Simpla Admin logo" /></a>
       <!-- Sidebar Profile links -->
-      <div id="profile-links" style="text-align: center">嗨, <a id="editUser" href="#"  data-url="/admin/admin/edit?admin_id=<?=$_SESSION['admin_id']?>" title="Edit your profile"><?=$username?></a> |
-      	<a target="_parent" href="/admin/index/logout" title="退出">退出</a> |
-      	<a href="javascript:void(0);" onclick="javascript:parent.document.getElementById('right').contentWindow.history.go(-1);" title="返回">返回</a>
+      <div id="profile-links" style="text-align: center"><a href="#"><?=$username?></a> |
+          <a id="editUser" href="#"  data-url="/admin/admin/edit?admin_id=<?=$_SESSION['admin_id']?>" style="color: red">修改信息</a>|
+      	<a target="_parent" href="/admin/index/logout" title="退出">退出</a>
+<!--      	<a href="javascript:void(0);" onclick="javascript:parent.document.getElementById('right').contentWindow.history.go(-1);" title="返回">返回</a>-->
 	  </div>
       <ul id="main-nav">
         <!-- Accordion Menu -->
