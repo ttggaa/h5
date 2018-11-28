@@ -949,6 +949,7 @@ class ApiController extends Yaf_Controller_Abstract
             //创建
             $user_id = $m_user->insert(array(
                 'username' => $arr['account'].'_'.$username,
+                'app' => $arr['account'],
                 'openid' => $open_id,
                 'password' => md5($arr['account'].'_'.$username),
                 'reg_time' => time(),
