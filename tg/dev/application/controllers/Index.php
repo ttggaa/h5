@@ -4,6 +4,8 @@ class IndexController extends Yaf_Controller_Abstract
 {
     public function indexAction()
     {
+//        $info['channel_id']=2;
+//        $this->getView()->assign($info);
         $url=new F_Helper_Url();
         $channel_id=$url->getUrlSign();
         if($channel_id){
@@ -57,26 +59,41 @@ class IndexController extends Yaf_Controller_Abstract
 
     public function ajaxRegisterAction()
     {
-        $m_admin=new AdminModel();
         $req = $this->getRequest();
         $u = substr($req->getPost('username', ''), 0, 16);
         $p = substr($req->getPost('password', ''), 0, 31);
+        $parent_id = substr($req->getPost('parent_id', ''), 0, 1);
         $xcode = substr($req->getPost('captcha', ''), 0, 4);
         //判断验证码
         $imgcode = new F_Helper_ImgCode();
-        $imgcode->sess_name='login';
+        $imgcode->sess_name='register';
         if( ! $imgcode->check($xcode) ) {
             $json['msg'] = '验证码错误！';
             $json['code'] = 0;
             exit(json_encode($json));
         }
-        $error = $m_admin->login($u, $p, 0);
-        if( $error != '' ) {
-            $json['msg'] = $error;
+        $m_admin=new AdminModel();
+        //判断用户名是否被占用
+        if($m_admin->fetch(['username'=>$u],'admin_id')){
+            $json['msg'] = '用户名已被占用';
+            $json['code'] = 0;
+            exit(json_encode($json));
+        }
+        $data['username']=$u;
+        $data['password']=md5($p);
+        $data['add_by']='self';
+        $data['add_ip']=$_SERVER['REMOTE_ADDR'];
+        $data['status']='super';
+        $data['parent_id']=$parent_id;
+        $data['cps_type']=3;
+        $data['divide_into']=50;
+        $id=$m_admin->insert($data);
+        if( !$id ) {
+            $json['msg'] = '注册失败';
             $json['code'] = 0;
             exit(json_encode($json));
         } else {
-            $json['msg'] = '/admin/index/main';
+            $json['msg'] = '注册成功';
             $json['code'] = 1;
             exit(json_encode($json));
         }

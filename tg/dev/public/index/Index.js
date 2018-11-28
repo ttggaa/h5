@@ -428,6 +428,7 @@ $(document).ready(function () {
                 url: "index/index/ajaxRegister",//路径
                 data: data,
                 success: function (result) {//返回数据根据结果进行相应的处理
+                    var result=JSON.parse(result);
                     if (result.code) {
                         alert(result.msg);
                         $('.Login-Pop').trigger('click');

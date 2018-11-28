@@ -1,127 +1,167 @@
 <style>
-    .title span ,.content span{
+    .title span, .content span {
         width: 50%;
         float: left;
         margin-bottom: 10px;
-        display:block;
+        display: block;
         word-break: break-all;
         word-wrap: break-word;
     }
 </style>
-    <noscript>
+<link rel="stylesheet" href="/layui/css/layui.css" type="text/css" media="screen"/>
+<noscript>
     <!-- Show a notification if the user has disabled javascript -->
     <div class="notification error png_bg">
-      <div> Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
-        Download From <a href="http://www.exet.tk">exet.tk</a></div>
+        <div> Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/"
+                                                                                    title="Upgrade to a better browser">upgrade</a>
+            your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852"
+                               title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface
+            properly.
+            Download From <a href="http://www.exet.tk">exet.tk</a></div>
     </div>
-    </noscript>
+</noscript>
 
-    <!-- Page Head -->
-    <h2>个人中心</h2>
+<!-- Page Head -->
+<h2>个人中心</h2>
 <!--    <p id="page-intro">这里是系统的简要统计信息，当前在线人数为当前的活跃链接数，存在一点误差！</p>-->
-    <div class="clear"></div>
-    <!-- End .clear -->
-    
-    <div class="content-box column-left">
-      <div class="content-box-header">
-        <h3>24小时活跃链接数<small></small></h3>
-      </div>
-      <!-- End .content-box-header -->
-      <div class="content-box-content">
+<div class="clear"></div>
+<!-- End .clear -->
+
+<div class="content-box column-left">
+    <div class="content-box-header">
+        <h3>24小时活跃链接数
+            <small></small>
+        </h3>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
         <div class="tab-content default-tab">
-          <h4><?=$count?></h4>
+            <h4><?= $count ?></h4>
         </div>
         <!-- End #tab3 -->
-      </div>
-      <!-- End .content-box-content -->
-        <div class="content-box-header">
-            <h3>您的专属网站推广网站<small></small></h3>
-        </div>
-        <!-- End .content-box-header -->
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-<!--                <h4>旧:<a target="_blank" href="--><?//='http://h5.zyttx.com/?user='.$_SESSION['admin_id']?><!--">--><?//='http://h5.zyttx.com/?user='.$_SESSION['admin_id']?><!--</a> </h4>-->
-                <h4><a target="_blank" href="<?='http://'.$_SESSION["admin_id"].'.h5.zyttx.com'?>"><?='http://'.$_SESSION["admin_id"].'.h5.zyttx.com'?></a> </h4>
-            </div>
-            <!-- End #tab3 -->
-        </div>
-        <div class="content-box-header">
-            <h3>您的专属APP推广宣传页(推荐使用安卓+iOS+网页版)<small></small></h3>
-        </div>
-        <!-- End .content-box-header -->
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <h4>
-                    <a target="_blank" href="<?='http://www.gmbsy.com/channel/index?channel='.$_SESSION['admin_id']?>"><?='http://www.gmbsy.com/channel/index?channel='.$_SESSION['admin_id']?></a>
-                </h4>
-            </div>
-            <!-- End #tab3 -->
-        </div>
-<!--        <div class="content-box-header">-->
-<!--            <h3>您的专属APP盒子直接下载链接(安卓新版)<small></small></h3>-->
-<!--        </div>-->
-<!--        <!-- End .content-box-header -->
-<!--        <div class="content-box-content">-->
-<!--            <div class="tab-content default-tab">-->
-<!--                <h4>-->
-<!--                    <a target="_blank" href="--><?//='http://yun.zyttx.com/index/apkgame3?tg_channel='.$_SESSION['admin_id']?><!--">--><?//='http://yun.zyttx.com/index/apkgame3?tg_channel='.$_SESSION['admin_id']?><!--</a>-->
-<!--                </h4>-->
-<!--            </div>-->
-<!--            <!-- End #tab3 -->
-<!--        </div>-->
-        <?php if ($_SESSION['cps_type']==1):?>
-        <div class="content-box-header">
-            <h3>专属推广二级代理网站<small></small></h3>
-        </div>
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <h4>
-                    <a href="http://<?=$_SESSION['admin_id']?>.gmbsy.com" target="_blank">http://<?=$_SESSION['admin_id']?>.gmbsy.com</a>
-                </h4>
-            </div>
-            <!-- End #tab3 -->
-        </div>
-        <?php endif;?>
-        <div class="content-box-header">
-            <h3>您的专属APP盒子直接下载链接(安卓旧版)<small></small></h3>
-        </div>
-        <!-- End .content-box-header -->
-        <div class="content-box-content">
-            <div class="tab-content default-tab">
-                <h4>
-                    <?php if(file_exists('/www2/wwwroot/xgame.zyttx.com/apk/'.$_SESSION['admin_id'].'.apk')):?>
-                        <a target="_blank" href="<?='http://xgame.zyttx.com/apk/'.$_SESSION['admin_id'].'.apk'?>"><?='http://xgame.zyttx.com/apk/'.$_SESSION['admin_id'].'.apk'?></a>
-                    <?php else:?>
-<!--                        <a href="/admin/admin/apk">您还没有渠道apk链接,点击生成!</a>-->
-                                无
-                    <?php endif;?>
-                </h4>
-            </div>
-            <!-- End #tab3 -->
-        </div>
     </div>
-    <!-- End .content-box -->
-    <div class="content-box column-right">
-      <div class="content-box-header">
+    <!-- End .content-box-content -->
+    <div class="content-box-header">
+        <h3>您的专属网站推广网站
+            <small></small>
+        </h3>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab">
+            <!--                <h4>旧:<a target="_blank" href="-->
+            <? //='http://h5.zyttx.com/?user='.$_SESSION['admin_id']?><!--">-->
+            <? //='http://h5.zyttx.com/?user='.$_SESSION['admin_id']?><!--</a> </h4>-->
+            <h4><a target="_blank"
+                   href="<?= 'http://' . $_SESSION["admin_id"] . '.h5.zyttx.com' ?>"><?= 'http://' . $_SESSION["admin_id"] . '.h5.zyttx.com' ?></a>
+            </h4>
+        </div>
+        <!-- End #tab3 -->
+    </div>
+    <div class="content-box-header">
+        <h3>您的专属APP推广宣传页(推荐使用安卓+iOS+网页版)
+            <small></small>
+        </h3>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab">
+            <h4>
+                <a target="_blank"
+                   href="<?= 'http://www.gmbsy.com/channel/index?channel=' . $_SESSION['admin_id'] ?>"><?= 'http://www.gmbsy.com/channel/index?channel=' . $_SESSION['admin_id'] ?></a>
+            </h4>
+        </div>
+        <!-- End #tab3 -->
+    </div>
+    <!--        <div class="content-box-header">-->
+    <!--            <h3>您的专属APP盒子直接下载链接(安卓新版)<small></small></h3>-->
+    <!--        </div>-->
+    <!--        <!-- End .content-box-header -->
+    <!--        <div class="content-box-content">-->
+    <!--            <div class="tab-content default-tab">-->
+    <!--                <h4>-->
+    <!--                    <a target="_blank" href="-->
+    <? //='http://yun.zyttx.com/index/apkgame3?tg_channel='.$_SESSION['admin_id']?><!--">-->
+    <? //='http://yun.zyttx.com/index/apkgame3?tg_channel='.$_SESSION['admin_id']?><!--</a>-->
+    <!--                </h4>-->
+    <!--            </div>-->
+    <!--            <!-- End #tab3 -->
+    <!--        </div>-->
+    <?php if ($_SESSION['cps_type'] == 1): ?>
+        <div class="content-box-header">
+            <h3>专属推广二级代理网站
+                <small></small>
+            </h3>
+        </div>
+        <div class="content-box-content">
+            <div class="tab-content default-tab">
+                <h4>
+                    <a href="http://<?= $_SESSION['admin_id'] ?>.gmbsy.com"
+                       target="_blank">http://<?= $_SESSION['admin_id'] ?>.gmbsy.com</a>
+                </h4>
+            </div>
+            <!-- End #tab3 -->
+        </div>
+    <?php endif; ?>
+    <div class="content-box-header">
+        <h3>您的专属APP盒子直接下载链接(安卓旧版)
+            <small></small>
+        </h3>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab">
+            <h4>
+                <?php if (file_exists('/www2/wwwroot/xgame.zyttx.com/apk/' . $_SESSION['admin_id'] . '.apk')): ?>
+                    <a target="_blank"
+                       href="<?= 'http://xgame.zyttx.com/apk/' . $_SESSION['admin_id'] . '.apk' ?>"><?= 'http://xgame.zyttx.com/apk/' . $_SESSION['admin_id'] . '.apk' ?></a>
+                <?php else: ?>
+                    <!--                        <a href="/admin/admin/apk">您还没有渠道apk链接,点击生成!</a>-->
+                    无
+                <?php endif; ?>
+            </h4>
+        </div>
+        <!-- End #tab3 -->
+    </div>
+</div>
+<!-- End .content-box -->
+<div class="content-box column-right">
+    <div class="content-box-header">
         <h3>公告</h3>
-      </div>
-      <div class="content-box-content">
+    </div>
+    <div class="content-box-content">
         <div class="tab-content default-tab">
             <div class="title">
-<!--                <span>标题</span>-->
-<!--                <span>时间</span>-->
-<!--                <span>内容</span>-->
+                <!--                <span>标题</span>-->
+                <!--                <span>时间</span>-->
+                <!--                <span>内容</span>-->
             </div>
             <div class="content">
-            <?php foreach ($articles as $key=>$value):?>
-                <span><a href="/admin/index/content?id=<?=$value['article_id']?>"><?=$value['title']?></a></span>
-                <span><?=date('Y-m-d H:i:s',$value['add_time'])?></span>
-<!--                <span>--><?//=strip_tags($value['content'])?><!--</span>-->
-            <?php endforeach;?>
+                <?php foreach ($articles as $key => $value): ?>
+                    <span><a href="/admin/index/content?id=<?= $value['article_id'] ?>"><?= $value['title'] ?></a></span>
+                    <span><?= date('Y-m-d H:i:s', $value['add_time']) ?></span>
+                    <!--                <span>--><? //=strip_tags($value['content'])?><!--</span>-->
+                <?php endforeach; ?>
             </div>
         </div>
-      </div>
     </div>
-    <div class="clear"></div>
-    <script type="text/javascript" src="/admin/js/common.js"></script>
+</div>
+<div class="clear"></div>
+<script type="text/javascript" src="/admin/js/common.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script>
+
+    layui.use(['layer', 'jquery'], function () {
+        var layer = layui.layer
+            , $ = layui.jquery;
+        var is_show_alert=<?=$is_show_alert?>;
+        if(is_show_alert){
+            layer.confirm('您的收款账号信息还没完善,可能会对你的结算产生影响,是否立刻完善?', {icon: 3, title:'提示'}, function(index){
+                var src='/admin/admin/edit?admin_id='+<?=$_SESSION['admin_id']?>;
+                parent.document.getElementById('right').src = src;
+                layer.close(index);
+            });
+        }
+    });
+</script>
 

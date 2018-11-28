@@ -121,6 +121,14 @@ class IndexController extends Yaf_Controller_Abstract
         $m_article=new ArticleModel();
         $articles=$m_article->fetchAll(['type'=>'代理公告'],$pn = 1, $limit = 20, $selects = '*', $orderby = 'add_time desc');
         $this->getView()->assign('articles',$articles);
+        //检查是否补全代理信息
+        $nickname=$s->get('nickname');
+        $pay_number=$s->get('pay_number');
+        $is_show_alert=false;
+        if(!$nickname || !$pay_number){
+            $is_show_alert=true;
+        }
+        $this->getView()->assign('is_show_alert',$is_show_alert);
 //		$mem = new Memcache();
 //		$mem->addServer('127.0.0.1');
 //		$stat = $mem->getStats();

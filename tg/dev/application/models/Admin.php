@@ -135,6 +135,8 @@ class AdminModel extends F_Model_Pdo
         $s->set('channel_ids_condition','('.implode(',',$channel_ids).')');
         $s->set('cps_type',(int)$user['cps_type']);
         $s->set('boxname',$user['boxname']);//盒子名字
+        $s->set('pay_number',$user['pay_number']);//盒子名字
+        $s->set('nickname',$user['nickname']);//盒子名字
         $this->update(array('last_login_time'=>date("Y-m-d H:i:s"), 'last_login_ip'=>$_SERVER['REMOTE_ADDR']), "admin_id='{$user['admin_id']}'");
 		if( $remember ) {
 			$time = time() + 864000;
