@@ -905,7 +905,7 @@ class ApiController extends Yaf_Controller_Abstract
         $request = $_GET;
         $this->checkParams($request, ['game_id', 'account','password','username','sign','timestamp']);
         //时效验证
-        if(time()-$request['timestamp']>300){
+        if(time()-$request['timestamp']>60){
             $assign['status'] = 'fail';
             $assign['msg'] = 'time error';
             exit(json_encode($assign));
