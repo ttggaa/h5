@@ -905,7 +905,7 @@ class ApiController extends Yaf_Controller_Abstract
         $request = $_GET;
         $this->checkParams($request, ['game_id', 'account','password','username','sign','timestamp']);
         //时效验证
-        if(time()-$request['timestamp']>300){
+        if(time()-$request['timestamp']>3000){
             $assign['status'] = 'fail';
             $assign['msg'] = 'time error';
             exit(json_encode($assign));
@@ -929,7 +929,7 @@ class ApiController extends Yaf_Controller_Abstract
             ksort($arr2);
             $sign_key=$arr['key'];
             $md5 = md5(implode('', $arr2) . $sign_key);
-            $sign=$request['timestamp'];
+            $sign=$request['sign'];
             if (strcmp($sign, $md5) != 0) {
                 exit('Sign error.');
             }
