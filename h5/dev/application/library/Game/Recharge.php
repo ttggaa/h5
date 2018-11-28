@@ -67,7 +67,7 @@ class Game_Recharge
         $adminlog->insert(['admin'=>'支付通知','content'=>$url,'ymd'=>date('Ymd'),'op_time'=>date('Y-m-d H;i;s')]);
         if( trim($ret) == 'success' || trim($ret)=='ok') {
             $m_pay = new PayModel();
-            $m_pay->update(array('game_success_time'=>time()), ['pay_id'=>$pay['pay_id']]);
+            $m_pay->update(array('game_success_time'=>time(),'pay_time'=>time(),'finish_time'=>time()), ['pay_id'=>$pay['pay_id']]);
             return '';
         } else {
             $log = new F_Helper_Log();

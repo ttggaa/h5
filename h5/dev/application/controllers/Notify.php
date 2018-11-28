@@ -144,6 +144,7 @@ class NotifyController extends Yaf_Controller_Abstract
      */
     public function pigpayAction(){
         $m_log = new AdminlogModel();
+        $m_pay=new PayModel();
         //订单验证
         $type=$_REQUEST['jinzhuc'];
         if($type!='deposit'){
@@ -156,13 +157,13 @@ class NotifyController extends Yaf_Controller_Abstract
                 'content' => json_encode($_REQUEST),
                 'ymd' => date('Ymd'),
             ));
+            $m_pay->update(['game_success_time'=>'-1'],['pay_id'=>$num]);
             echo 'success';die;
 //            echo '非法订单,已记录访问ip,请勿违法犯罪之事';die;
         }else{
             $html_arr=json_decode($html,true);
             $okprice=$html_arr['okprice'];
             $pay_id =$_REQUEST['jinzhue'];
-            $m_pay=new PayModel();
             $pay_info=$m_pay->fetch(['pay_id'=>$pay_id],'money');
             if($pay_info['money']!=$okprice){
                 $m_log->insert(array(
@@ -170,6 +171,8 @@ class NotifyController extends Yaf_Controller_Abstract
                     'content' => json_encode($_REQUEST).$html,
                     'ymd' => date('Ymd'),
                 ));
+                //避免误判，可手动通知
+                $m_pay->update(['game_success_time'=>'-1'],['pay_id'=>$pay_id]);
                 echo 'success';die;
 //                echo '非法订单修改订单金额,已记录访问ip,请勿违法犯罪之事';die;
             }
