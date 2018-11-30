@@ -13,6 +13,7 @@ class FeedbackModel extends F_Model_Pdo
 //'游戏问题','代理问题','申请返利','其他'
     public $_types = array('游戏问题','代理问题','申请返利','其他');
     public $_status = array('未处理','已处理');
+    public $_now_reply = array('是','否');
     public function getFieldsLabel()
     {
         return array(
@@ -46,6 +47,7 @@ class FeedbackModel extends F_Model_Pdo
         return array(
             'status' => array('状态', 'select', $this->_status, null),
             'type' => array('问题类型', 'select', $this->_types, null),
+            'now_reply' => array('是否有未读消息', 'select', $this->_now_reply, null),
             'title' => array('关键字', 'input', null, ''),
         );
     }

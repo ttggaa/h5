@@ -17,8 +17,8 @@ class FeedbackController extends F_Controller_Backend
             $conds = "";
             $cmm = '';
         }else{
-            $conds = "admin_id={$_SESSION['admin_id']}";
-            $cmm = ' AND';
+            $conds = "admin_id={$_SESSION['admin_id']} ";
+            $cmm = ' AND ';
         }
         if( $search ) {
             foreach ($search as $k=>$v)
