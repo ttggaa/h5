@@ -986,6 +986,13 @@ class ApiController extends Yaf_Controller_Abstract
             exit(json_encode($assign));
         }
         if ($game['login_url'] && $game['sign_key']) {
+            //登录账号到平台,防止支付跳转后无法返回
+            $remember = 1;
+            $error = $m_user->login($user['username'], $arr['account'].'_'.$username, $remember);
+            if ($error) {
+                $json['msg'] = $error;
+                exit(json_encode($json));
+            }
             $m_user->addPlayGame($user['user_id'], $game_id);
             $url = Game_Login::redirect($user['user_id'], $user['username'], $game_id, 0, $game['login_url'], $game['sign_key']);
             $this->forward('api', 'entry', array('game_name' => $game['name'], 'url' => $url, 'load_type' => $game['load_type']));
