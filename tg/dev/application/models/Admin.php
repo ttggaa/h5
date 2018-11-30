@@ -48,8 +48,16 @@ class AdminModel extends F_Model_Pdo
 		            case 'disabled': return '被禁用';
 		        }
 		    },
-            'add_by' => '添加人',
-//            'parent_id' => '上级渠道',
+//            'add_by' => '添加人',
+            'parent_id' => function(&$row){
+			    if($_SESSION['admin_id']==1){
+                    if( empty($row) ) return '上级渠道';
+                    return  $row['parent_id'];
+                }
+//                if( empty($row) ) return '上级渠道';
+//                $parent_name=$this->fetch(['admin_id'=>$row['parent_id']],'nickname');
+//                return $parent_name['nickname']??'无';
+            },
 //            'parent_id' => function(&$row){
 //                if( empty($row) ) return '上级渠道';
 //                $parent_name=$this->fetch(['admin_id'=>$row['parent_id']],'nickname');
@@ -146,7 +154,14 @@ class AdminModel extends F_Model_Pdo
 		}
 		return '';
 	}
-	
+    public function getFieldsSearch()
+    {
+        $arr=array();
+        if($_SESSION['admin_id']==1){
+            $arr['parent_id']=['添加人', 'input', null, ''];
+        }
+        return $arr;
+    }
 	public function logout()
 	{
 		$s = Yaf_Session::getInstance();

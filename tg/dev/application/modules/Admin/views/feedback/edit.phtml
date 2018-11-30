@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/layui/css/layui.css" type="text/css" media="screen" />
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header">
+        <h3><?= $title ?></h3>
+        <a class="go_back" href="javascript:history.go(-1);">返回上一页</a>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab">
+            <form action="/admin/feedback/update" method="post">
+                <input type="hidden" name="info[admin_id]"
+                       value="<?php echo isset($info) ? $info['admin_id'] : ''; ?>"/>
+                <input type="hidden" name="info[feed_id]"
+                       value="<?php echo isset($info) ? $info['feed_id'] : ''; ?>"/>
+                <fieldset>
+                    <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                    <p>
+                        <label>问题类型</label>
+                        <select class="small-input" name="info[type]" id="type" required>
+                            <option value="">选择问题类型</option>
+                            <?php foreach ($types as $tp) { ?>
+                                <option value="<?= $tp ?>"<?php if (isset($info) && $info['type'] == $tp) echo ' selected="selected"'; ?>><?= $tp ?></option>
+                            <?php } ?>
+                        </select>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>标题</label>
+                        <input class="text-input small-input" type="text" id="title" name="info[title]"
+                               value="<?php echo isset($info) ? $info['title'] : ''; ?>"  maxlength="24" required/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>内容</label>
+                        <textarea  id="content"  cols="30" rows="10" name="info[content]" required><?php echo isset($info) ? $info['content'] : ''; ?></textarea>
+                        <br/>
+                    </p>
+                    <input id="submit" class="button" type="submit" value="提交"/>
+                    </p>
+                </fieldset>
+                <div class="clear"></div>
+                <!-- End .clear -->
+            </form>
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+<!-- End .content-box -->
+
+<div class="clear"></div>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'form','layedit'], function(){
+        var $=layui.jquery,layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '/admin/feedback/uploadReplyImg' //接口url
+                ,type: '' //默认post
+            }
+        });
+        var index = layedit.build('content'); //建立编辑器
+        $('#type').change(function () {
+            var html='';
+            var value=$(this).val();
+            switch (value) {
+                case '游戏问题':
+                    html='游戏账号：<br/>' +
+                        '密码：尽量有<br/>' +
+                        '区服：<br/>' +
+                        '角色名字：<br/>' +
+                        '充值金额：<br/>' +
+                        '充值时间：<br/>' +
+                        '问题描述：';
+                        layedit.setContent(index,html);
+                    break;
+                case '代理问题':
+                    html=''
+                    break;
+                case '申请返利':
+                    html='游戏账号：<br/>' +
+                        '区服：<br/>' +
+                        '角色名字：<br/>' +
+                        '角色ID:游戏内点击角色头像查看或游戏内点击设置查看<br/>' +
+                        '充值金额：<br/>' +
+                        '充值时间：<br/>' +
+                        '备注：';
+                        layedit.setContent(index,html);
+                    break;
+                case '其他':
+                    html='';
+                    break;
+                default:
+                    html='';
+                    break;
+            }
+            // $('#content').html(html);
+        })
+        $('#submit').click(function () {
+            $('#content').text(layedit.getContent(index));
+        })
+    });
+</script>

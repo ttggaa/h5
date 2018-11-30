@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/layui/css/layui.css" type="text/css" media="screen" />
+<style>
+    .reply li{list-style-type:none!important;
+        background: #ffffff !important;
+    padding: 50px;}
+</style>
+<div class="layui-card">
+    <div class="layui-card-header">
+      <span style="font-size: 28px">[ <?=$data['feedback']['type']?> ]<?=$data['feedback']['title']?>  <?php if($data['feedback']['status']=='已处理'):?> <span class="layui-bg-green">已处理</span><?php else:?> <span class="layui-bg-red">未处理</span><?php endif;?>
+          </span>
+        <?php if($_SESSION['admin_id']==1 && $data['feedback']['status']=='未处理'):?>
+          <form class="layui-form" action=""  style="float: right">
+            <input type="checkbox" name="zzz" lay-skin="switch" lay-text="已处理|未处理"  lay-filter="type">
+        </form>
+        <?php endif;?>
+    </div>
+    <div class="layui-card-body">
+        <ul class="reply">
+            <li">
+                <span style="color: #9da7b0"><?php if($data['feedback']['admin_id']==1):?>管理员:<?php else:;?><?=$_SESSION['admin_name']?>:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$data['feedback']['create_time'])?></span>
+                <br/>
+                <span style="color: #0b0b0b!important;"><?=$data['feedback']['content']?></span>
+            </li>
+            <hr/>
+            <?php foreach ($data['feedbackreply'] as $key=>$value):?>
+            <li <?php if($value['reply_name']==1):?>style="background-color:yellow!important;"    <?php endif;?>
+                 <span style="color: #9da7b0"><?php if($value['reply_name']==1):?>管理员:<?php else:;?><?=$_SESSION['admin_name']?>:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$value['create_time'])?></span>
+                <br/>
+                <span style="color: #0b0b0b!important;"><?=$value['content']?></span>
+            </li>
+                <hr/>
+            <?php endforeach;?>
+        </ul>
+    </div>
+</div>
+<textarea id="reply" style="display: none;"></textarea>
+<button class="layui-btn layui-btn-fluid" id="reply_btn">回复</button>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script>
+    layui.use(['layedit','form','jquery'], function(){
+        var layedit = layui.layedit,$=layui.jquery,form=layui.form;
+        layedit.set({
+            uploadImage: {
+                url: '/admin/feedback/uploadReplyImg' //接口url
+                ,type: '' //默认post
+            }
+        });
+        var index =layedit.build('reply'); //建立编辑器
+        $('#reply_btn').click(function(){
+            var value=layedit.getContent(index);
+            if(value=='')return false;
+            $.ajax({
+                type: "POST", //提交方式
+                url: "/admin/feedback/ajaxReply",//路径
+                data: {'content':value,'feed_id':<?=$data['feedback']['feed_id']?>},
+                success: function (result) {//返回数据根据结果进行相应的处理
+                    var result=JSON.parse(result);
+                    if (result.code) {
+                        alert(result.msg);
+                        location.reload();
+                    } else {
+                        alert(result.msg);
+                        //刷新验证码
+                        // $("#tipMsg").text("删除数据失败");
+                    }
+                }
+            });
+        });
+        //标记解决
+        form.on('switch(type)', function(data){
+            var value=data.elem.checked;
+            $.ajax({
+                type: "POST", //提交方式
+                url: "/admin/feedback/changeStatus",//路径
+                data: {'status':value,'feed_id':<?=$data['feedback']['feed_id']?>},
+                success: function (result) {//返回数据根据结果进行相应的处理
+                    var result=JSON.parse(result);
+                    if (result.code) {
+                        alert(result.msg);
+                        location.reload();
+                    } else {
+                        alert(result.msg);
+                        //刷新验证码
+                        // $("#tipMsg").text("删除数据失败");
+                    }
+                }
+            });
+        });
+    });
+</script>

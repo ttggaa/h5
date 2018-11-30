@@ -30,7 +30,7 @@ class AdminController extends F_Controller_Backend
                 $conds .= "{$cmm}{$k}='{$v}'";
                 $cmm = ' AND ';
             }
-            $conds.="  AND parent_id in {$channel_ids_condition} or admin_id = {$_SESSION['admin_id']}";
+            $conds.="  AND parent_id in {$channel_ids_condition}";
         }else{
             $conds.="parent_id in {$channel_ids_condition} or admin_id = {$_SESSION['admin_id']}";
         }
@@ -38,7 +38,6 @@ class AdminController extends F_Controller_Backend
         if($_SESSION['admin_id']==1){
             $params['op'] = F_Helper_Html::Op_Edit;
         }else{
-//            $params['op'] = F_Helper_Html::Op_Edit;
             $params['op'] = F_Helper_Html::Op_Null;
         }
         $params['conditions']=$conds;
