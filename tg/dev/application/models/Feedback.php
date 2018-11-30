@@ -30,6 +30,14 @@ class FeedbackModel extends F_Model_Pdo
             'admin_id' => function(&$row){
                 if( empty($row) ) return '渠道id';
                 return $row['admin_id'];
+            },
+            'now_reply'=> function(&$row){
+                if( empty($row) ) return '是否有未读新消息';
+                if($row['now_reply']=='是'){
+                    return "<span style='color: #00ce7d'>".$row['now_reply']."</span>";
+                }else{
+                    return "<span style='color: red'>".$row['now_reply']."</span>";
+                }
             }
         );
     }

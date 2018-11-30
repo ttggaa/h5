@@ -75,6 +75,10 @@ class FeedbackController extends F_Controller_Backend
         $data['feedbackreply']=$feedback->fetchAllBySql("select * from cps.feed_back_reply as a where a.feed_id={$feed_id} order by create_time asc");
 //        var_dump($result);die;
 //        return $result;
+        //修改是否查看
+        if($_SESSION['admin_id']==$data['feedback']['admin_id'] && $data['feedback']['now_reply']=='是'){
+            $feedback->update(['now_reply'=>'否'],['feed_id'=>$data['feedback']['feed_id']]);
+        }
         $this->getView()->assign('data',$data);
     }
 
@@ -86,6 +90,10 @@ class FeedbackController extends F_Controller_Backend
         $m_feedbackreply=new FeedbackreplyModel();
         $now_time=time();
         $rs=$m_feedbackreply->insert(['feed_id'=>$data['feed_id'],'content'=>$data['content'],'create_time'=>$now_time,'reply_name'=>$_SESSION['admin_id']]);
+        if($_SESSION['admin_id']==1){
+            $feedback=new FeedbackModel();
+            $feedback->update(['now_reply'=>'是'],['feed_id'=>$data['feed_id']]);
+        }
         if($rs){
         die(json_encode(['code'=>1,'msg'=>'回复成功']));
         }else{

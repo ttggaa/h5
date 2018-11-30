@@ -74,7 +74,6 @@
                         '充值金额：<br/>' +
                         '充值时间：<br/>' +
                         '问题描述：';
-                        layedit.setContent(index,html);
                     break;
                 case '代理问题':
                     html=''
@@ -87,7 +86,6 @@
                         '充值金额：<br/>' +
                         '充值时间：<br/>' +
                         '备注：';
-                        layedit.setContent(index,html);
                     break;
                 case '其他':
                     html='';
@@ -96,6 +94,7 @@
                     html='';
                     break;
             }
+            layedit.setContent(index,html);
             // $('#content').html(html);
         })
         $('#submit').click(function () {
