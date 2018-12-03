@@ -67,7 +67,8 @@
             var value=$(this).val();
             switch (value) {
                 case '游戏问题':
-                    html='游戏账号：<br/>' +
+                    html='游戏名字：<br/>' +
+                        '游戏账号：<br/>' +
                         '密码：尽量有<br/>' +
                         '区服：<br/>' +
                         '角色名字：<br/>' +
@@ -75,11 +76,12 @@
                         '充值时间：<br/>' +
                         '问题描述：';
                     break;
-                case '代理问题':
-                    html=''
-                    break;
+                // case '代理问题':
+                //     html=''
+                //     break;
                 case '申请返利':
-                    html='游戏账号：<br/>' +
+                    html='游戏名字：<br/>' +
+                        '游戏账号：<br/>' +
                         '区服：<br/>' +
                         '角色名字：<br/>' +
                         '角色ID:游戏内点击角色头像查看或游戏内点击设置查看<br/>' +
@@ -87,7 +89,7 @@
                         '充值时间：<br/>' +
                         '备注：';
                     break;
-                case '其他':
+                case '其他问题':
                     html='';
                     break;
                 default:
