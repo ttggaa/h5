@@ -62,7 +62,7 @@ class IndexController extends Yaf_Controller_Abstract
         $req = $this->getRequest();
         $u = substr($req->getPost('username', ''), 0, 16);
         $p = substr($req->getPost('password', ''), 0, 31);
-        $parent_id = substr($req->getPost('parent_id', ''), 0, 3);
+        $parent_id = $req->getPost('parent_id', '');
         $xcode = substr($req->getPost('captcha', ''), 0, 4);
         //判断验证码
         $imgcode = new F_Helper_ImgCode();
