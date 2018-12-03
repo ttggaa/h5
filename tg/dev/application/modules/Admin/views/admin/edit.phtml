@@ -52,11 +52,11 @@
                     <p>
                         <label>盒子名称</label>
                         <input class="text-input small-input" type="text" id="boxname" name="info[boxname]"
-                               value="<?php echo isset($info) ? $info['boxname'] : '';?>" placeholder="可以不填"/>
+                               value="<?php echo isset($info) ? $info['boxname'] : '';?>" placeholder="XX游戏盒子"/>
                         <br/>
                     </p>
                     <p>
-                        <label>推广游戏—游戏列表,查看每个游戏分成比例</label>
+                        <label>游戏分成：以推广游戏—游戏列表,每个游戏分成处为准</label>
                         <input class="text-input small-input" type="number" id="boxname" name="info[divide_into]"
                                value="<?php echo isset($info) ? $info['divide_into'] : ''; ?>" min="20" max="55" required
                                <?php if($info['admin_id']==$_SESSION['admin_id']) echo 'disabled';?>
@@ -66,17 +66,15 @@
                     <p>
                         <label>客服QQ</label>
                         <input class="text-input small-input" type="text"  name="info[qq1]"
-                               value="<?php echo isset($info) ? $info['qq1'] : ''; ?>" placeholder="可以不填"/>
+                               value="<?php echo isset($info) ? $info['qq1'] : ''; ?>" placeholder="填你自己的QQ"/>
                         <br/>
                     </p>
                     <p>
                         <label>QQ群</label>
                         <input class="text-input small-input" type="text"  name="info[qq2]"
-                               value="<?php echo isset($info) ? $info['qq2'] : ''; ?>" placeholder="可以不填"/>
+                               value="<?php echo isset($info) ? $info['qq2'] : ''; ?>" placeholder="填自己的Q群号"/>
                         <br/>
                     </p>
-
-
                     <input type="hidden" name="info[status]" value="super">
                     <input class="button" type="submit" value="提交"/>
                     </p>
