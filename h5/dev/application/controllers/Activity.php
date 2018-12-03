@@ -97,7 +97,7 @@ class ActivityController extends Yaf_Controller_Abstract
 	    $list = $m_gift->fetchAllBySql("SELECT gb.gift_id,gb.name,gb.type,gb.nums,gb.used, gm.name AS game_name,gm.logo FROM giftbag AS gb 
 	        LEFT JOIN game AS gm ON gb.game_id=gm.game_id 
 	        WHERE (gb.begin_time=0 OR gb.begin_time<{$time}) AND (gb.end_time=0 OR gb.end_time>{$time}) AND gm.visible=1 
-	       ORDER BY gb.weight ASC LIMIT {$offset},{$limit}");
+	       ORDER BY gb.weight ASC ,gb.gift_id DESC LIMIT {$offset},{$limit}");
 	    if( empty($list) ) {
 	        exit;
 	    }
