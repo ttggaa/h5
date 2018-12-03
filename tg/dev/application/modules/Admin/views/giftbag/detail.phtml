@@ -12,7 +12,9 @@ $detail=json_decode($gift_keys['details']);
 <p>礼包内容:</p>
     <?php
     $content=unserialize($gift_bag['content']);
-    echo $content[0]['name'];
+    foreach ($content as $key=>$value){
+        echo $value['name']."*".$value['nums'].'<br/>';
+    }
     ?>
 <p>礼包详情:</p>
 <span>
