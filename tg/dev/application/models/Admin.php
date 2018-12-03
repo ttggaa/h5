@@ -27,7 +27,7 @@ class AdminModel extends F_Model_Pdo
 			'boxname' => '盒子名字',
 			'divide_into' =>
                 function(&$row){
-                    if( empty($row) ) return '分层比例';
+                    if( empty($row) ) return '分成比例';
                         $cps_type=$this->fetch(['admin_id'=>$row['admin_id']],'cps_type');
                         $cps_type=$cps_type['cps_type'];
                         if($cps_type!=3){
