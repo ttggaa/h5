@@ -12,19 +12,17 @@ class PayController extends F_Controller_Backend
     {
 //        $params = parent::beforeList();
         $params['op'] = F_Helper_Html::Op_Null;
-        $conds = '';
         $search = $this->getRequest()->getQuery('search', array());
         $s = Yaf_Session::getInstance();
         $channel_ids_condition=$s->get('channel_ids_condition');
+        $conds = '';
+        $cmm = '';
         if( $search ) {
             if( !empty($search['add_begin']) && !empty($search['add_end']) ) {
                 $search['add_end'] .= ' 23:59:59';
                 $search['add_begin']=strtotime($search['add_begin']);
                 $search['add_end']=strtotime($search['add_end']);
                 $conds = "pay_time BETWEEN {$search['add_begin']} AND {$search['add_end']}";
-                $cmm=' AND ';
-            }else{
-                $cmm = '';
             }
             unset($search['add_begin'], $search['add_end']);
             if(!empty($search['game_name'])){
@@ -40,6 +38,9 @@ class PayController extends F_Controller_Backend
                 if( empty($v) ) {
                     continue;
                 }
+                if($conds){
+                    $conds.=' AND ';
+                }
                 if( $k == 'username' ) {
                     $m_user = new UsersModel();
                     $user = $m_user->fetch("username='{$v}'", 'user_id');
@@ -51,7 +52,7 @@ class PayController extends F_Controller_Backend
                     }
                 }
                 $conds .= "{$cmm}{$k}='{$v}'";
-                $cmm = ' AND ';
+                $cmm = '';
             }
             $conds.="  AND tg_channel in {$channel_ids_condition}";
         }else{
