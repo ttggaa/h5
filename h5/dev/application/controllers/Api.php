@@ -1001,6 +1001,15 @@ class ApiController extends Yaf_Controller_Abstract
 //        Yaf_Dispatcher::getInstance()->disableView();
     }
 
+    /**
+     * 获取游戏信息
+     */
+    public function getGameInfoByIdAction(){
+        $game_id=$_GET['game_id'];
+        $m_game=new GameModel();
+        $game_info=$m_game->fetch(['game_id'=>$game_id],'name,logo,package_name,package_size');
+        exit(json_encode($game_info));
+    }
     public function entryAction()
     {
         $req = $this->getRequest();
