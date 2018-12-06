@@ -18,29 +18,39 @@
 <body style="background-color:#ffffff">
 <!--div.container 总外框  start-->
 <div>
-    <div class="layui-container">
     <blockquote class="layui-elem-quote layui-quote-nm">问题反馈
 
     </blockquote>
-    <form class="layui-form" action="">
+    <form class="layui-form" action="/index/sdkapi/feedbackAdd" method="post">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                <select name="type" lay-verify="required" lay-filter="type" id="type" >
+                    <option value="">选择问题类型</option>
+                    <?php foreach ($types as $tp) { ?>
+                        <option value="<?= $tp ?>"><?= $tp ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="text" id="title" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <div class="layui-input-block">
-                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea id="reply" name="content" placeholder="请输入内容" class="layui-textarea" ></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">在线提交</button>
+                <input type="hidden" id="user_id" name="user_id" value="<?=$info['uid']?>">
+                <button id="btn" type="submit"  class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">在线提交</button>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block" style="text-align: center">
-                <a >我已提交的点击查看</a>
+                <a href="/index/sdkapi/feedbacklist?uid=<?=$info['uid']?>" >我已提交的点击查看</a>
             </div>
         </div>
     </form>
@@ -51,15 +61,42 @@
             <image src="/images/login/qq.png" width="20" height="20"></image><a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">玩家群:<?= $info['service_qq2']; ?></a>
         </div>
 </div>
-</div>
 <!--div.container 总外框  end-->
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
 <script src="/layui/layui.js"></script>
 <script>
-    layui.use(['layer', 'form'], function(){
+    layui.use(['layer', 'form','layedit'], function(){
         var layer = layui.layer
-            ,form = layui.form;
+            ,form = layui.form,layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '/index/sdkapi/uploadReplyImg' //接口url
+                ,type: '' //默认post
+            }
+        });
+        var index =layedit.build('reply'); //建立编辑器
+        form.on('submit(formDemo)', function(data){
+            var value=layedit.getContent(index);
+            if(value=='')return false;
+            // $.ajax({
+            //     type: "POST", //提交方式
+            //     url: "/index/sdkapi/feedbackadd",//路径
+            //     data: {'content':value,'title':$('#title').val(),'user_id':$('#user_id').val(),'type':$('#type').val()},
+            //     success: function (result) {//返回数据根据结果进行相应的处理
+            //         var result=JSON.parse(result);
+            //         if (result.code) {
+            //             alert(result.msg);
+            //             location.reload();
+            //         } else {
+            //             alert(result.msg);
+            //             //刷新验证码
+            //             // $("#tipMsg").text("删除数据失败");
+            //         }
+            //     }
+            // });
+            // return false;
+        });
     });
     function IsPC() {
         var userAgentInfo = navigator.userAgent;

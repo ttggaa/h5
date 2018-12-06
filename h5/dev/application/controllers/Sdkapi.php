@@ -1,5 +1,7 @@
 <?php
 
+use app\admin\model\User;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -336,15 +338,124 @@ class SdkapiController extends Yaf_Controller_Abstract
         $admin_info = $m_channel->fetch(['admin_id' => 1], 'qq1 as service_qq,qq2 as service_qq2');
         $info['service_qq'] = $channel_info['service_qq'] ?? $admin_info['service_qq'];
         $info['service_qq2'] = $channel_info['service_qq2'] ?? $admin_info['service_qq2'];
-        $assign['info']=$info;
+        $assign['info'] = $info;
         $this->getView()->assign($assign);
     }
+
+    /**
+     * 客服
+     * @Author   liuqi
+     * @DateTime 2018-08-23T10:54:47+0800
+     * @return   [type]                   [description]
+     */
+    public function server2Action()
+    {
+        Yaf_Dispatcher::getInstance()->enableView();
+        $qid = $_GET['q_id'] ?? 1;
+        $uid = $_GET['uid'] ?? null;
+        if (!$uid) {
+            die('用户id不能为空');
+        }
+        $m_channel = new AdminModel('cps');
+        $channel_info = $m_channel->fetch(['admin_id' => $qid], 'admin_id as service_id,nickname as service_name,qq1 as service_qq,qq2 as service_qq2');
+        $admin_info = $m_channel->fetch(['admin_id' => 1], 'qq1 as service_qq,qq2 as service_qq2');
+        $info['service_qq'] = $channel_info['service_qq'] ?? $admin_info['service_qq'];
+        $info['service_qq2'] = $channel_info['service_qq2'] ?? $admin_info['service_qq2'];
+        $info['uid'] = $uid;
+        $assign['info'] = $info;
+        $m_feedback = new FeedbackModel('cps');
+        $this->getView()->assign('types', $m_feedback->_types);
+        $this->getView()->assign($assign);
+    }
+
+    /**
+     * 新增反馈
+     */
+    public function feedbackAddAction()
+    {
+        $info = $_POST;
+        unset($info['file']);
+        $m_feedback = new FeedbackModel('cps');
+        $info['content'] = trim($info['content']);
+        if ($info['feed_id'] ?? null) {
+            //编辑
+            $rs = $m_feedback->update($info, ['feed_id' => $info['feed_id']]);
+        } else {
+            $info['create_time'] = time();
+            $info['status'] = '未处理';
+            $info['admin_id'] = 0;
+            //注册
+            $rs = $m_feedback->insert($info);
+        }
+        $this->redirect('/index/sdkapi/server2?uid=' . $info['user_id']);
+//        if($rs){
+//            die('发表成功');
+//        }else{
+//            die('发表失败');
+//        }
+    }
+
+    /**
+     * 新增反馈
+     */
+    public function feedbackListAction()
+    {
+        Yaf_Dispatcher::getInstance()->enableView();
+        $info = $_GET;
+        $m_feedback = new FeedbackModel('cps');
+        $uid = $info['uid'] ?? null;
+        $list = $m_feedback->fetchAll(['user_id' => $uid], 1, 10, 'feed_id,title,type,status,now_reply', 'create_time desc');
+        $this->getView()->assign('list', $list);
+    }
+
+    /**
+     * 回复
+     */
+    public function detailsAction()
+    {
+        Yaf_Dispatcher::getInstance()->enableView();
+        $feed_id = $_GET['feed_id'];
+        $feedback = new FeedbackModel('cps');
+//        $rs = $m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
+        $data['feedback'] = $feedback->fetchBySql("select * from cps.feed_back as a where a.feed_id={$feed_id}");
+        $data['feedbackreply'] = $feedback->fetchAllBySql("select * from cps.feed_back_reply as a where a.feed_id={$feed_id} order by create_time asc");
+//        var_dump($result);die;
+//        return $result;
+        //修改是否查看
+        if ($data['feedback']['now_reply'] == '是') {
+            $feedback->update(['now_reply' => '否'], ['feed_id' => $data['feedback']['feed_id']]);
+        }
+        $this->getView()->assign('data', $data);
+    }
+
+    /**
+     * 回复
+     */
+    public function ajaxReplyAction()
+    {
+        $data = $_POST;
+        $m_feedbackreply = new FeedbackreplyModel('cps');
+        $now_time = time();
+        $rs = $m_feedbackreply->insert(['feed_id' => $data['feed_id'], 'content' => $data['content'], 'create_time' => $now_time, 'reply_name' => $data['user_id']]);
+        if ($rs) {
+            die(json_encode(['code' => 1, 'msg' => '回复成功']));
+        } else {
+            die(json_encode(['code' => 0, 'msg' => '回复失败']));
+        }
+    }
+
+    public function uploadReplyImgAction()
+    {
+        $path = 'feedback';
+        $this->uploadImg($path);
+    }
+
     public function giftbagAction()
     {
 //        Yaf_Dispatcher::getInstance()->enableView();
         $qid = $_GET['q_id'] ?? 1;
         $game_id = $_GET['game_id'] ?? 62;
-        echo 'qid:'.$qid.'game_id:'.$game_id;
+        echo 'qid:' . $qid . 'game_id:' . $game_id;
 //        $m_channel = new AdminModel('cps');
 //        $channel_info = $m_channel->fetch(['admin_id' => $qid], 'admin_id as service_id,nickname as service_name,qq1 as service_qq,qq2 as service_qq2');
 //        $admin_info = $m_channel->fetch(['admin_id' => 1], 'qq1 as service_qq,qq2 as service_qq2');
@@ -353,6 +464,7 @@ class SdkapiController extends Yaf_Controller_Abstract
 //        $assign['info']=$info;
 //        $this->getView()->assign($assign);
     }
+
     /**
      * 检查参数
      * @Author   liuqi
@@ -376,6 +488,37 @@ class SdkapiController extends Yaf_Controller_Abstract
                 echo json_encode($rs);
                 die;
             }
+        }
+    }
+    protected function uploadImg($path){
+        $id=date('Ymd',time());
+        //判断是否有目录
+        if(!is_dir(APPLICATION_PATH."/public/{$path}/{$id}")){
+            mkdir(APPLICATION_PATH."/public/{$path}/{$id}",0755,true);
+        }
+        if( $_FILES['file']['size'] > 0 && $_FILES['file']['error'] == 0 ) {
+            $img = getimagesize($_FILES['file']['tmp_name']);
+            if( ! $img ) {
+                exit(json_encode(['code'=>404,'msg'=>'上传的不是有效的图片文件！']));
+            }
+            $ext = '';
+            switch ($img[2])
+            {
+                case 1: $ext = 'gif'; break;
+                case 2: $ext = 'jpg'; break;
+                case 3: $ext = 'png'; break;
+                default: exit(json_encode(['code'=>404,'msg'=>'不支持的图片文件格式！']));
+            }
+            $name=time();
+            $path .= "/{$id}/{$name}.{$ext}";
+            $dst = APPLICATION_PATH.'/public/'.$path;
+
+            $rs = move_uploaded_file($_FILES['file']['tmp_name'], $dst);
+            if( ! $rs ) {
+                exit(json_encode(['code'=>404,'msg'=>'不是有效的上传文件，请重新上传！']));
+            }
+            $path .= '?'.time();
+            exit(json_encode(["code"=>0,"msg"=>"","data"=>["src"=>'/'.$path,"title"=> "图片名称"]]));
         }
     }
 }

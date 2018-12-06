@@ -32,6 +32,10 @@ class FeedbackModel extends F_Model_Pdo
                 if( empty($row) ) return '渠道id';
                 return $row['admin_id'];
             },
+            'user_id' => function(&$row){
+                if( empty($row) ) return '玩家id';
+                return $row['user_id'];
+            },
             'now_reply'=> function(&$row){
                 if( empty($row) ) return '是否有未读新消息';
                 if($row['now_reply']=='是'){
