@@ -352,7 +352,7 @@ class SdkapiController extends Yaf_Controller_Abstract
     {
         Yaf_Dispatcher::getInstance()->enableView();
         $qid = $_GET['q_id'] ?? 1;
-        $uid = $_GET['uid'] ?? null;
+        $uid = $_SESSION['user_id'] ?? null;
         if (!$uid) {
             die('用户id不能为空');
         }
