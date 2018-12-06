@@ -18,14 +18,14 @@
 <body style="background-color:#ffffff">
 <!--div.container 总外框  start-->
 <div>
-    <blockquote class="layui-elem-quote layui-quote-nm">问题反馈
+    <blockquote class="layui-elem-quote layui-quote-nm">在线提交申请返利或游戏问题
 
     </blockquote>
     <form class="layui-form" action="/index/sdkapi/feedbackAdd" method="post">
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <select name="type" lay-verify="required" lay-filter="type" id="type" >
-                    <option value="">选择问题类型</option>
+                    <option value="">选择提交分类</option>
                     <?php foreach ($types as $tp) { ?>
                         <option value="<?= $tp ?>"><?= $tp ?></option>
                     <?php } ?>
@@ -67,8 +67,7 @@
 <script src="/layui/layui.js"></script>
 <script>
     layui.use(['layer', 'form','layedit'], function(){
-        var layer = layui.layer
-            ,form = layui.form,layedit = layui.layedit;
+        var form = layui.form,layedit = layui.layedit;
         layedit.set({
             uploadImage: {
                 url: '/index/sdkapi/uploadReplyImg' //接口url
@@ -79,23 +78,45 @@
         form.on('submit(formDemo)', function(data){
             var value=layedit.getContent(index);
             if(value=='')return false;
-            // $.ajax({
-            //     type: "POST", //提交方式
-            //     url: "/index/sdkapi/feedbackadd",//路径
-            //     data: {'content':value,'title':$('#title').val(),'user_id':$('#user_id').val(),'type':$('#type').val()},
-            //     success: function (result) {//返回数据根据结果进行相应的处理
-            //         var result=JSON.parse(result);
-            //         if (result.code) {
-            //             alert(result.msg);
-            //             location.reload();
-            //         } else {
-            //             alert(result.msg);
-            //             //刷新验证码
-            //             // $("#tipMsg").text("删除数据失败");
-            //         }
-            //     }
-            // });
-            // return false;
+        });
+        form.on('select(type)', function(data){
+            console.log(111);
+            var html='';
+            var value=data.value;
+            console.log(111);
+            switch (value) {
+                case '游戏问题':
+                    html='游戏名字：<br/>' +
+                        '游戏账号：<br/>' +
+                        '密码：尽量有<br/>' +
+                        '区服：<br/>' +
+                        '角色名字：<br/>' +
+                        '充值金额：<br/>' +
+                        '充值时间：<br/>' +
+                        '问题描述：';
+                    break;
+                // case '代理问题':
+                //     html=''
+                //     break;
+                case '申请返利':
+                    html='游戏名字：<br/>' +
+                        '游戏账号：<br/>' +
+                        '区服：<br/>' +
+                        '角色名字：<br/>' +
+                        '角色ID:游戏内点击角色头像查看或游戏内点击设置查看<br/>' +
+                        '充值金额：<br/>' +
+                        '充值时间：<br/>' +
+                        '备注：';
+                    break;
+                case '其他问题':
+                    html='';
+                    break;
+                default:
+                    html='';
+                    break;
+            }
+            layedit.setContent(index,html);
+            // $('#content').html(html);
         });
     });
     function IsPC() {

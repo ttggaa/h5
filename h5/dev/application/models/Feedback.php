@@ -15,7 +15,7 @@ class FeedbackModel extends F_Model_Pdo
     protected $_table = 'feed_back';
     protected $_primary = 'feed_id';
 //'游戏问题','代理问题','申请返利','其他'
-    public $_types = array('游戏问题','申请返利','其他问题');
+    public $_types = array('申请返利','游戏问题','其他问题');
     public $_status = array('未处理','已处理');
     public $_now_reply = array('是','否');
 //    public function getFieldsLabel()
