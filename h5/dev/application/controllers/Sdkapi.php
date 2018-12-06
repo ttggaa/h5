@@ -354,8 +354,8 @@ class SdkapiController extends Yaf_Controller_Abstract
 
         $uid = $_GET['uid'] ?? $_SESSION['user_id'];
         $m_user=new UsersModel();
-        $user_info=$m_user->fetch(['user_id'=>$uid],'player_channel');
-        $qid = $user_info['player_channel'];
+        $user_info=$m_user->fetch(['user_id'=>$uid],'tg_channel');
+        $qid = $user_info['tg_channel'];
         if (!$uid) {
             die('用户id不能为空');
         }
