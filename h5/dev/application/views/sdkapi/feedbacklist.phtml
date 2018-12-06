@@ -36,8 +36,8 @@
                 <tbody>
                 <?php foreach ($list as $key=>$value):?>
                 <tr <?php if($value['now_reply']=='是'):?>style="background-color: red"<?php endif;?>>
-                    <td><?=$value['title']?></td>
-                    <td><a href="/index/sdkapi/details?feed_id=<?=$value['feed_id']?>"><?=$value['type']?></a></td>
+                    <td><a href="/index/sdkapi/details?feed_id=<?=$value['feed_id']?>"><?=$value['title']?></a></td>
+                    <td><?=$value['type']?></td>
                     <td><?=$value['status']?></td>
                     <td ><?=$value['now_reply']?></td>
                 </tr>
