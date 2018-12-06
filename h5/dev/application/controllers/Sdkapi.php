@@ -362,8 +362,15 @@ class SdkapiController extends Yaf_Controller_Abstract
         $m_channel = new AdminModel('cps');
         $channel_info = $m_channel->fetch(['admin_id' => $qid], 'admin_id as service_id,nickname as service_name,qq1 as service_qq,qq2 as service_qq2');
         $admin_info = $m_channel->fetch(['admin_id' => 1], 'qq1 as service_qq,qq2 as service_qq2');
-        $info['service_qq'] = $channel_info['service_qq'] ?? $admin_info['service_qq'];
-        $info['service_qq2'] = $channel_info['service_qq2'] ?? $admin_info['service_qq2'];
+        $info['service_qq'] = $channel_info['service_qq'];
+        $info['service_qq2'] = $channel_info['service_qq2'];
+        if($channel_info['service_qq']==''){
+            $info['service_qq']=$admin_info['service_qq'];
+        }
+        if($channel_info['service_qq2']==''){
+            $info['service_qq2']=$admin_info['service_qq2'];
+        }
+
         $info['uid'] = $uid;
         $assign['info'] = $info;
         $m_feedback = new FeedbackModel('cps');
