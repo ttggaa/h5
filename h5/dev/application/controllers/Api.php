@@ -353,7 +353,7 @@ class ApiController extends Yaf_Controller_Abstract
         $assign['hot_games'] = $m_game->getListByAttr('hot', 1, 3, $game_type);
 //        $assign['article_list'] = $m_game->getListByAttr('hot', 1, 5, $game_type);
         $m_article = new ArticleModel();
-        $list = $m_article->fetchAll("visible=1 and type!='代理公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
+        $list = $m_article->fetchAll("visible=1 and type='活动' or type='公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
         foreach ($list as &$row) {
             $row['up_time'] = $m_article->formatTime($row['up_time']);
         }
