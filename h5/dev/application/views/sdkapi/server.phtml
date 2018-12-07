@@ -6,83 +6,19 @@
     <title>客服中心</title>
     <link rel="stylesheet" href="/public/styles/base.css"/>
     <link rel="stylesheet" href="/styles/pay_edit.css"/>
-    <link rel="stylesheet" href="/layui/css/layui.css"/>
-    <style>
-        a{color: #0b0b0b!important;text-decoration:underline}
-        .layui-input-block {
-             margin-left: 0!important;
-            min-height: 36px;
-        }
-    </style>
 </head>
 <body style="background-color:#ffffff">
 <!--div.container 总外框  start-->
 <div>
-    <div class="layui-container">
-    <blockquote class="layui-elem-quote layui-quote-nm">问题反馈
-
-    </blockquote>
-    <form class="layui-form" action="">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <div class="layui-input-block">
-                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">在线提交</button>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block" style="text-align: center">
-                <a >我已提交的点击查看</a>
-            </div>
-        </div>
-    </form>
-    <div style="float: left">
-        <image src="/images/login/qq.png" width="20" height="20"></image><a onclick="jump_qq(this)" data-id="<?= $info['service_qq'] ?>" href="javascript:void(0);">客服:<?= $info['service_qq']; ?></a>
-    </div>
-        <div style="float: right">
-            <image src="/images/login/qq.png" width="20" height="20"></image><a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">玩家群:<?= $info['service_qq2']; ?></a>
-        </div>
-</div>
+    <h1>
+        <span>客服QQ:<?=$info['service_qq'];?></span>
+    </h1>
+    <h1>
+        <span>群:<?=$info['service_qq2'];?></span>
+    </h1>
 </div>
 <!--div.container 总外框  end-->
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
-<script src="/layui/layui.js"></script>
-<script>
-    layui.use(['layer', 'form'], function(){
-        var layer = layui.layer
-            ,form = layui.form;
-    });
-    function IsPC() {
-        var userAgentInfo = navigator.userAgent;
-        var Agents = ["Android", "iPhone",
-            "SymbianOS", "Windows Phone",
-            "iPad", "iPod"];
-        var flag = true;
-        for (var v = 0; v < Agents.length; v++) {
-            if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }
-    function jump_qq(obj) {
-        var qq = $(obj).attr('data-id');
-        if (IsPC()) {
-            window.open("http://wpa.qq.com/msgrd?v=3&uin=" + qq + "&site=qq&menu=yes");
-        } else {
-            window.open("mqqwpa://im/chat?chat_type=wpa&uin=" + qq + "&version=1&src_type=web&web_src=oicqzone.com");
-        }
-    }
-</script>
 </body>
 </html>
