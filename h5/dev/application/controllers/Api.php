@@ -720,7 +720,7 @@ class ApiController extends Yaf_Controller_Abstract
         foreach ($logs as &$value) {
             $gift = $m_gift->fetch(['gift_id' => $value['gift_id']]);
             $game = $m_game->fetch(['game_id' => $gift['game_id']], 'logo');
-            if($game['logo']) {
+            if($game['logo'] && $gift['gift_id']) {
                 $value['content'] = unserialize($gift['content']);
                 $value['game_name'] = $gift['game_name'];
                 $value['name'] = $gift['name'];
