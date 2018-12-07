@@ -34,7 +34,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <input type="text" id="title" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                <input type="text" id="title" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" maxlength="15">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -55,10 +55,12 @@
         </div>
     </form>
     <div style="float: left">
-        <image src="/images/login/qq.png" width="20" height="20"></image><a onclick="jump_qq(this)" data-id="<?= $info['service_qq'] ?>" href="javascript:void(0);">客服:<?= $info['service_qq']; ?></a>
+<!--        <image src="/images/login/qq.png" width="20" height="20"></image>-->
+        <a onclick="jump_qq(this)" data-id="<?= $info['service_qq'] ?>" href="javascript:void(0);">客服QQ:<?= $info['service_qq']; ?></a>
     </div>
         <div style="float: right">
-            <image src="/images/login/qq.png" width="20" height="20"></image><a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">玩家群:<?= $info['service_qq2']; ?></a>
+<!--            <image src="/images/login/qq.png" width="20" height="20"></image>-->
+            <a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">玩家QQ群:<?= $info['service_qq2']; ?></a>
         </div>
 </div>
 <!--div.container 总外框  end-->

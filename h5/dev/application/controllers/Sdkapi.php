@@ -370,7 +370,6 @@ class SdkapiController extends Yaf_Controller_Abstract
         if($channel_info['service_qq2']==''){
             $info['service_qq2']=$admin_info['service_qq2'];
         }
-
         $info['uid'] = $uid;
         $assign['info'] = $info;
         $m_feedback = new FeedbackModel('cps');
@@ -397,7 +396,7 @@ class SdkapiController extends Yaf_Controller_Abstract
             //注册
             $rs = $m_feedback->insert($info);
         }
-        $this->redirect('/index/sdkapi/server2?uid=' . $info['user_id']);
+        $this->redirect('/index/sdkapi/feedbackList?uid=' . $info['user_id']);
 //        if($rs){
 //            die('发表成功');
 //        }else{
