@@ -717,10 +717,10 @@ class ApiController extends Yaf_Controller_Abstract
         }
         $m_gift = new GiftbagModel();
         $logs = $m_user->giftLogs($request['user_id'], $pn, $limit);
-        foreach ($logs as &$value) {
+        foreach ($logs as $key=>&$value) {
             $gift = $m_gift->fetch(['gift_id' => $value['gift_id']]);
             $game = $m_game->fetch(['game_id' => $gift['game_id']], 'logo');
-            if($game['logo'] && $gift['gift_id']) {
+            if($game['logo']) {
                 $value['content'] = unserialize($gift['content']);
                 $value['game_name'] = $gift['game_name'];
                 $value['name'] = $gift['name'];
@@ -729,7 +729,7 @@ class ApiController extends Yaf_Controller_Abstract
                 $value['logo'] = $game['logo'];
                 $value['howget'] = $gift['howget'];
             }else{
-                unset($value);
+                unset($logs[$key]);
             }
         }
         exit(json_encode($logs));
