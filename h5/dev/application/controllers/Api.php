@@ -720,13 +720,15 @@ class ApiController extends Yaf_Controller_Abstract
         foreach ($logs as &$value) {
             $gift = $m_gift->fetch(['gift_id' => $value['gift_id']]);
             $game = $m_game->fetch(['game_id' => $gift['game_id']], 'logo');
-            $value['content'] = unserialize($gift['content']);
-            $value['game_name'] = $gift['game_name'];
-            $value['name'] = $gift['name'];
-            $value['nums'] = $gift['nums'];
-            $value['used'] = $gift['used'];
-            $value['logo'] = $game['logo'];
-            $value['howget'] = $gift['howget'];
+            if($game['logo']) {
+                $value['content'] = unserialize($gift['content']);
+                $value['game_name'] = $gift['game_name'];
+                $value['name'] = $gift['name'];
+                $value['nums'] = $gift['nums'];
+                $value['used'] = $gift['used'];
+                $value['logo'] = $game['logo'];
+                $value['howget'] = $gift['howget'];
+            }
         }
         exit(json_encode($logs));
     }
