@@ -627,7 +627,7 @@ class ApiController extends Yaf_Controller_Abstract
         $order = 'h5.giftbag.game_id DESC';
         $m_gift = new GiftbagModel();
         $game_id = $request['game_id'];
-        $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_id =  '{$game_id}' order by {$order}");
+        $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,howget,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_id =  '{$game_id}' order by {$order}");
 //        $log="select h5.giftbag.name,game_name,nums,used,content,h5.giftbag.gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' order by {$order}  LIMIT {$offset},{$limit}";
         foreach ($gifts as &$value) {
             $value['content'] = unserialize($value['content']);
@@ -726,6 +726,7 @@ class ApiController extends Yaf_Controller_Abstract
             $value['nums'] = $gift['nums'];
             $value['used'] = $gift['used'];
             $value['logo'] = $game['logo'];
+            $value['howget'] = $game['howget'];
         }
         exit(json_encode($logs));
     }
