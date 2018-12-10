@@ -44,7 +44,7 @@ class GameController extends F_Controller_Backend
         }
         $params['conditions'] = $conds;
         $params['op'] = F_Helper_Html::Op_Null;
-        $params['orderby'] = 'game_id desc';
+        $params['orderby'] = 'add_time desc';
         return $params;
     }
     
