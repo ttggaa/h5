@@ -351,7 +351,6 @@ class SdkapiController extends Yaf_Controller_Abstract
     public function server2Action()
     {
         Yaf_Dispatcher::getInstance()->enableView();
-
         $uid = $_GET['uid'] ?? $_SESSION['user_id'];
         $m_user=new UsersModel();
         $user_info=$m_user->fetch(['user_id'=>$uid],'tg_channel');

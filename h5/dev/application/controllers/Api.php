@@ -801,6 +801,19 @@ class ApiController extends Yaf_Controller_Abstract
         $assign['number'] = $count['number'];
         exit(json_encode($assign));
     }
+    function playerChannel2Action()
+    {
+        $request = $_GET;
+        $this->checkParams($request, ['pn','limit']);
+        $pn = $request['pn'];
+        $limit = $request['limit'];
+        $m_user = new UsersModel();
+        if( $pn < 1 || $limit < 1 ) {
+            exit;
+        }
+        $assign['list']=$m_user->fetchAll(['player_channel'=>$_SESSION['user_id']],$pn,$limit,'username,reg_time,player_channel_get','reg_time desc');
+        exit(json_encode($assign));
+    }
 
     function getGameDownloadUrlAction()
     {

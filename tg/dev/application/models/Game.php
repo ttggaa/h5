@@ -103,14 +103,14 @@ class GameModel extends F_Model_Pdo
                 }
             },
             'visible' => function(&$row){
-                if( empty($row) ) return '网站和APP是否显示';
+                if( empty($row) ) return '推广的网站和APP是否显示';
                 switch ($row['visible']){
                     case 0:
                         return '否';
                     case 1:
                         return '全显示';
                     case 2:
-                        return '不显示';
+                        return '未显示';
                 }
 //		        return $row['visible'] ? '是' : '-';
             },

@@ -125,7 +125,7 @@ class GameModel extends F_Model_Pdo
                     case 1:
                         return '全显示';
                     case 2:
-                        return '不显示';
+                        return '未显示';
                 }
 //		        return $row['visible'] ? '是' : '-';
 		    },
