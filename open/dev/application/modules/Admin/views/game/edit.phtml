@@ -240,7 +240,10 @@
 
                     <?php if (isset($info) && $info['apk_url']) echo "<a  href=\"{$info['apk_url']}\">{$info['apk_url']}</a>"; ?>
                     </p>
-
+                    <p>
+                        <label>上架时间</label>
+                        <input class="text-input small-input" type="text" name="info[add_time]" value="<?php echo isset($info) ? $info['add_time'] : ''; ?>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    </p>
                     <p>
                         <input  onclick="upload()" class="button" type="button" value="提交"/>
                     </p>
@@ -260,6 +263,7 @@
 <script type="text/javascript" charset="utf-8" src="/ue/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/ue/ueditor.all.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/ue/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
 <script>
     var editor = UE.getEditor('info_details');
      function upload(){

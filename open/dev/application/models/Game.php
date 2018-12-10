@@ -114,7 +114,7 @@ class GameModel extends F_Model_Pdo
                 }
         ,
 		    'add_time' => function(&$row){
-		        if( empty($row) ) return '添加时间';
+		        if( empty($row) ) return '上架时间';
 		        return substr($row['add_time'], 0, 10);
 		    },
 		    'visible' => function(&$row){

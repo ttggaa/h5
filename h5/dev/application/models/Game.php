@@ -237,13 +237,13 @@ class GameModel extends F_Model_Pdo
 	            $order = 'support DESC';
 	            break;
 	        case 'new':
-	            $order = 'game_id DESC';
+	            $order = 'add_time DESC';
 	            break;
 	        case 'grade':
 	            $order = 'grade DESC';
 	            break;
             case 'hot':
-                $order='play_times DESC';
+                $order='support DESC';
                 break;
 	    }
         if($game_type){
