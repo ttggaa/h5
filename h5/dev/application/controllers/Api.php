@@ -804,7 +804,7 @@ class ApiController extends Yaf_Controller_Abstract
     function playerChannel2Action()
     {
         $request = $_GET;
-        $this->checkParams($request, ['pn','limit']);
+        $this->checkParams($request, ['pn']);
         $pn = $request['pn'];
         $limit = 10;
         $m_user = new UsersModel();
