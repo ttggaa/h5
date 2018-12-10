@@ -168,7 +168,7 @@
                     <p>
                         <label>是否可见</label>
                         <select name="info[visible]">
-                            <?php foreach (array('1' => '是', '0' => '否') as $lk => $lv) { ?>
+                            <?php foreach (array('1' => '全显示','2'=>'不显示', '0' => '否') as $lk => $lv) { ?>
                                 <option value="<?= $lk ?>"<?php if (isset($info) && $info['visible'] == $lk) echo ' selected="selected"'; ?>><?= $lv ?></option>
                             <?php } ?>
                         </select>

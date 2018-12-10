@@ -118,8 +118,16 @@ class GameModel extends F_Model_Pdo
 		        return substr($row['add_time'], 0, 10);
 		    },
 		    'visible' => function(&$row){
-		        if( empty($row) ) return '是否可见';
-		        return $row['visible'] ? '是' : '-';
+		        if( empty($row) ) return '网站和APP是否显示';
+		        switch ($row['visible']){
+                    case 0:
+                        return '否';
+                    case 1:
+                        return '全显示';
+                    case 2:
+                        return '不显示';
+                }
+//		        return $row['visible'] ? '是' : '-';
 		    },
 //		    'channel' => function(&$row){
 //		        if( empty($row) ) return '合作渠道';
