@@ -137,7 +137,7 @@
             $.ajax({
                 type: "POST", //提交方式
                 url: "/index/sdkapi/feedbackAdd",//路径
-                data: {'content':value,'type':$('#type').val(),'title':$('#title').val(),'user_id':$('#user_id').val()},
+                data: data,
                 success: function (result) {//返回数据根据结果进行相应的处理
                     var result=JSON.parse(result);
                     if (result.code==200) {
