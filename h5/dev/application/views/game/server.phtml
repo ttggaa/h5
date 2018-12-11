@@ -28,16 +28,16 @@
                 <div class="swipe" id="slider">
                     <div class="slide_cont swipe-wrap">
                         <ul id="game_list_0" class="wrap">
-                            <li class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                            <li class="loading"><img src="/images/loader/loading.gif"><span>查看更多</span></li>
                         </ul>
                         <ul id="game_list_1" class="wrap">
-                            <li class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                            <li class="loading"><img src="/images/loader/loading.gif"><span>查看更多</span></li>
                         </ul>
                         <ul id="game_list_2" class="wrap">
-                            <li class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                            <li class="loading"><img src="/images/loader/loading.gif"><span>查看更多</span></li>
                         </ul>
                         <ul id="game_list_3" class="wrap">
-                            <li class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                            <li class="loading"><img src="/images/loader/loading.gif"><span>查看更多</span></li>
                         </ul>
                     </div>
                 </div>
@@ -85,15 +85,18 @@ $(function(){
         });
     }
     tc();
-    $(window).on('scrollstop', function(){
-        var t_h = $('.z_container').height();
-        var c_h = $(document).scrollTop();
-        if( c_h == 0 ) c_h = $('.z_container').scrollTop();
-        c_h += $(window).height() + 10;
-        if( c_h >= t_h ) {
-            tc();
-        }
+    $(".loading").on('tap',function(){
+        tc();
     });
+    // $(window).on('scrollstop', function(){
+    //     var t_h = $('.z_container').height();
+    //     var c_h = $(document).scrollTop();
+    //     if( c_h == 0 ) c_h = $('.z_container').scrollTop();
+    //     c_h += $(window).height() + 10;
+    //     if( c_h >= t_h ) {
+    //         tc();
+    //     }
+    // });
 
     var slider = new Swipe(document.getElementById('slider'), {
         auto: false,

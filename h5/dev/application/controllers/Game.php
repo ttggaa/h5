@@ -124,7 +124,7 @@ class GameController extends Yaf_Controller_Abstract
         switch ($od)
         {
             case 1: $order = 'add_time DESC'; break;
-            case 2: $order = 'support DESC'; break;
+            case 2: $order = 'server'; break;
             case 3: $order = 'grade DESC,weight ASC'; break;
             default: $order = 'weight ASC'; break;
         }

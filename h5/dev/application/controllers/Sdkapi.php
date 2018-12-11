@@ -395,12 +395,12 @@ class SdkapiController extends Yaf_Controller_Abstract
             //注册
             $rs = $m_feedback->insert($info);
         }
-        $this->redirect('/index/sdkapi/feedbackList?uid=' . $info['user_id']);
-//        if($rs){
-//            die('发表成功');
-//        }else{
-//            die('发表失败');
-//        }
+//        $this->redirect('/index/sdkapi/feedbackList?uid=' . $info['user_id']);
+        if($rs){
+            die(json_encode(['code'=>200,'msg'=>'发表成功!']));
+        }else{
+            die(json_encode(['code'=>400,'msg'=>'提交失败,请稍后再试']));
+        }
     }
 
     /**

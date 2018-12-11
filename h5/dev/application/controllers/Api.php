@@ -806,7 +806,7 @@ class ApiController extends Yaf_Controller_Abstract
         $request = $_GET;
         $this->checkParams($request, ['pn']);
         $pn = $request['pn'];
-        $limit = 10;
+        $limit = 30;
         $m_user = new UsersModel();
         if( $pn < 1 || $limit < 1 ) {
             exit;

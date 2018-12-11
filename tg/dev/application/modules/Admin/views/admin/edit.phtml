@@ -50,7 +50,7 @@
                     </p>
                     <p>
                     <p>
-                        <label>盒子名称</label>
+                        <label>盒子名称：不能含有(私  SF   破解) </label>
                         <input class="text-input small-input" type="text" id="boxname" name="info[boxname]"
                                value="<?php echo isset($info) ? $info['boxname'] : '';?>" placeholder="XX游戏盒子"/>
                         <br/>
@@ -90,3 +90,13 @@
 <!-- End .content-box -->
 
 <div class="clear"></div>
+<script>
+    $('#boxname').on('blur',function(){
+            var value=$(this).val();
+        // 私  SF   破解
+         value = value.replace(/私/i,"");
+         value = value.replace(/SF/i,"");
+         value = value.replace(/破解/i,"");
+         $(this).val(value);
+    })
+</script>
