@@ -460,6 +460,14 @@ class ApiController extends Yaf_Controller_Abstract
 //            $assign=$res['hot_games'];
         } elseif($type == 'recommend'){
            $res = $m_game->getListByAttr('recommend', $request['pn'], 10, $game_type);
+        }elseif($type == 'bt'){
+            $res = $m_game->getListByAttr('bt', $request['pn'], 10, $game_type);
+        }elseif($type == 'mv'){
+            $res = $m_game->getListByAttr('mv', $request['pn'], 10, $game_type);
+        }elseif($type == 'gm'){
+            $res = $m_game->getListByAttr('gm', $request['pn'], 10, $game_type);
+        }elseif($type == 'gf'){
+            $res = $m_game->getListByAttr('gf', $request['pn'], 10, $game_type);
         }
         echo json_encode($res, true);
         die;

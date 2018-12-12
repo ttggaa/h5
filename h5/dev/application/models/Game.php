@@ -247,6 +247,22 @@ class GameModel extends F_Model_Pdo
             case 'hot':
                 $order='support DESC';
                 break;
+            case 'bt':
+                $order = 'weight ASC';
+                $conds = "type='BT版' AND ";
+                break;
+            case 'mv':
+                $order = 'weight ASC';
+                $conds = "type='满V版' AND ";
+                break;
+            case 'gm':
+                $order = 'weight ASC';
+                $conds = "type='GM版' AND ";
+                break;
+            case 'gf':
+                $order = 'weight ASC';
+                $conds = "type='独家' AND ";
+                break;
 	    }
         if($game_type){
             $conds .= "visible=1 AND game_type='{$game_type}'";
