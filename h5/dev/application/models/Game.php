@@ -231,10 +231,12 @@ class GameModel extends F_Model_Pdo
 	 */
 	public function getListByAttr($attr, $pn = 1, $limit = 10,$game_type='')
 	{
+	    $conds='';
 	    switch ($attr)
 	    {
-	        case 'support':
-	            $order = 'support DESC';
+	        case 'recommend':
+	            $order = 'weight ASC';
+	            $conds = "type='推荐' AND ";
 	            break;
 	        case 'new':
 	            $order = 'add_time DESC';
@@ -247,9 +249,9 @@ class GameModel extends F_Model_Pdo
                 break;
 	    }
         if($game_type){
-            $conds = "visible=1 AND game_type='{$game_type}'";
+            $conds .= "visible=1 AND game_type='{$game_type}'";
         }else{
-            $conds = 'visible=1';
+            $conds .= 'visible=1';
         }
 	    $select = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
 	    
