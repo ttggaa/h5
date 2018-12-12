@@ -348,9 +348,33 @@ class ApiController extends Yaf_Controller_Abstract
         $this->checkParams($request, ['game_type']);
         $game_type = $request['game_type'];
         $m_game = new GameModel();
-        $assign['top_games'] = $m_game->getTopByType($pn = 1, $limit = 3, $type = '', $game_type);//分类
+        $assign['top_games'] = $m_game->getTopByType($pn = 1, $limit = 4, $type = '', $game_type);//分类
         $assign['new_games'] = $m_game->getListByAttr('new', 1, 3, $game_type);
         $assign['hot_games'] = $m_game->getListByAttr('hot', 1, 3, $game_type);
+//        $assign['article_list'] = $m_game->getListByAttr('hot', 1, 5, $game_type);
+        $m_article = new ArticleModel();
+        $list = $m_article->fetchAll("visible=1 and type='活动' or type='公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
+        foreach ($list as &$row) {
+            $row['up_time'] = $m_article->formatTime($row['up_time']);
+        }
+        $assign['info'] = $list;
+        echo json_encode($assign, true);
+        die;
+    }
+    /**
+     * 获取游戏列表v2
+     * game_type 游戏类型 h5\手游
+     */
+    public function gameListV2Action()
+    {
+        $request = $_POST;
+        $this->checkParams($request, ['game_type']);
+        $game_type = $request['game_type'];
+        $m_game = new GameModel();
+//        $assign['top_games'] = $m_game->getTopByType($pn = 1, $limit = 4, $type = '', $game_type);//分类
+        $assign['support_games'] = $m_game->getListByAttr('support', 1, 4, $game_type);
+        $assign['new_games'] = $m_game->getListByAttr('new', 1, 4, $game_type);
+        $assign['hot_games'] = $m_game->getListByAttr('hot', 1, 4, $game_type);
 //        $assign['article_list'] = $m_game->getListByAttr('hot', 1, 5, $game_type);
         $m_article = new ArticleModel();
         $list = $m_article->fetchAll("visible=1 and type='活动' or type='公告'", 1, 3, 'article_id,cover,title,up_time', 'weight ASC,article_id DESC');
