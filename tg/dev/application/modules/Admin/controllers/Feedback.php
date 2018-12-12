@@ -34,7 +34,11 @@ class FeedbackController extends F_Controller_Backend
                 $cmm = ' AND ';
             }
         }
-        $params['op'] = F_Helper_Html::Op_Null;
+        if($_SESSION['admin_id']==1){
+            $params['op'] = F_Helper_Html::Op_Delete;
+        }else{
+            $params['op'] = F_Helper_Html::Op_Null;
+        }
         $params['conditions']=$conds;
         return $params;
     }
