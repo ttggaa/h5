@@ -526,7 +526,7 @@ class SdkapiController extends Yaf_Controller_Abstract
                 exit(json_encode(['code'=>404,'msg'=>'不是有效的上传文件，请重新上传！']));
             }
             $path .= '?'.time();
-            exit(json_encode(["code"=>0,"msg"=>"","data"=>["src"=>'/'.$path,"title"=> "图片名称"]]));
+            exit(json_encode(["code"=>0,"msg"=>"","data"=>["src"=>'http://h5.zyttx.com/public/'.$path,"title"=> "图片名称"]]));
         }
     }
 }
