@@ -458,8 +458,8 @@ class ApiController extends Yaf_Controller_Abstract
         } elseif ($type == 'hot') {
             $res = $m_game->getListByAttr('hot', $request['pn'], 10, $game_type);
 //            $assign=$res['hot_games'];
-        } else {
-//            $assign='fail';
+        } else{
+           $res = $m_game->getListByAttr('support', $request['pn'], 10, $game_type);
         }
         echo json_encode($res, true);
         die;
