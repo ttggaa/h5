@@ -277,7 +277,6 @@ class GameController extends Yaf_Controller_Abstract
                 $num = 'off_nums';
                 break;
         }
-        
         $m_dev = F_Model_Pdo::getInstance('Developer');
         $login = $m_dev->getLogin();
         if( empty($login) ) {
