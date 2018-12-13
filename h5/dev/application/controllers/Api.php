@@ -486,14 +486,22 @@ class ApiController extends Yaf_Controller_Abstract
         }
         $type = $request['type'];
         $m_game = new GameModel();
-        if ($type == 'bt'){
-            $res[$game_type] = $m_game->getListByAttr('bt', $request['pn'], 10, $game_type);
+        if ($type == 'new') {
+            $res = $m_game->getListByAttr('new', $request['pn'], 10, $game_type);
+//            $assign=$res['new_games'];
+        } elseif ($type == 'hot') {
+            $res = $m_game->getListByAttr('hot', $request['pn'], 10, $game_type);
+//            $assign=$res['hot_games'];
+        } elseif($type == 'recommend'){
+            $res = $m_game->getListByAttr('recommend', $request['pn'], 10, $game_type);
+        }elseif($type == 'bt'){
+            $res = $m_game->getListByAttr('bt', $request['pn'], 10, $game_type);
         }elseif($type == 'mv'){
-            $res[$game_type] = $m_game->getListByAttr('mv', $request['pn'], 10, $game_type);
+            $res = $m_game->getListByAttr('mv', $request['pn'], 10, $game_type);
         }elseif($type == 'gm'){
-            $res[$game_type] = $m_game->getListByAttr('gm', $request['pn'], 10, $game_type);
+            $res = $m_game->getListByAttr('gm', $request['pn'], 10, $game_type);
         }elseif($type == 'gf'){
-            $res[$game_type] = $m_game->getListByAttr('gf', $request['pn'], 10, $game_type);
+            $res = $m_game->getListByAttr('gf', $request['pn'], 10, $game_type);
         }
         echo json_encode($res, true);
         die;
