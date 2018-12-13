@@ -475,7 +475,7 @@ class ApiController extends Yaf_Controller_Abstract
     /**
      * 获取游戏
      */
-    function getGamesBySortV2tAction()
+    function getGamesBySortV2Action()
     {
         $request = $_GET;
         $this->checkParams($request, ['index', 'type', 'pn']);
