@@ -472,6 +472,32 @@ class ApiController extends Yaf_Controller_Abstract
         echo json_encode($res, true);
         die;
     }
+    /**
+     * 获取游戏
+     */
+    function getGamesBySortV2tAction()
+    {
+        $request = $_GET;
+        $this->checkParams($request, ['index', 'type', 'pn']);
+        if($request['index']==1){
+            $game_type='手游';
+        }else{
+            $game_type='h5';
+        }
+        $type = $request['type'];
+        $m_game = new GameModel();
+        if ($type == 'bt'){
+            $res[$game_type] = $m_game->getListByAttr('bt', $request['pn'], 10, $game_type);
+        }elseif($type == 'mv'){
+            $res[$game_type] = $m_game->getListByAttr('mv', $request['pn'], 10, $game_type);
+        }elseif($type == 'gm'){
+            $res[$game_type] = $m_game->getListByAttr('gm', $request['pn'], 10, $game_type);
+        }elseif($type == 'gf'){
+            $res[$game_type] = $m_game->getListByAttr('gf', $request['pn'], 10, $game_type);
+        }
+        echo json_encode($res, true);
+        die;
+    }
 
     /**
      * 获取文章详情
