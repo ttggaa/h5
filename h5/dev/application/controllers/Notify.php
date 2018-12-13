@@ -172,7 +172,7 @@ class NotifyController extends Yaf_Controller_Abstract
                     'ymd' => date('Ymd'),
                 ));
                 //避免误判，可手动通知
-                $m_pay->update(['game_success_time'=>'-1', 'trade_no' => $_REQUEST['OrderID'], 'pay_type' => $_REQUEST['jinzhuc']],['pay_id'=>$pay_id]);
+                $m_pay->update(['game_success_time'=>'-1', 'trade_no' => $_REQUEST['OrderID'], 'type'=>$_REQUEST['jinzhuc'],'pay_type' => $_REQUEST['jinzhuc']],['pay_id'=>$pay_id]);
                 echo 'success';die;
 //                echo '非法订单修改订单金额,已记录访问ip,请勿违法犯罪之事';die;
             }
