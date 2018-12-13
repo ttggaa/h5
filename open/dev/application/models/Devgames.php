@@ -70,8 +70,8 @@ class DevgamesModel extends F_Model_Pdo
 	        default: $conds .= ' AND status<9'; break;
 	    }
 	    $conds .= ' ORDER BY game_id DESC';
-	    $offset = ($pn - 1) * $limit;
-	    $conds .= " LIMIT {$offset},{$limit}";
+//	    $offset = ($pn - 1) * $limit*$pn;
+//	    $conds .= " LIMIT {$limit}*$pn,{$offset}";
 	    $gids = $this->fetch($conds, 'GROUP_CONCAT(game_id) AS gids');
 	    $gids = "game_id IN({$gids['gids']})";
 	    
