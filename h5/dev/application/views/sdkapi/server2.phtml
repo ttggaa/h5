@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles/pay_edit.css"/>
     <link rel="stylesheet" href="/layui/css/layui.css"/>
     <style>
-        a{color: #0b0b0b!important;text-decoration:underline}
+        a{color: #0b0b0b!important;font-size: 24px;color: red!important;}
         .layui-input-block {
              margin-left: 0!important;
             min-height: 36px;
@@ -18,8 +18,18 @@
 <body style="background-color:#ffffff">
 <!--div.container 总外框  start-->
 <div>
-<!--    <blockquote class="layui-elem-quote layui-quote-nm"></blockquote>-->
-    <div style="height: 38px;line-height: 38px">在线提交申请返利或游戏问题或投诉和其他问题</div>
+<!--    <blockquote class="layui-elem-quote layui-quote-nm">-->
+        <div style="float: left;">
+<!--            <image src="/images/login/qq.png" width="20" height="20"></image>-->
+            <a onclick="jump_qq(this)" data-id="<?= $info['service_qq'] ?>" href="javascript:void(0);">客服Q:<?= $info['service_qq']; ?></a>
+        </div>
+        <div style="float: right;">
+<!--            <image src="/images/login/qq.png" width="20" height="20"></image>-->
+            <a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">QQ群:<?= $info['service_qq2']; ?></a>
+        </div>
+<!--    </blockquote>-->
+    <hr>
+    <div style="height: 38px;line-height: 38px">自助在线提交申请返利或游戏投诉其他问题,急事直接联系客服</div>
     <form class="layui-form" action="/index/sdkapi/feedbackAdd" method="post">
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -53,14 +63,6 @@
             </div>
         </div>
     </form>
-    <div style="float: left">
-<!--        <image src="/images/login/qq.png" width="20" height="20"></image>-->
-        <a onclick="jump_qq(this)" data-id="<?= $info['service_qq'] ?>" href="javascript:void(0);">客服QQ:<?= $info['service_qq']; ?></a>
-    </div>
-        <div style="float: right;margin-bottom: 12px">
-<!--            <image src="/images/login/qq.png" width="20" height="20"></image>-->
-            <a onclick="jump_qq(this)" data-id="<?= $info['service_qq2'] ?>" href="javascript:void(0);">玩家QQ群:<?= $info['service_qq2']; ?></a>
-        </div>
 </div>
 <!--div.container 总外框  end-->
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
