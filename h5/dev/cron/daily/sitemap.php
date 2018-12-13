@@ -35,7 +35,7 @@ function sitemap()
     $m_game = new GameModel();
     $types = $m_game->_classic;
     $types[] = '精品推荐';
-    $types[] = '独家首发';
+    $types[] = '官服';
     $types[] = 'BT游戏';
     $types[] = '满V游戏';
     $types[] = 'GM游戏';

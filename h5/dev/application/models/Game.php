@@ -6,7 +6,7 @@ class GameModel extends F_Model_Pdo
 	protected $_primary = 'game_id';
 	
 	//类型
-	public $_types = array('推荐','独家','BT版','满V版','GM版');
+	public $_types = array('推荐','官服','BT版','满V版','GM版');
 	//经典分类
 	public $_classic = array(
 	    '角色扮演', '动作过关', '梦幻回合', '仙侠即时', '经营策略', '卡牌三国', '魔幻动漫', '休闲竞技', '放置挂机', '其他',
@@ -261,7 +261,7 @@ class GameModel extends F_Model_Pdo
                 break;
             case 'gf':
                 $order = 'weight ASC';
-                $conds = "type='独家' AND ";
+                $conds = "type='官服' AND ";
                 break;
 	    }
         if($game_type){

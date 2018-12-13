@@ -131,7 +131,7 @@ class GameController extends Yaf_Controller_Abstract
         
         $map = array(
             '精品推荐' => '推荐',
-            '独家首发' => '独家',
+            '官服' => '官服',
             'BT游戏' => 'BT版',
             '满V游戏' => '满V版',
             'GM游戏' => 'GM版',
