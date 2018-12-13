@@ -617,7 +617,7 @@ class ApiController extends Yaf_Controller_Abstract
     public function gameAdposAction()
     {
         $m_adpos = new AdposModel();
-        $banner = $m_adpos->getByCode('game_index_banner', 3);
+        $banner = $m_adpos->getByCode('game_index_banner', 4);
         echo json_encode($banner['ads'], true);
         die;
     }
