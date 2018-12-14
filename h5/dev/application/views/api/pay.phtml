@@ -154,6 +154,7 @@
         });
 
         $('#next_step').on('click', function(){
+            $("#next_step").attr('disabled',true);
             var mn = parseInt($("input[name=Price]").val());
             if( isNaN(mn) || mn < 1 ) {
                 alert('最小充值金额为1元！');
@@ -218,6 +219,7 @@
                 default:
                     return false;
             }
+            $("#next_step").attr('disabled',false);
             // console.log($('.z_main').serialize());
             return false;
         });
