@@ -183,6 +183,10 @@ class NotifyController extends Yaf_Controller_Abstract
             $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['deposit'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money');
             $uid=$order_info['to_uid'];
             $user_info=$m_user->fetch(['user_id'=>$uid],'money');
+            if($user_info || $order_info){
+                echo json_encode(['code' => 1, 'message' => '订单或账户信息错误']);
+                die;
+            }
             if($order_info['money']>$user_info['money']){
                 echo json_encode(['code' => 1, 'message' => '平台币不足']);
                 die;
