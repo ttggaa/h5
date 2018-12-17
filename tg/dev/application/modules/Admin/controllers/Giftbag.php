@@ -4,9 +4,30 @@ class GiftbagController extends F_Controller_Backend
 {
     protected function beforeList()
     {
-        $params = parent::beforeList();
-        $params['orderby'] = 'add_time DESC';
+        $search = $this->getRequest()->getQuery('search', array());
+        $conds = '';
+        $comma = '';
+        if(!empty($search['game_name'])){
+            if($conds){
+                $conds .= " AND {$comma}game_name LIKE '%{$search['game_name']}%'";
+            }else{
+                $conds .= "{$comma}game_name LIKE '%{$search['game_name']}%'";
+            }
+            unset($search['game_name']);
+        }
+        foreach ($search as $k=>$v)
+        {
+            $v = trim($v);
+            if( empty($v) ) continue;
+            if($conds){
+                $conds .= " AND {$comma}{$k}='{$v}'";
+            }else{
+                $conds .= "{$comma}{$k}='{$v}'";
+            }
+        }
+        $params['conditions'] = $conds;
         $params['op'] = F_Helper_Html::Op_Null;
+        $params['orderby'] = 'add_time DESC';
         return $params;
     }
 
