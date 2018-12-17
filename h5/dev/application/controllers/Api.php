@@ -143,6 +143,7 @@ class ApiController extends Yaf_Controller_Abstract
      */
     public function payByDepositAction()
     {
+        die (json_encode(['code' => 1, 'message' => '平台币充值维护中，请稍后再试']));
         Yaf_Dispatcher::getInstance()->disableView();
         $params = $_REQUEST;
         $user_id = $params['user_id'];
@@ -186,7 +187,8 @@ class ApiController extends Yaf_Controller_Abstract
 //            $this->forward('notify', 'pigpay',$params);
             if ($rs1) {
                 $trade_no = date('YmdHis') . rand(1, 9999);
-                $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}";
+                $now_time=time();
+                $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}&key=$now_time";
                 $curl = new F_Helper_Curl();
                 $rs = $curl->request($url);
                 if ($rs == 'success' || $rs == 'ok') {

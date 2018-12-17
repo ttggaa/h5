@@ -179,6 +179,10 @@ class NotifyController extends Yaf_Controller_Abstract
         }
         }else{
             //二次验证平台币
+            $time=time();
+            if($time){
+
+            }
             $m_user=new UsersModel();
             $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['jinzhuc'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money,pay_time');
             $uid=$order_info['to_uid'];
