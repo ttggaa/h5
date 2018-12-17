@@ -144,6 +144,12 @@ class NotifyController extends Yaf_Controller_Abstract
      */
     public function pigpayAction(){
         $m_log = new AdminlogModel();
+        //日志
+        $m_log->insert(array(
+            'admin' => '支付回调',
+            'content' => json_encode($_REQUEST),
+            'ymd' => date('Ymd'),
+        ));
         $m_pay=new PayModel();
         //订单验证
         $type=$_REQUEST['jinzhuc'];
@@ -185,12 +191,6 @@ class NotifyController extends Yaf_Controller_Abstract
             }
         }
         //订单验证
-        //日志
-        $m_log->insert(array(
-            'admin' => '金猪支付',
-            'content' => json_encode($_REQUEST),
-            'ymd' => date('Ymd'),
-        ));
         $class = new Pay_Pigpay_Mobile();
         $rs = $class->notify();
         if( $rs == false ) {
