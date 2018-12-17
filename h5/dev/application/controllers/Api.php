@@ -186,7 +186,7 @@ class ApiController extends Yaf_Controller_Abstract
 //            $this->forward('notify', 'pigpay',$params);
             if ($rs1) {
                 $trade_no = date('YmdHis') . rand(1, 9999);
-                $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/directPay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}";
+                $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}";
                 $curl = new F_Helper_Curl();
                 $rs = $curl->request($url);
                 if ($rs == 'success' || $rs == 'ok') {

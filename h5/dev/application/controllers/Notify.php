@@ -206,9 +206,6 @@ class NotifyController extends Yaf_Controller_Abstract
         }
         $this->deal($rs['pay_id'], $rs['trade_no'],$rs['pay_type']);
     }
-    public function directPayAction(){
-
-    }
     /**
      * 重新通知
      */
