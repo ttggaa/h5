@@ -178,26 +178,10 @@ class NotifyController extends Yaf_Controller_Abstract
             }
         }
         }else{
-            //二次验证平台币
-            $time=time();
-            if($time){
-
-            }
-            $m_user=new UsersModel();
-            $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['jinzhuc'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money,pay_time');
-            $uid=$order_info['to_uid'];
-            $user_info=$m_user->fetch(['user_id'=>$uid],'money');
-            if($order_info['pay_time']>0){
-                echo json_encode(['code' => 0, 'message' => 'ok']);
-                die;
-            }
-            if(!$user_info || !$order_info){
-                echo json_encode(['code' => 1, 'message' => '订单或账户信息错误']);
-                die;
-            }
-            if($order_info['money']>$user_info['money']){
-                echo json_encode(['code' => 1, 'message' => '平台币不足']);
-                die;
+            //验证是否是真实地址（已减扣状态）
+            $pay_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['jinzhuc'],'trade_no'=>$_REQUEST['OrderID']],'game_success_time');//修改订单状态 为已减扣状态
+            if(!$pay_info || $pay_info['game_success_time']!='-2'){
+                die(json_encode(['code' => 1, 'message' => '非法请求']));
             }
         }
         //订单验证

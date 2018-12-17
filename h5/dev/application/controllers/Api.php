@@ -143,7 +143,7 @@ class ApiController extends Yaf_Controller_Abstract
      */
     public function payByDepositAction()
     {
-        die (json_encode(['code' => 1, 'message' => '平台币充值维护中，请稍后再试']));
+//        die (json_encode(['code' => 1, 'message' => '平台币充值维护中，请稍后再试']));
         Yaf_Dispatcher::getInstance()->disableView();
         $params = $_REQUEST;
         $user_id = $params['user_id'];
@@ -166,8 +166,8 @@ class ApiController extends Yaf_Controller_Abstract
         //游戏信息
         $m_game = new GameModel();
         $game = $m_game->fetch("game_id='{$arr['game_id']}'", 'name,login_url,sign_key');
-        $server_name = '';
-        $game_name = $game['name'];
+//        $server_name = '';
+//        $game_name = $game['name'];
         $login_url = $game['login_url'];
         $sign_key = $game['sign_key'];
         $m_user = new UsersModel();
@@ -183,27 +183,30 @@ class ApiController extends Yaf_Controller_Abstract
             //减扣平台币
             $m_user = new UsersModel();
             $now_money = (int)($user['money'] - $arr['money']);
+            //事务处理
+	        $pdo = $m_pay->getPdo();
+	        $pdo->beginTransaction();
             $rs1 = $m_user->update(array('money' => $now_money), "user_id='{$user_id}'");
+            $rs2=$m_pay->update(['game_success_time'=>'-2'],['pay_id'=>$pay_id]);//修改订单状态 为已减扣状态
 //            $this->forward('notify', 'pigpay',$params);
-            if ($rs1) {
+            if ($rs1 && $rs2) {
+                $pdo->commit();
                 $trade_no = date('YmdHis') . rand(1, 9999);
                 $now_time=time();
                 $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}&key=$now_time";
                 $curl = new F_Helper_Curl();
                 $rs = $curl->request($url);
                 if ($rs == 'success' || $rs == 'ok') {
-                    echo json_encode(['code' => 0, 'message' => $return]);
+                    die(json_encode(['code' => 0, 'message' => $return]));
                 } else {
-                    echo json_encode(['code' => 1, 'message' => '游戏发货失败,请联系客服处理']);
+                    die(json_encode(['code' => 1, 'message' => '游戏发货失败,请联系客服处理']));
                 }
             } else {
-                echo json_encode(['code' => 1, 'message' => '发货失败']);
+                $pdo->rollBack();
+                die(json_encode(['code' => 1, 'message' => '发货失败']));
             }
-            return false;
         } else {
-            echo json_encode(['code' => 1, 'message' => '平台币不足']);
-            die;
-            return false;
+            die(json_encode(['code' => 1, 'message' => '平台币不足']));
         }
     }
 
