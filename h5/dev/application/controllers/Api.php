@@ -189,13 +189,19 @@ class ApiController extends Yaf_Controller_Abstract
 //            $this->forward('notify', 'pigpay',$params);
             if ($rs1 && $rs2) {
                 $trade_no = date('YmdHis') . rand(1, 9999);
-                $now_time=time();
                 $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}";
                 $curl = new F_Helper_Curl();
                 $rs = $curl->request($url);
                 if ($rs == 'success' || $rs == 'ok') {
                     die(json_encode(['code' => 0, 'message' => $return]));
                 } else {
+                    $m_log = new AdminlogModel();
+                    //日志
+                    $m_log->insert(array(
+                        'admin' => '发货失败回调',
+                        'content' => $rs,
+                        'ymd' => date('Ymd'),
+                    ));
                     die(json_encode(['code' => 1, 'message' => '游戏发货失败,请联系客服处理']));
                 }
             } else {
