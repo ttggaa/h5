@@ -184,13 +184,10 @@ class ApiController extends Yaf_Controller_Abstract
             $m_user = new UsersModel();
             $now_money = (int)($user['money'] - $arr['money']);
             //事务处理
-	        $pdo = $m_pay->getPdo();
-	        $pdo->beginTransaction();
             $rs1 = $m_user->update(array('money' => $now_money), "user_id='{$user_id}'");
             $rs2=$m_pay->update(['game_success_time'=>'-2'],['pay_id'=>$pay_id]);//修改订单状态 为已减扣状态
 //            $this->forward('notify', 'pigpay',$params);
             if ($rs1 && $rs2) {
-                $pdo->commit();
                 $trade_no = date('YmdHis') . rand(1, 9999);
                 $now_time=time();
                 $url = 'http://' . $_SERVER['SERVER_NAME'] . "/notify/pigpay?jinzhue={$params['jinzhue']}&jinzhuc={$params['jinzhuc']}&OrderID={$trade_no}&key=$now_time";
@@ -202,7 +199,6 @@ class ApiController extends Yaf_Controller_Abstract
                     die(json_encode(['code' => 1, 'message' => '游戏发货失败,请联系客服处理']));
                 }
             } else {
-                $pdo->rollBack();
                 die(json_encode(['code' => 1, 'message' => '发货失败']));
             }
         } else {
