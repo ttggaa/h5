@@ -147,7 +147,7 @@ class NotifyController extends Yaf_Controller_Abstract
         $m_pay=new PayModel();
         //订单验证
         $type=$_REQUEST['jinzhuc'];
-//        if($type!='deposit'){
+        if($type!='deposit'){
         $num=$_REQUEST['OrderID'];
         $url='http://357p.com/api/mun.asp?userid=27641&mun='.$num;
         $html = file_get_contents($url);
@@ -177,7 +177,17 @@ class NotifyController extends Yaf_Controller_Abstract
 //                echo '非法订单修改订单金额,已记录访问ip,请勿违法犯罪之事';die;
             }
         }
-//        }
+        }else{
+            //二次验证平台币
+            $m_user=new UsersModel();
+            $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['deposit'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money');
+            $uid=$order_info['to_uid'];
+            $user_info=$m_user->fetch(['user_id'=>$uid],'money');
+            if($order_info['money']>$user_info['money']){
+                echo json_encode(['code' => 1, 'message' => '平台币不足']);
+                die;
+            }
+        }
         //订单验证
         //日志
         $m_log->insert(array(
@@ -192,11 +202,16 @@ class NotifyController extends Yaf_Controller_Abstract
         }
         $this->deal($rs['pay_id'], $rs['trade_no'],$rs['pay_type']);
     }
+    public function directPayAction(){
 
+    }
     /**
      * 重新通知
      */
     public function reDealAction(){
+        if($_SESSION['admin_id']!==1){
+            echo '无权操作!';
+        }
         $pay_id=$_GET['pay_id'];
         $m_pay=new PayModel();
         $pay=$m_pay->fetch(['pay_id'=>$pay_id]);
