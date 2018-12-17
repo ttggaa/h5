@@ -180,9 +180,12 @@ class NotifyController extends Yaf_Controller_Abstract
         }else{
             //二次验证平台币
             $m_user=new UsersModel();
-            $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['deposit'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money');
+            $order_info=$m_pay->fetch(['pay_id'=>$_REQUEST['jinzhue'],'pay_type'=>$_REQUEST['deposit'],'trade_no'=>$_REQUEST['OrderID']],'to_uid,money,pay_time');
             $uid=$order_info['to_uid'];
             $user_info=$m_user->fetch(['user_id'=>$uid],'money');
+            if($order_info['pay_time']>0){
+                echo json_encode(['code' => 0, 'message' => 'ok']);
+            }
             if($user_info || $order_info){
                 echo json_encode(['code' => 1, 'message' => '订单或账户信息错误']);
                 die;
