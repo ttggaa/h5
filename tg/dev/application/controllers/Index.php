@@ -8,7 +8,7 @@ class IndexController extends Yaf_Controller_Abstract
 //        $this->getView()->assign($info);
         $url=new F_Helper_Url();
         $channel_id=$url->getUrlSign();
-        if(!$channel_id){
+        if($channel_id){
             $info['channel_id']=$channel_id;
             $this->getView()->assign($info);
         }else{
