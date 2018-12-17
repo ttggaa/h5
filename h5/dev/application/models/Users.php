@@ -894,7 +894,7 @@ class UsersModel extends F_Model_Pdo
 	{
 	    $offset = ($pn - 1) * $limit;
 	    $pdo = $this->getPdo();
-	    $stm = $pdo->query("SELECT * FROM user_cdkey WHERE user_id='{$uid}' LIMIT {$offset},{$limit}");
+	    $stm = $pdo->query("SELECT * FROM user_cdkey WHERE user_id='{$uid}' order by get_time desc LIMIT {$offset},{$limit} ");
 	    $logs = array();
 	    $row = $stm->fetch(PDO::FETCH_ASSOC);
 	    while ($row)
