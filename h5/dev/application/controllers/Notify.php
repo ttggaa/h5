@@ -185,6 +185,7 @@ class NotifyController extends Yaf_Controller_Abstract
             $user_info=$m_user->fetch(['user_id'=>$uid],'money');
             if($order_info['pay_time']>0){
                 echo json_encode(['code' => 0, 'message' => 'ok']);
+                die;
             }
             if($user_info || $order_info){
                 echo json_encode(['code' => 1, 'message' => '订单或账户信息错误']);
