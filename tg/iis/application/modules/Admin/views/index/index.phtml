@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>久乐H5游戏联运平台-最好的H5游戏联运平台！</title>
+<!--                       CSS                       -->
+<!-- Reset Stylesheet -->
+<link rel="stylesheet" href="/admin/css/reset.css" type="text/css" media="screen" />
+<!-- Main Stylesheet -->
+<link rel="stylesheet" href="/admin/css/style.css" type="text/css" media="screen" />
+<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
+<link rel="stylesheet" href="/admin/css/invalid.css" type="text/css" media="screen" />
+<!--                       Javascripts                       -->
+<!-- jQuery -->
+<script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
+<!-- jQuery Configuration -->
+<script type="text/javascript" src="/admin/js/simpla.jquery.configuration.js"></script>
+</head>
+
+<body id="login">
+<div id="login-wrapper" class="png_bg">
+  <div id="login-top">
+    <h1>久乐H5游戏联运平台-最好的H5游戏联运平台！</h1>
+    <!-- Logo (221px width) -->
+    <a href="#"><img id="logo" src="/admin/images/logo.png" alt="Simpla Admin logo" /></a> </div>
+  <!-- End #logn-top -->
+  <div id="login-content">
+    <form action="/admin/index/login" method="post">
+      <div class="notification information png_bg">
+        <div> <?php if(isset($error)){echo '<font color="red">',$error,'</font>';}else{echo '请输入账号和密码.';} ?></div>
+      </div>
+      <p>
+        <label>账号</label>
+        <input class="text-input" type="text" name="username" required />
+      </p>
+      <div class="clear"></div>
+      <p>
+        <label>密码</label>
+        <input class="text-input" type="password" name="password" required />
+      </p>
+      <div class="clear"></div>
+<!--      <p id="remember-password">-->
+<!--        <input type="checkbox" id="remember" name="remember" value="1" />-->
+<!--        <label for="remember" style="float:right; margin-top:-2px; width:94px;">免登录</label>-->
+<!--      </p>-->
+      <div class="clear"></div>
+      <p>
+        <input class="button" type="submit" value="登录" />
+      </p>
+    </form>
+  </div>
+  <!-- End #login-content -->
+    <style>
+        p a{
+            text-align: center;
+            text-decoration:underline;
+        }
+    </style>
+</div>
+<footer style="position: fixed;bottom:0;left: 35%">
+    <div class="footer_center" style="text-align: center">
+        <!--    <i class="icons i_logo2"></i>-->
+        <address>
+<!--            <p>-->
+<!--                <a target="_blank" href="http://h5.zyttx.com">游戏平台|</a>-->
+<!--                <a target="_blank" href="http://open.zyttx.com/">开放平台|</a>-->
+<!--                <a target="_blank" href="http://yun.zyttx.com">推广平台</a>-->
+<!--            </p>-->
+            <p>
+                <span>网络文化经营许可证：川网文[2018]7147-249号  增值电信业务经营许可证: 川B2-20160007  蜀ICP备18008778-1号</span>
+                <!--            <a href="#">隐私条款</a><span> |</span>-->
+                <!--            <a href="#">法律声明</a><span> 蜀ICP备18008778号-1</span>-->
+            </p>
+            <p>&copy; Chengdu JIULE Technology Co., Ltd. 成都九九六网络科技有限公司 版权所有</p>
+        </address>
+    </div>
+</footer>
+<!-- End #login-wrapper -->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header">
+        <h3><?= $title ?></h3>
+        <a class="go_back" href="javascript:history.go(-1);">返回上一页</a>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab">
+            <form action="/admin/admin/update" method="post">
+                <input type="hidden" name="info[admin_id]"
+                       value="<?php echo isset($info) ? $info['admin_id'] : ''; ?>"/>
+                <fieldset>
+                    <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                    <p>
+                        <label>渠道账号</label>
+                        <input class="text-input small-input" type="text" id="username" name="info[username]"
+                               value="<?php echo isset($info) ? $info['username'] : ''; ?>" <?php echo isset($info)?'readonly':'';?> maxlength="16" required/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>用户密码</label>
+                        <input class="text-input small-input" type="password" id="upass" name="info[password]"
+                               value="" maxlength="16"/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>真实姓名</label>
+                        <input class="text-input small-input" type="text" id="nickname" name="info[nickname]"
+                               value="<?php echo isset($info) ? $info['nickname'] : ''; ?>" maxlength="16" required
+                            <?php
+                                if($info['nickname']!='' && $_SESSION['admin_id']!=1){
+                                    echo 'readonly';
+                                }
+                            ;?>/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>支付宝账号</label>
+                        <input class="text-input small-input" type="text" id="pay_number" name="info[pay_number]"
+                               value="<?php echo isset($info) ? $info['pay_number'] : ''; ?>" required
+                            <?php
+                            if($info['pay_number']!='' && $_SESSION['admin_id']!=1){
+                                echo 'readonly';
+                            }
+                            ;?>
+                        />
+                        <br/>
+                    </p>
+                    <p>
+                    <p>
+                        <label>盒子名称：不能含有(私  SF   破解) </label>
+                        <input class="text-input small-input" type="text" id="boxname" name="info[boxname]"
+                               value="<?php echo isset($info) ? $info['boxname'] : '';?>" placeholder="XX游戏盒子"/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>游戏分成：以推广游戏—游戏列表,每个游戏分成处为准</label>
+                        <input class="text-input small-input" type="number" id="boxname" name="info[divide_into]"
+                               value="<?php echo isset($info) ? $info['divide_into'] : ''; ?>" min="20" max="55" required
+                               <?php if($info['admin_id']==$_SESSION['admin_id']) echo 'disabled';?>
+                               />
+                        <br/>
+                    </p>
+                    <p>
+                        <label>客服QQ</label>
+                        <input class="text-input small-input" type="text"  name="info[qq1]"
+                               value="<?php echo isset($info) ? $info['qq1'] : ''; ?>" placeholder="填你自己的QQ"/>
+                        <br/>
+                    </p>
+                    <p>
+                        <label>QQ群</label>
+                        <input class="text-input small-input" type="text"  name="info[qq2]"
+                               value="<?php echo isset($info) ? $info['qq2'] : ''; ?>" placeholder="填自己的Q群号"/>
+                        <br/>
+                    </p>
+                    <input type="hidden" name="info[status]" value="super">
+                    <input class="button" type="submit" value="提交"/>
+                    </p>
+                </fieldset>
+                <div class="clear"></div>
+                <!-- End .clear -->
+            </form>
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+<!-- End .content-box -->
+
+<div class="clear"></div>
+<script>
+    $('#boxname').on('blur',function(){
+            var value=$(this).val();
+        // 私  SF   破解
+         value = value.replace(/私/i,"");
+         value = value.replace(/SF/i,"");
+         value = value.replace(/破解/i,"");
+         $(this).val(value);
+    })
+</script>
