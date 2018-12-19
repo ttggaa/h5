@@ -460,17 +460,18 @@ class SdkapiController extends Yaf_Controller_Abstract
 
     public function giftbagAction()
     {
-//        Yaf_Dispatcher::getInstance()->enableView();
+        Yaf_Dispatcher::getInstance()->enableView();
         $qid = $_GET['q_id'] ?? 1;
-        $game_id = $_GET['game_id'] ?? 62;
-        echo 'qid:' . $qid . 'game_id:' . $game_id;
+//        $game_id = $_GET['game_id'] ?? 62;
+        $url="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$qid;
+//        echo 'qid:' . $qid . 'game_id:' . $game_id;
 //        $m_channel = new AdminModel('cps');
 //        $channel_info = $m_channel->fetch(['admin_id' => $qid], 'admin_id as service_id,nickname as service_name,qq1 as service_qq,qq2 as service_qq2');
 //        $admin_info = $m_channel->fetch(['admin_id' => 1], 'qq1 as service_qq,qq2 as service_qq2');
 //        $info['service_qq'] = $channel_info['service_qq'] ?? $admin_info['service_qq'];
 //        $info['service_qq2'] = $channel_info['service_qq2'] ?? $admin_info['service_qq2'];
-//        $assign['info']=$info;
-//        $this->getView()->assign($assign);
+        $assign['url']=$url;
+        $this->getView()->assign($assign);
     }
 
     /**
