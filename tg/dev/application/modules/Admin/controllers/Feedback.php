@@ -13,7 +13,7 @@ class FeedbackController extends F_Controller_Backend
         $params = parent::beforeList();
         $params['orderby'] = 'status asc,create_time DESC';
         $search = $this->getRequest()->getQuery('search', array());
-        if($_SESSION['admin_id']==1){
+        if($_SESSION['cps_type']==1){
             $conds = "";
             $cmm = '';
         }else{

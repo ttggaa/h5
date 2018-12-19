@@ -49,16 +49,16 @@
         <section class="swipe" id="news_list">
         <div class="swipe-wrap">
             <ul class="game_news">
-                <li id="loader_0" class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                <li id="loader_0" class="loading"><span>查看更多</span></li>
             </ul>
             <ul class="game_news">
-                <li id="loader_1" class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                <li id="loader_1" class="loading"><span>查看更多</span></li>
             </ul>
             <ul class="game_news">
-                <li id="loader_2" class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                <li id="loader_2" class="loading"><span>查看更多</span></li>
             </ul>
             <ul class="game_news">
-                <li id="loader_3" class="loading"><img src="/images/loader/loading.gif"><span>数据玩命加载中...</span></li>
+                <li id="loader_3" class="loading"><span>查看更多</span></li>
             </ul>
         </div>
         </section>
@@ -146,16 +146,18 @@ $(function(){
 		news_slider.slide($(this).index(), 400);
 		return true;
 	});
-
-	$(window).on('scrollstop', function(){
-        var t_h = $('.z_main').height();
-        var c_h = $(document).scrollTop();
-        if( c_h == 0 ) c_h = $('.z_container').scrollTop();
-        c_h += $(window).height() + 10;
-        if( c_h >= t_h ) {
-            pull(news_slider.getPos());
-        }
+    $(".loading").on('tap',function(){
+        pull(news_slider.getPos());
     });
+	// $(window).on('scrollstop', function(){
+    //     var t_h = $('.z_main').height();
+    //     var c_h = $(document).scrollTop();
+    //     if( c_h == 0 ) c_h = $('.z_container').scrollTop();
+    //     c_h += $(window).height() + 10;
+    //     if( c_h >= t_h ) {
+    //         pull(news_slider.getPos());
+    //     }
+    // });
 });
 </script>
 </body>

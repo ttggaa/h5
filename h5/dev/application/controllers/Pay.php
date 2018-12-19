@@ -92,6 +92,7 @@ class PayController extends Yaf_Controller_Abstract
     //充值到平台
 	public function depositAction()
 	{
+	    die('平台币充值通道已关闭,如有问题请联系客服!');
 	    $to_user = $this->getRequest()->get('to_user', '');
 	    $set_arr = array();
 	    if( $to_user ) {
@@ -102,7 +103,6 @@ class PayController extends Yaf_Controller_Abstract
 	        }
 	        $set_arr = array('to_uid'=>$user['user_id'], 'to_user'=>$to_user);
 	    }
-	    
 	    $set_arr = array_merge($set_arr, array('game_id'=>0, 'game_name'=>'', 'server_id'=>0, 'server_name'=>''));
 	    $this->setPayInfo($set_arr);
 	    

@@ -122,7 +122,7 @@ class AdminModel extends F_Model_Pdo
 			return '你没有访问权限。';
 		}
         $admin=new AdminModel();
-		if($user['admin_id']==1){
+		if($user['cps_type']==1){
 		    //超级管理员
             $channel_ids = $admin->fetchAll('', 1, 20000, 'admin_id');
         }else {
