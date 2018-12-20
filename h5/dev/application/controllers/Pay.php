@@ -92,7 +92,7 @@ class PayController extends Yaf_Controller_Abstract
     //充值到平台
 	public function depositAction()
 	{
-	    die('平台币充值通道已关闭,如有问题请联系客服!');
+//	    die('平台币充值通道已关闭,如有问题请联系客服!');
 	    $to_user = $this->getRequest()->get('to_user', '');
 	    $set_arr = array();
 	    if( $to_user ) {
