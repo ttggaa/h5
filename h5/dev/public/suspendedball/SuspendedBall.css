@@ -1,8 +1,12 @@
 .SuspendedBall {
+    background-image: url(./button0.png);
     position: fixed;
     width: 50px;
     height: 50px;
-    background: #3071a9;
+    /*border-radius: 5px;*/
+    /*background: #3071a9;*/
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -15,23 +19,23 @@
     display: block;
 }
 
-.SuspendedBall > div {
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    background: #fff;
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    filter: alpha(opacity=80);
-    -moz-opacity: 0.8;
-    opacity: 0.8;
-    background-image: url("/Images/Self.png");
-    background-repeat: no-repeat;
-    background-size: 80% auto;
-    background-position-x: 50%;
-    background-position-y: 50%;
-}
+/*.SuspendedBall > div {*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*margin: 10px;*/
+    /*background: #fff;*/
+    /*border-radius: 15px;*/
+    /*-moz-border-radius: 15px;*/
+    /*-webkit-border-radius: 15px;*/
+    /*filter: alpha(opacity=80);*/
+    /*-moz-opacity: 0.8;*/
+    /*opacity: 0.8;*/
+    /*background-image: url("/Images/Self.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 80% auto;*/
+    /*background-position-x: 50%;*/
+    /*background-position-y: 50%;*/
+/*}*/
 
 @media screen and (max-width: 500px) {
     .SuspendedBall {
