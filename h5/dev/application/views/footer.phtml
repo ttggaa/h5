@@ -73,13 +73,13 @@
         var ua = navigator.userAgent.toLowerCase();
         if (/iphone|ipad|ipod/.test(ua)) {
             if (appid == 100) {
-                $('#and_url').attr('href', '#');
+                $(obj).attr('href', '#');
                 alert('苹果手机不能下载安卓包哦！');
                 return;
             }
         } else if (/android/.test(ua)) {
             if (appid == 101) {
-                $('#ios_url').attr('href', '#');
+                $(obj).attr('href', '#');
                 alert('安卓手机不能下载苹果包哦！');
                 return;
             }
