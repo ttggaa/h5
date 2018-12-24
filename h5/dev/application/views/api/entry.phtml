@@ -108,7 +108,7 @@
         SuspendedBall.Move();//这个就是让悬浮球动起来的方法。为啥单独写个不写到add方法里面呢？因为你可以在页面中直接写入悬浮球的两个div。这个方法里面可以添加一个参数，这个参数是个function。当鼠标抬起的时候会调用到这个方法。
         $(document).on('click', '.close_game', function () {
             event.stopPropagation();    //  阻止事件冒泡
-            document.write('');
+            // document.write('');
             javascript:history.back(-1);
             return false;
         })
