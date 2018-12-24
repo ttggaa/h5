@@ -1,42 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta charset="UTF-8">
-<meta name="generator" content="namiyx.dxj">
-<meta content="yes" name="apple-touch-fullscreen"><meta content="yes" name="full-screen">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-<title><?=$game_name?></title>
-<style>
-html,body,iframe,object{margin:0; padding:0;}
-iframe,object{height:100%; height:100vh; width:100%; overflow:hidden; position:relative;}
-.namiyx{background-color:#000; width:100%; height:100vh; position:absolute; left:0; top:0; z-index:2;}
-.namiyx img{width:202px; height:48px; position:absolute; left:50%; top:50%; margin:-24px auto auto -99px;}
-</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="yes" name="full-screen">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title><?= $game_name ?></title>
+    <link href="/suspendedball/SuspendedBall.css" media="screen" rel="stylesheet" type="text/css">
+    <style>
+        html, body, iframe, object {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe, object {
+            height: 100%;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .namiyx {
+            background-color: #000;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .namiyx img {
+            width: 202px;
+            height: 48px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -24px auto auto -99px;
+        }
+
+        .item {
+            display: flex;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            /*display: block;*/
+        }
+
+        .item .btn{
+            background-color: orange;
+            width: 80%;
+            height: 30px;
+            color: #ffffff;
+            line-height: 30px;
+            border-radius: 5px;
+            text-align: center;
+            margin-left: 10%;
+        }
+
+        .close {
+            width: 100%;
+            display: block;
+            text-align: right;
+            color: red;
+            font-size: 2rem;
+            padding-right: 10px;
+        }
+        .close_win,.btn{
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
-<div class="namiyx"><img src="/public/images/namiyx.jpg"/></div>
+<div id="MenuInfo">
+    <div class="close"><span class="close_win" style="padding-left: 30px">x</span></div>
+    <div class="close_game item"><div class="btn">关闭游戏</div></div>
+</div>
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
+<script src="/suspendedball/PublicJs.js"></script>
+<script src="/suspendedball/SuspendedBall.js"></script>
 <script>
-(function(){
-	var h = $(window).height(),
-	w = $(window).width(),
-	lt = '<?=$load_type?>',
-	url = '<?=$url?>';
-	if(lt == 'iframe') {
-		var obj = '<iframe src="'+url+'" scrolling="no" frameborder="0" style="height:'+h+'px; width:'+w+'px;" marginheight="0" marginwidth="0"></iframe>';
-	} else {
-	    var obj = '<object data="'+url+'" type="text/html" border="0" style="height:'+h+'px; width:'+w+'px;"></object>';
-	}
-	document.write(obj);
-	$(window).on("orientationchange", function(){
-		$('iframe, object').css({height: $(window).height(), width: $(window).width()});
-	});
-	setTimeout(function(){
-		$('.namiyx').fadeOut();
-	}, 2000);
-})();
+    (function () {
+        var h = $(window).height(),
+            w = $(window).width(),
+            lt = '<?=$load_type?>',
+            url = '<?=$url?>';
+        if (lt == 'iframe') {
+            var obj = '<iframe src="' + url + '" scrolling="no" frameborder="0" style="height:' + h + 'px; width:' + w + 'px;" marginheight="0" marginwidth="0"></iframe>';
+        } else {
+            var obj = '<object data="' + url + '" type="text/html" border="0" style="height:' + h + 'px; width:' + w + 'px;"></object>';
+        }
+        document.write(obj);
+        $(window).on("orientationchange", function () {
+            $('iframe, object').css({height: $(window).height(), width: $(window).width()});
+        });
+        setTimeout(function () {
+            $('.namiyx').fadeOut();
+        }, 2000);
+        SuspendedBall.Add();//添加悬浮球
+        SuspendedBall.BoxHtml("<div class=\"SMenu\">" + $("#MenuInfo").html() + "</div>");//添加菜单框的内容当然，具体的样式和里面的内容需要自己去写
+        SuspendedBall.Move();//这个就是让悬浮球动起来的方法。为啥单独写个不写到add方法里面呢？因为你可以在页面中直接写入悬浮球的两个div。这个方法里面可以添加一个参数，这个参数是个function。当鼠标抬起的时候会调用到这个方法。
+        $(document).on('click', '.close_game', function () {
+            event.stopPropagation();    //  阻止事件冒泡
+            document.write('');
+            javascript:history.back(-1);
+            return false;
+        })
+        $(document).on('click', '.close_win', function () {
+            event.stopPropagation();    //  阻止事件冒泡
+            $(".SuspendedBall").show();
+            $(".BallBox").hide();
+            return false;
+        })
+    })();
 </script>
-<div style="width:0;height:0;overflow:hidden;"><script src="http://s95.cnzz.com/z_stat.php?id=1256660450&web_id=1256660450"></script></div>
 </body>
 </html>
