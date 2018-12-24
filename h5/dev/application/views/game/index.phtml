@@ -70,7 +70,7 @@
                                 <?php } ?>
                                 <div class="game_btn">
                                     <?php if($row['game_type']=='手游'):?>
-                                            <a target="_top" onclick="countDownload(<?=$row['game_id'];?>)" href="<?='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
+                                            <a target="_top" onclick="countDownload(this,100)" href="<?='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
                                     <?php else:?>
                                         <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
                                     <?php endif;?>
@@ -125,14 +125,14 @@
                     $url=new F_Helper_Url();
                     $g=$url->getUrlSign();
                     ?>
-                        <a   href="<?='http://yun.zyttx.com/index/apkgame3?&tg_channel='.$g?>">
+                        <a   href="<?='http://yun.zyttx.com/index/apkgame3?&tg_channel='.$g?>" onclick="countDownload(this,100)">
                             <div>
                                 <img src="/images/index/盒子下载.png"  height="auto" alt="盒子下载" />
                                 <br/>
                                 <span>安卓盒子</span>
                             </div>
                         </a>
-                    <a   href="<?='http://yun.zyttx.com/index/apkgame4?&tg_channel='.$g?>">
+                    <a   href="<?='http://yun.zyttx.com/index/apkgame4?&tg_channel='.$g?>" onclick="countDownload(this,101)">
                         <div>
                             <img src="/images/index/盒子下载苹果.png"  height="auto" alt="盒子下载苹果" />
                             <br/>
@@ -207,7 +207,7 @@
                                             <?php } ?>
                                             <div class="game_btn">
                                                 <?php if($row['game_type']=='手游'):?>
-                                                        <a target="_top"  onclick="countDownload(<?=$row['game_id'];?>)"  href="<?='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
+                                                        <a target="_top"  onclick="countDownload(this,100)"  href="<?='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'].'&tg_channel='.$tg_channel?>" class="btn_blue">点击下载</a>
                                                 <?php else:?>
                                                     <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>" class="btn_blue">开始玩</a>
                                                 <?php endif;?>

@@ -23,6 +23,15 @@
         </a>
     </nav>
 </footer>
+<link href="/css/app.css" rel="stylesheet" type="text/css">
+<div id="weixin_an" style="display: none">
+    <div class="click_opacity"></div>
+    <div class="to_btn">
+        <span class="span1"><img src="/public/channel/click_btn.png"></span>
+        <span class="span2"><em>1</em> 点击右上角<img src="/public/channel/menu_android.png">打开菜单</span>
+        <span class="span2 android_open"><em>2</em> 选择<img src="/public/channel/android.png"></span>
+    </div>
+</div>
 <div class="qrcode_image" style="text-align: center">
     <span style="margin-bottom: 1px">按住CTRL+D键收藏本站</span>
     <div id="qrcode" style="margin-top: 1px;"></div>
@@ -57,10 +66,28 @@
     /**
      * 统计
      */
-    function countDownload(game_id){
-        $.post("/index/game/countgame",{game_id:game_id},function(result){
-            console.log(result);
-        });
+    function countDownload(obj,appid){
+        // $.post("/index/game/countgame",{game_id:game_id},function(result){
+        //     console.log(result);
+        // });
+        var ua = navigator.userAgent.toLowerCase();
+        if (/iphone|ipad|ipod/.test(ua)) {
+            if (appid == 100) {
+                $('#and_url').attr('href', '#');
+                alert('苹果手机不能下载安卓包哦！');
+                return;
+            }
+        } else if (/android/.test(ua)) {
+            if (appid == 101) {
+                $('#ios_url').attr('href', '#');
+                alert('安卓手机不能下载苹果包哦！');
+                return;
+            }
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            $(obj).attr('href', '#');
+            $('#weixin_an').show();
+            }
+        }
     }
 </script>
 
