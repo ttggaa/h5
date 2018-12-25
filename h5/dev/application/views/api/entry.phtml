@@ -109,7 +109,8 @@
         $(document).on('click', '.close_game', function () {
             event.stopPropagation();    //  阻止事件冒泡
             // document.write('');
-            javascript:history.back(-1);
+            window.location.href="about:blank";
+            window.close();
             return false;
         })
         $(document).on('click', '.close_win', function () {
