@@ -215,7 +215,7 @@ class ApiController extends Yaf_Controller_Abstract
     //充值到平台
     public function depositAction()
     {
-        die('平台币充值通道已关闭,如有问题请联系客服!');
+//        die('平台币充值通道已关闭,如有问题请联系客服!');
 //        Yaf_Dispatcher::getInstance()->disableView();
         $params = $_GET;
         $open_id = $params['open_id'];
