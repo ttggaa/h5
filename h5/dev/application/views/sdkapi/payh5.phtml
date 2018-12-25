@@ -6,14 +6,15 @@
     <title>选择金额 - 久乐游戏</title>
     <link rel="stylesheet" href="/public/styles/base.css"/>
     <link rel="stylesheet" href="/styles/pay_edit.css"/>
+    <link rel="stylesheet" href="/layui/css/layui.css"/>
 </head>
 <body class="bg00">
 <!--div.container 总外框  start-->
 <div class="z_container bg01">
-    <header class="z_header">
-        <!--        <a target="_top" href="/pay/index.html"></a>-->
-        选择金额
-    </header>
+<!--    <header class="z_header">-->
+<!--                <a target="_top" href="/pay/index.html"></a>-->
+<!--        选择金额-->
+<!--    </header>-->
 
     <!--div.z_min 内容区域 statr-->
     <form class="z_main" data-role="conent" action="http://api.357p.com" method="post">
@@ -94,150 +95,138 @@
 <?php //include $this->getScriptPath().'/footer.phtml'; ?>
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
+<script src="/layui/layui.js"></script>
 <script>
-    $('#footer a:eq(4)').attr('id', 'footer_nav_active');
-    $(function(){
-        var parities = parseInt('<?=$parities?>');
+    layui.use(['layer', 'jquery'], function(){
+        var layer = layui.layer
+            ,$ = layui.jquery;
+            var parities = parseInt('<?=$parities?>');
+            /**支付金额选择*/
+            $(".edit ul li").on("tap",function(){
+                var money = parseInt($(this).find("span").text());
+                $(".edit input").val(money);
+                $('#get_nums').html(parities * money);
+                $(this).addClass("m_active").siblings().removeClass("m_active");
+            });
+            /**支付方式选择*/
+            $(".choses ul li").on("tap",function(){
+                $(this).find(".checkbox ").addClass("checkbox_active");
+                $(this).siblings().find(".checkbox").removeClass("checkbox_active");
+            });
+            /**验证输入框信息*/
+            $("input[name=money]").on("focus",function(){
+                $(".edit ul li").removeClass("m_active");
+                $(this).attr("placeholder","");
+            });
+            $('.i_edit').on('tap', function(){
+                $("input[name=money]").focus();
+            });
 
-        /**支付金额选择*/
-        $(".edit ul li").on("tap",function(){
-            var money = parseInt($(this).find("span").text());
-            $(".edit input").val(money);
-            $('#get_nums').html(parities * money);
-            $(this).addClass("m_active").siblings().removeClass("m_active");
-        });
-
-        /**支付方式选择*/
-        $(".choses ul li").on("tap",function(){
-            $(this).find(".checkbox ").addClass("checkbox_active");
-            $(this).siblings().find(".checkbox").removeClass("checkbox_active");
-        });
-
-        /**验证输入框信息*/
-        $("input[name=money]").on("focus",function(){
-            $(".edit ul li").removeClass("m_active");
-            $(this).attr("placeholder","");
-        });
-        $('.i_edit').on('tap', function(){
-            $("input[name=money]").focus();
-        });
-
-        $("input[name=money]").on("blur",function(){
-            var _t = $(this);
-            var v = parseInt(_t.val());
-            if( isNaN(v) || v < 0 ) {
-                _t.val('');
-                $('#get_nums').html('0');
-                return false;
-            }
-            if( v > 60000 ) {
-                _t.val(60000);
-                $('#get_nums').html(parities * 60000);
-                return false;
-            }
-            /*
-            var reg = /^[1-9][0-9]{0,3}0$/  ; //验证非负整数的正则表达式
-            if(reg.test(v)){
-                _t.val(v);
-                $('#get_nums').html(parities * v);
-            }else if(v == ""){
-                _t.attr("placeholder","请选择或输入金额");
-                $('#get_nums').html('');
-            }else{
-                alert("必须是数字形式,且为10的倍数！");
-                v = v - v%10;
-                _t.val(v);
-                $('#get_nums').html(parities * v);
-                _t.attr("placeholder","请选择或输入金额");
-            }
-            */
-        });
-
-        $('#next_step').on('click', function(){
-            $("#next_step").attr('disabled',true);
-            var mn = parseInt($("input[name=Price]").val());
-            if( isNaN(mn) || mn < 1 ) {
-                alert('最小充值金额为1元！');
-                return false;
-            }
-            if( mn > 60000 ) mn = 60000;
-            var tp = $('.checkbox_active:visible');
-            if( tp.length < 1 ) {
-                alert('请选择支付方式！');
-                return false;
-            }
-            tp = tp.attr('data-type');
-            $('#jinzhuc').val(tp);
-            //判断选择通道id
-            switch (tp) {
-                case 'alipay':
-                    if(IsPC()){
-                        $('#PayID').val('25');
-                    }else{
-                        $('#PayID').val('15');
-                    }
-                    $('.z_main').submit();
-                    break;
-                case 'wxpay':
-                    if(IsPC()){
-                        $('#PayID').val('16');
-                    }else{
-                        $('#PayID').val('36');
-                    }
-                    $('.z_main').submit();
-                    break;
-                case 'deposit':
-                    $.ajax({
-                        url:"/api/payByDeposit",
-                        data:$('.z_main').serialize(),
-                        type:"post",
-                        async:false,
-                        success:function(aaa){
-                            //aaa为服务器所返回的值
-                            var aaa=JSON.parse(aaa);
-                            if(aaa.code===1){
-                                alert(aaa.message);
-                            }else{
-                                alert('支付成功!');
-                                window.location.href=aaa.message;
-                            }
-                        },
-                        error:function(){
-                            //服务器连接失败
-                            alert('服务器连接失败');
-                        },
-                        beforeSend:function(){
-                            //在success之前就进行了
-                            //操作
-                        },
-                        complete:function(){
-                            //在success之后就进行
-                            //操作
-                        }
-                    });
-                    break;
-                default:
+            $("input[name=money]").on("blur",function(){
+                var _t = $(this);
+                var v = parseInt(_t.val());
+                if( isNaN(v) || v < 0 ) {
+                    _t.val('');
+                    $('#get_nums').html('0');
                     return false;
-            }
-            $("#next_step").attr('disabled',false);
-            // console.log($('.z_main').serialize());
-            return false;
-        });
-        function IsPC() {
-            var userAgentInfo = navigator.userAgent;
-            var Agents = ["Android", "iPhone",
-                "SymbianOS", "Windows Phone",
-                "iPad", "iPod"];
-            var flag = true;
-            for (var v = 0; v < Agents.length; v++) {
-                if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                    flag = false;
-                    break;
                 }
-            }
-            return flag;
-        }
+                if( v > 60000 ) {
+                    _t.val(60000);
+                    $('#get_nums').html(parities * 60000);
+                    return false;
+                }
+            });
+
+            $('#next_step').on('click', function(){
+                $("#next_step").attr('disabled',true);
+                var mn = parseInt($("input[name=Price]").val());
+                if( isNaN(mn) || mn < 1 ) {
+                    alert('最小充值金额为1元！');
+                    return false;
+                }
+                if( mn > 60000 ) mn = 60000;
+                var tp = $('.checkbox_active:visible');
+                if( tp.length < 1 ) {
+                    alert('请选择支付方式！');
+                    return false;
+                }
+                tp = tp.attr('data-type');
+                $('#jinzhuc').val(tp);
+                //判断选择通道id
+                var index = layer.open({
+                    shade : 0.8,
+                    type:3,
+                });
+                switch (tp) {
+                    case 'alipay':
+                        if(IsPC()){
+                            $('#PayID').val('25');
+                        }else{
+                            $('#PayID').val('15');
+                        }
+                        $('.z_main').submit();
+                        break;
+                    case 'wxpay':
+                        if(IsPC()){
+                            $('#PayID').val('16');
+                        }else{
+                            $('#PayID').val('36');
+                        }
+                        $('.z_main').submit();
+                        break;
+                    case 'deposit':
+                        $.ajax({
+                            url:"/api/payByDeposit",
+                            data:$('.z_main').serialize(),
+                            type:"post",
+                            async:false,
+                            success:function(aaa){
+                                //aaa为服务器所返回的值
+                                var aaa=JSON.parse(aaa);
+                                if(aaa.code===1){
+                                    alert(aaa.message);
+                                }else{
+                                    alert('支付成功!');
+                                    window.location.href=aaa.message;
+                                }
+                            },
+                            error:function(){
+                                //服务器连接失败
+                                alert('服务器连接失败');
+                            },
+                            beforeSend:function(){
+                                //在success之前就进行了
+                                //操作
+                            },
+                            complete:function(){
+                                layer.close(index);
+                                //在success之后就进行
+                                //操作
+                            }
+                        });
+                        break;
+                    default:
+                        return false;
+                }
+                $("#next_step").attr('disabled',false);
+                // console.log($('.z_main').serialize());
+                return false;
+            });
     });
+    function IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
 </script>
 </body>
 </html>
