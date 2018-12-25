@@ -141,13 +141,13 @@
                 $("#next_step").attr('disabled',true);
                 var mn = parseInt($("input[name=Price]").val());
                 if( isNaN(mn) || mn < 1 ) {
-                    alert('最小充值金额为1元！');
+                    layer.msg('最小充值金额为1元');
                     return false;
                 }
                 if( mn > 60000 ) mn = 60000;
                 var tp = $('.checkbox_active:visible');
                 if( tp.length < 1 ) {
-                    alert('请选择支付方式！');
+                    layer.msg('请选择支付方式');
                     return false;
                 }
                 tp = tp.attr('data-type');
@@ -184,15 +184,18 @@
                                 //aaa为服务器所返回的值
                                 var aaa=JSON.parse(aaa);
                                 if(aaa.code===1){
-                                    alert(aaa.message);
+                                    // alert(aaa.message);
+                                    layer.msg('aaa.message');
+
                                 }else{
-                                    alert('支付成功!');
-                                    window.location.href=aaa.message;
+                                    layer.msg('支付成功');
+                                    // window.location.href=aaa.message;
                                 }
                             },
                             error:function(){
                                 //服务器连接失败
-                                alert('服务器连接失败');
+                                layer.msg('服务器连接失败');
+
                             },
                             beforeSend:function(){
                                 //在success之前就进行了
