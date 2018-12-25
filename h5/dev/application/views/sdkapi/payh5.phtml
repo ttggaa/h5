@@ -189,6 +189,10 @@
 
                                 }else{
                                     layer.msg('支付成功');
+                                    layer.confirm('支付成功,点击返回', function(index){
+                                        window.Android.backToApp();
+
+                                    });
                                     // window.location.href=aaa.message;
                                 }
                             },
