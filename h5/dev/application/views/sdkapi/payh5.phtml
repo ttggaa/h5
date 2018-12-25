@@ -10,11 +10,17 @@
 <body class="bg00">
 <!--div.container 总外框  start-->
 <div class="z_container bg01">
+    <header class="z_header">
+        <!--        <a target="_top" href="/pay/index.html"></a>-->
+        选择金额
+    </header>
+
+    <!--div.z_min 内容区域 statr-->
     <form class="z_main" data-role="conent" action="http://api.357p.com" method="post">
         <h3 class="block_bg your_money" style="position:relative">
             <span>充入账号：</span>
             <b class="bold green"><?=$pay['to_user']?></b>
-<!--            <span class="fr" style="position:absolute; right:1px">(1RMB = --><?//=$parities?><!--平台币)</span>-->
+            <!--            <span class="fr" style="position:absolute; right:1px">(1RMB = --><?//=$parities?><!--平台币)</span>-->
             <input type="hidden" name="user_id" value="<?=$pay['user_id']?>">
             <input type="hidden" name="username" value="<?=$pay['user_id']?>">
         </h3>
@@ -24,11 +30,17 @@
             <!--            <span class="fr" style="position:absolute; right:1px">(1RMB = --><?//=$parities?><!--平台币)</span>-->
             <input type="hidden" name="game_name" value="<?=$pay['game_name']?>">
         </h3>
-       <h3 class="block_bg your_money" style="position:relative">
-            <span>充值描述：</span>
-            <b class="bold green"><?=$pay['extra']?></b>
+        <h3 class="block_bg your_money" style="position:relative">
+            <span>商品标题：</span>
+            <b class="bold green"><?=$pay['subject']?></b>
             <!--            <span class="fr" style="position:absolute; right:1px">(1RMB = --><?//=$parities?><!--平台币)</span>-->
-            <input type="hidden" name="extra" value="<?=$pay['extra']?>">
+            <input type="hidden" name="subject" value="<?=$pay['subject']?>">
+        </h3>
+        <h3 class="block_bg your_money" style="position:relative">
+            <span>商品描述：</span>
+            <b class="bold green"><?=$pay['body']?></b>
+            <!--            <span class="fr" style="position:absolute; right:1px">(1RMB = --><?//=$parities?><!--平台币)</span>-->
+            <input type="hidden" name="body" value="<?=$pay['body']?>">
         </h3>
         <h3 class="block_bg your_money" style="position:relative">
             <span>充值金额：</span>
@@ -37,7 +49,7 @@
             <input type="hidden" name="Price" value="<?=$pay['money']?>">
         </h3>
         <section class="block_bg choses" >
-<!--            <h3>充值方式：</h3>-->
+            <!--            <h3>充值方式：</h3>-->
             <ul style="width:90%;margin: 0 auto;font-size: 10px">
                 <!--                <li>-->
                 <!--                    <span data-type="iapppay" class="checkbox checkbox_active"><i></i></span>-->
@@ -60,6 +72,7 @@
                     <span class="i_ptb"><i></i></span>
                     <span class="bold">平台币</span>
                 </li>
+                <!--                --><?php //} ?>
             </ul>
         </section>
         <div class="btn_cont">
@@ -78,12 +91,14 @@
     <!--div.z_min 内容区域 end-->
 </div>
 <!--div.container 总外框  end-->
+<?php //include $this->getScriptPath().'/footer.phtml'; ?>
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
 <script>
     $('#footer a:eq(4)').attr('id', 'footer_nav_active');
     $(function(){
         var parities = parseInt('<?=$parities?>');
+
         /**支付金额选择*/
         $(".edit ul li").on("tap",function(){
             var money = parseInt($(this).find("span").text());
@@ -91,11 +106,13 @@
             $('#get_nums').html(parities * money);
             $(this).addClass("m_active").siblings().removeClass("m_active");
         });
+
         /**支付方式选择*/
         $(".choses ul li").on("tap",function(){
             $(this).find(".checkbox ").addClass("checkbox_active");
             $(this).siblings().find(".checkbox").removeClass("checkbox_active");
         });
+
         /**验证输入框信息*/
         $("input[name=money]").on("focus",function(){
             $(".edit ul li").removeClass("m_active");
@@ -104,6 +121,7 @@
         $('.i_edit').on('tap', function(){
             $("input[name=money]").focus();
         });
+
         $("input[name=money]").on("blur",function(){
             var _t = $(this);
             var v = parseInt(_t.val());
@@ -117,7 +135,24 @@
                 $('#get_nums').html(parities * 60000);
                 return false;
             }
+            /*
+            var reg = /^[1-9][0-9]{0,3}0$/  ; //验证非负整数的正则表达式
+            if(reg.test(v)){
+                _t.val(v);
+                $('#get_nums').html(parities * v);
+            }else if(v == ""){
+                _t.attr("placeholder","请选择或输入金额");
+                $('#get_nums').html('');
+            }else{
+                alert("必须是数字形式,且为10的倍数！");
+                v = v - v%10;
+                _t.val(v);
+                $('#get_nums').html(parities * v);
+                _t.attr("placeholder","请选择或输入金额");
+            }
+            */
         });
+
         $('#next_step').on('click', function(){
             $("#next_step").attr('disabled',true);
             var mn = parseInt($("input[name=Price]").val());
