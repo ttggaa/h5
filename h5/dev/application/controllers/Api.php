@@ -1144,7 +1144,7 @@ class ApiController extends Yaf_Controller_Abstract
         $m_pay = new PayModel();
         $pays = $m_pay->fetchAll("user_id='{$request['user_id']} and game_id='{$game_id}' and pay_time > 0", 1, 3, 'pay_id,to_user,game_id,game_name,money,add_time', 'add_time DESC');
         $assign['pay'] = $pays;
-        $this->getView()->assign($assign);
+        exit(json_encode($assign));
     }
     //不同环境下获取真实的IP
     function getIp()
