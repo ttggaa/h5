@@ -1142,7 +1142,7 @@ class ApiController extends Yaf_Controller_Abstract
         $assign['gift'] = $gifts;
         //充值记录
         $m_pay = new PayModel();
-        $pays = $m_pay->fetchAll("user_id='{$request['user_id']} and game_id='{$game_id}' and pay_time > 0", 1, 3, 'pay_id,to_user,game_id,game_name,money,add_time', 'add_time DESC');
+        $pays = $m_pay->fetchAll("user_id={$request['user_id']} and game_id=$game_id and pay_time > 0", 1, 30000, 'pay_id,to_user,game_id,game_name,money,add_time', 'add_time DESC');
         $assign['pay'] = $pays;
         exit(json_encode($assign));
     }
