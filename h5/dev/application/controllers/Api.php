@@ -1122,7 +1122,30 @@ class ApiController extends Yaf_Controller_Abstract
         }
         $this->getView()->assign($params);
     }
-
+    public function getOpenGameAction(){
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+        $this->checkParams($request, ['game_id', 'user_id']);
+        //礼包详情
+        $order = 'h5.giftbag.game_id DESC';
+        $m_gift = new GiftbagModel();
+        $game_id = $request['game_id'];
+        $gifts = $m_gift->fetchAllBySql("select h5.giftbag.name,game_name,nums,used,howget,content,gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_id =  '{$game_id}' order by {$order}");
+//        $log="select h5.giftbag.name,game_name,nums,used,content,h5.giftbag.gift_id,h5.game.logo from h5.giftbag  inner join h5.`game`  on h5.giftbag.game_id = h5.`game`.game_id where h5.`game`.game_type =  '{$game_type}' order by {$order}  LIMIT {$offset},{$limit}";
+        foreach ($gifts as &$value) {
+            $value['content'] = unserialize($value['content']);
+            if ($request['user_id'] ?? 0) {
+                $rs = $m_gift->fetchBySql("select cdkey from h5.user_cdkey where user_id = {$request['user_id']} and gift_id = {$value['gift_id']}");
+                $value['cdkey'] = $rs['cdkey'];
+            }
+        }
+        $assign['gift'] = $gifts;
+        //充值记录
+        $m_pay = new PayModel();
+        $pays = $m_pay->fetchAll("user_id='{$request['user_id']} and game_id='{$game_id}' and pay_time > 0", 1, 3, 'pay_id,to_user,game_id,game_name,money,add_time', 'add_time DESC');
+        $assign['pay'] = $pays;
+        $this->getView()->assign($assign);
+    }
     //不同环境下获取真实的IP
     function getIp()
     {
