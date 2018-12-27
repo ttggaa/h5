@@ -12,7 +12,7 @@ class IndexController extends Yaf_Controller_Abstract
             $info['channel_id']=$channel_id;
             $this->getView()->assign($info);
         }else{
-            $url = 'http://' . $_SERVER['SERVER_NAME'] . '/admin/index/index';
+            $url = 'http://' . $_SERVER['HTTP_HOST'] . '/admin/index/index';
             $this->redirect($url);
         }
     }
