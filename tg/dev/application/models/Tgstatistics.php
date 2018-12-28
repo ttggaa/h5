@@ -12,6 +12,10 @@ class TgstatisticsModel extends F_Model_Pdo
 	public function getFieldsLabel()
 	{
 	    return array(
+//	        'statistics_time'=>function(&$row){
+//                if(empty($row)) return '统计时间';
+//	          return date('Y-m-d H:i:s',$row['statistics_time']);
+//            },
 	        'channel' => function(&$row){
 	            if(empty($row)) return '推广渠道';
 	            $model = F_Model_Pdo::getInstance('Admin');

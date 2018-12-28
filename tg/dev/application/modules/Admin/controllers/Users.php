@@ -60,7 +60,9 @@ class UsersController extends F_Controller_Backend
             ));
         }
     }
-    
+    public function list2Action(){
+        echo '111';
+    }
     public function deleteAction()
     {
         exit;
