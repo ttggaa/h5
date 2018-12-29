@@ -31,14 +31,14 @@ class UsergamesController extends F_Controller_Backend
                 $params['conditions'] = preg_replace('#game_name=\'([^\']+)\'#', "game_name LIKE $game_name", $params['conditions']);
             }
         }
-//        if($admin_id==1){
-//        }else{
+        if($admin_id==1){
+        }else{
             if($params['conditions']){
                 $params['conditions'].=" AND tg_channel={$admin_id}";
             }else{
                 $params['conditions'].="tg_channel={$admin_id}";
             }
-//        }
+        }
         //按时间最新的在前面
         $params['orderby']='last_play desc';
         return $params;
