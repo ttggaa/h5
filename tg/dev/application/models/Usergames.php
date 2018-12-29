@@ -33,6 +33,7 @@ class UsergamesModel extends F_Model_Pdo
 	        'game_id' => array('游戏ID', 'input', null, ''),
 	        'last_play' => array('登录日期', 'datepicker', '{dateFmt:\'yyyy-MM-dd\'}', ''),
 	        'register_time' => array('注册日期', 'datepicker', '{dateFmt:\'yyyy-MM-dd\'}', ''),
+//	        'tg_channel' => array('代理渠道', 'hidden', "{$_SESSION['admin_id']}", ''),
 	    );
 	}
 }

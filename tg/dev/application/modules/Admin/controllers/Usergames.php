@@ -6,6 +6,7 @@ class UsergamesController extends F_Controller_Backend
     {
         $params = parent::beforeList();
         $params['op'] = F_Helper_Html::Op_Null;
+        $admin_id=$_SESSION['admin_id'];
         if( isset($params['conditions']) ) {
             if( preg_match('#last_play=\'([^\']+)\'#', $params['conditions'], $match) ) {
                 $begin = strtotime($match[1].' 00:00:00');
@@ -20,6 +21,14 @@ class UsergamesController extends F_Controller_Backend
                 $params['conditions'] = preg_replace('#register_time=\'([^\']+)\'#', "register_time BETWEEN {$begin} AND {$end}", $params['conditions']);
             }
         }
+//        if($admin_id==1){
+//        }else{
+            if($params['conditions']){
+                $params['conditions'].=" AND tg_channel={$admin_id}";
+            }else{
+                $params['conditions'].="tg_channel={$admin_id}";
+            }
+//        }
         //按时间最新的在前面
         $params['orderby']='last_play desc';
         return $params;

@@ -774,10 +774,11 @@ class UsersModel extends F_Model_Pdo
 	    $time = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time();
 	    $has = $this->fetchBySql("SELECT * FROM user_games WHERE user_id='{$uid}' AND game_id='{$gid}'");
 	    $pdo = $this->getPdo();
-	    if( $has ) {
-	        $pdo->exec("UPDATE user_games SET last_play={$time} WHERE user_id='{$uid}' AND game_id='{$gid}'");
-	    } else {
-	        $pdo->exec("INSERT INTO user_games(user_id,game_id,last_play) VALUES({$uid},{$gid},{$time})");
+        $tg_channel=$this->fetch(['user_id'=>$uid],'tg_channel');//渠道号
+        if( $has ) {
+            $pdo->exec("UPDATE user_games SET last_play={$time},tg_channel={$tg_channel['tg_channel']} WHERE user_id='{$uid}' AND game_id='{$gid}'");
+        } else {
+	        $pdo->exec("INSERT INTO user_games(user_id,game_id,last_play,tg_channel) VALUES({$uid},{$gid},{$time},{$tg_channel['tg_channel']})");
 	    }
 	    
 	    $pdo->exec("UPDATE `game` SET `play_times`=`play_times`+1 WHERE game_id='{$gid}'");
