@@ -312,33 +312,33 @@ class GameController extends Yaf_Controller_Abstract
 	        return false;
 	    }
 	    
-	    if( $server_id > 0 ) {
-	        $m_server = new ServerModel();
-	        $server = $m_server->fetch("server_id='{$server_id}' AND visible=1", 'game_id,server_id,game_name,name,login_url,sign_key,channel,load_type');
-	        if( empty($server) ) {
-	            $this->redirect('/game/index.html');
-	        }
-	        if( $server['channel'] == 'egret' ) {
-	            $user_merge = $m_user->fetch("user_id='{$user['user_id']}'", 'avatar,sex');
-	            $user_merge = array_merge($user, $user_merge);
-	            $egret = new Game_Channel_Egret();
-	            $url = $egret->login($user_merge, $server);
-	            $this->forward('game', 'entry', array('game_name'=>$server['game_name'], 'url'=>$url, 'load_type'=>$server['load_type']));
-	            return false;
-	        }
-	        if( $server['login_url'] && $server['sign_key'] ) {
-	            $m_user->addPlayServer($user['user_id'], $server['game_id'], $server_id);
-	            $url = Game_Login::redirect($user['user_id'], $user['username'], $server['game_id'], $server_id, $server['login_url'], $server['sign_key']);
-	            $this->forward('game', 'entry', array('game_name'=>$server['game_name'], 'url'=>$url, 'load_type'=>$server['load_type']));
-	            return false;
-	        }
-	        if( $server['login_url'] ) {
-	            $m_user->addPlayServer($user['user_id'], $server['game_id'], $server_id);
-	            header("Location: {$server['login_url']}");
-	            return false;
-	        }
-	        throw new Yaf_Exception("游戏区/服（id={$server_id}）未设置登录地址及校验码！");
-	    }
+//	    if( $server_id > 0 ) {
+//	        $m_server = new ServerModel();
+//	        $server = $m_server->fetch("server_id='{$server_id}' AND visible=1", 'game_id,server_id,game_name,name,login_url,sign_key,channel,load_type');
+//	        if( empty($server) ) {
+//	            $this->redirect('/game/index.html');
+//	        }
+//	        if( $server['channel'] == 'egret' ) {
+//	            $user_merge = $m_user->fetch("user_id='{$user['user_id']}'", 'avatar,sex');
+//	            $user_merge = array_merge($user, $user_merge);
+//	            $egret = new Game_Channel_Egret();
+//	            $url = $egret->login($user_merge, $server);
+//	            $this->forward('game', 'entry', array('game_name'=>$server['game_name'], 'url'=>$url, 'load_type'=>$server['load_type']));
+//	            return false;
+//	        }
+//	        if( $server['login_url'] && $server['sign_key'] ) {
+//	            $m_user->addPlayServer($user['user_id'], $server['game_id'], $server_id);
+//	            $url = Game_Login::redirect($user['user_id'], $user['username'], $server['game_id'], $server_id, $server['login_url'], $server['sign_key']);
+//	            $this->forward('game', 'entry', array('game_name'=>$server['game_name'], 'url'=>$url, 'load_type'=>$server['load_type']));
+//	            return false;
+//	        }
+//	        if( $server['login_url'] ) {
+//	            $m_user->addPlayServer($user['user_id'], $server['game_id'], $server_id);
+//	            header("Location: {$server['login_url']}");
+//	            return false;
+//	        }
+//	        throw new Yaf_Exception("游戏区/服（id={$server_id}）未设置登录地址及校验码！");
+//	    }
 	    
 	    if( $game_id < 1 ) {
 	        $this->redirect('/game/index.html');
@@ -349,16 +349,16 @@ class GameController extends Yaf_Controller_Abstract
 	        $this->redirect('/game/index.html');
 	        return false;
 	    }
-	    
-	    if( $game['channel'] == 'egret' ) {
-	        $user_merge = $m_user->fetch("user_id='{$user['user_id']}'", 'avatar,sex');
-	        $user_merge = array_merge($user, $user_merge);
-	        $game['server_id'] = 0;
-	        $egret = new Game_Channel_Egret();
-	        $url = $egret->login($user_merge, $game);
-	        $this->forward('game', 'entry', array('game_name'=>$game['name'], 'url'=>$url, 'load_type'=>$game['load_type']));
-	        return false;
-	    }
+//
+//	    if( $game['channel'] == 'egret' ) {
+//	        $user_merge = $m_user->fetch("user_id='{$user['user_id']}'", 'avatar,sex');
+//	        $user_merge = array_merge($user, $user_merge);
+//	        $game['server_id'] = 0;
+//	        $egret = new Game_Channel_Egret();
+//	        $url = $egret->login($user_merge, $game);
+//	        $this->forward('game', 'entry', array('game_name'=>$game['name'], 'url'=>$url, 'load_type'=>$game['load_type']));
+//	        return false;
+//	    }
 	    if( $game['login_url'] && $game['sign_key'] ) {
 	        $m_user->addPlayGame($user['user_id'], $game_id);
 	        $url = Game_Login::redirect($user['user_id'], $user['username'], $game_id, 0, $game['login_url'], $game['sign_key']);
@@ -366,17 +366,17 @@ class GameController extends Yaf_Controller_Abstract
 	        return false;
 	    }
 	    
-	    if( ! isset($m_server) ) {
-    	    $m_server = new ServerModel();
-	    }
-	    $list = $m_server->fetchAll("game_id='{$game_id}' AND visible=1", 1, 100, 'server_id,name,corner,label', 'weight DESC');
-	    if( empty($list) ) {
-	        throw new Yaf_Exception("游戏（id={$game_id}）未设置登录地址及校验码，也没有添加区/服！");
-	    }
+//	    if( ! isset($m_server) ) {
+//    	    $m_server = new ServerModel();
+//	    }
+//	    $list = $m_server->fetchAll("game_id='{$game_id}' AND visible=1", 1, 100, 'server_id,name,corner,label', 'weight DESC');
+//	    if( empty($list) ) {
+//	        throw new Yaf_Exception("游戏（id={$game_id}）未设置登录地址及校验码，也没有添加区/服！");
+//	    }
 	    
-	    $play = $m_user->getPlayServers($user['user_id'], $game_id);
+//	    $play = $m_user->getPlayServers($user['user_id'], $game_id);
 	    
-	    $this->getView()->assign(array('user'=>$user ,'game'=>$game, 'list'=>$list, 'play'=>$play));
+//	    $this->getView()->assign(array('user'=>$user ,'game'=>$game, 'list'=>$list, 'play'=>$play));
 	}
 	
 	public function entryAction()
