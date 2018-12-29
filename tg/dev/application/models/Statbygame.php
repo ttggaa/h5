@@ -18,8 +18,8 @@ class StatbygameModel extends F_Model_Pdo
         return array(
             'ymd' => '统计日期',
             'game_name' => '游戏名称',
-            'signon_times' => '登录次数',
-            'signon_people' => '登录人数',
+//            'signon_times' => '登录次数',
+//            'signon_people' => '登录人数',
             'recharge_times' => '充值次数',
             'recharge_people' => '充值人数',
             'recharge_money' => function(&$row){
