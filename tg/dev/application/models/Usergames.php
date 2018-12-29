@@ -16,6 +16,8 @@ class UsergamesModel extends F_Model_Pdo
 	public function getFieldsLabel()
 	{
 	    return array(
+	        'user_id' =>'用户id',
+	        'game_id' =>'游戏id',
 	        'user_name' =>'用户名',
 	        'game_name' => '游戏名',
 	        'last_play' => function(&$row){
@@ -30,8 +32,8 @@ class UsergamesModel extends F_Model_Pdo
 	{
 	    return array(
 	        'user_name' => array('用户名', 'input', null, ''),
-//	        'user_id' => array('用户ID', 'input', null, ''),
-//	        'game_id' => array('游戏ID', 'input', null, ''),
+	        'user_id' => array('用户ID', 'input', null, ''),
+	        'game_id' => array('游戏ID', 'input', null, ''),
 	        'game_name' => array('游戏名', 'input', null, ''),
 	        'last_play' => array('登录日期', 'datepicker', '{dateFmt:\'yyyy-MM-dd\'}', ''),
 	        'register_time' => array('注册日期', 'datepicker', '{dateFmt:\'yyyy-MM-dd\'}', ''),
