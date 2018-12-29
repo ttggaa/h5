@@ -774,11 +774,14 @@ class UsersModel extends F_Model_Pdo
 	    $time = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time();
 	    $has = $this->fetchBySql("SELECT * FROM user_games WHERE user_id='{$uid}' AND game_id='{$gid}'");
 	    $pdo = $this->getPdo();
-        $tg_channel=$this->fetch(['user_id'=>$uid],'tg_channel');//渠道号
+        $m_game=new GameModel();
+        $game_name=$m_game->fetch(['game_id'=>$gid],'name');
+        $tg_channel=$this->fetch(['user_id'=>$uid],'tg_channel,username');//游戏名
         if( $has ) {
-            $pdo->exec("UPDATE user_games SET last_play={$time},tg_channel={$tg_channel['tg_channel']} WHERE user_id='{$uid}' AND game_id='{$gid}'");
+            $pdo->exec("UPDATE user_games SET last_play={$time} ,tg_channel={$tg_channel['tg_channel']},user_name='{$tg_channel['username']}',game_name='{$game_name['name']}' WHERE user_id='{$uid}' AND game_id='{$gid}'");
         } else {
-	        $pdo->exec("INSERT INTO user_games(user_id,game_id,last_play,tg_channel) VALUES({$uid},{$gid},{$time},{$tg_channel['tg_channel']})");
+//            $tg_channel=$this->fetch(['user_id'=>$uid],'tg_channel,username');//渠道号
+            $pdo->exec("INSERT INTO user_games(user_id,game_id,last_play,tg_channel,user_name,game_name) VALUES({$uid},{$gid},{$time},{$tg_channel['tg_channel']},'{$tg_channel['username']}','{$game_name['name']}')");
 	    }
 	    
 	    $pdo->exec("UPDATE `game` SET `play_times`=`play_times`+1 WHERE game_id='{$gid}'");

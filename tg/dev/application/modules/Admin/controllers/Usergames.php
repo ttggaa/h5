@@ -20,6 +20,16 @@ class UsergamesController extends F_Controller_Backend
 //                $end = strtotime($match[1].' 23:59:59');
                 $params['conditions'] = preg_replace('#register_time=\'([^\']+)\'#', "register_time BETWEEN {$begin} AND {$end}", $params['conditions']);
             }
+            if( preg_match('#user_name=\'([^\']+)\'#', $params['conditions'], $match) ) {
+                $user_name = "'%".$match[1]."%'";
+//                $end = strtotime($match[1].' 23:59:59');
+                $params['conditions'] = preg_replace('#user_name=\'([^\']+)\'#', "user_name LIKE $user_name", $params['conditions']);
+            }
+            if( preg_match('#game_name=\'([^\']+)\'#', $params['conditions'], $match) ) {
+                $game_name = "'%".$match[1]."%'";
+//                $end = strtotime($match[1].' 23:59:59');
+                $params['conditions'] = preg_replace('#game_name=\'([^\']+)\'#', "game_name LIKE $game_name", $params['conditions']);
+            }
         }
 //        if($admin_id==1){
 //        }else{
