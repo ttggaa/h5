@@ -17,16 +17,6 @@ class AdminController extends F_Controller_Backend
                 if( empty($v) ) {
                     continue;
                 }
-                if( $k == 'username' ) {
-                    $m_user = new UsersModel();
-                    $user = $m_user->fetch("username='{$v}'", 'user_id');
-                    if( $user ) {
-                        $k = 'user_id';
-                        $v = $user['user_id'];
-                    } else {
-                        continue;
-                    }
-                }
                 $conds .= "{$cmm}{$k}='{$v}'";
                 $cmm = ' AND ';
             }
