@@ -87,6 +87,7 @@ class SdkapiController extends Yaf_Controller_Abstract
                 $info['q_id'] = $request['q_id'] ?? 0;
                 $info['game_id'] = $request['game_id'] ?? 0;
                 $data['info'] = $info;
+                $m_user->addPlayGame($info['user_id'], $info['game_id']);//无法统计区服
             } else {
                 $data['status'] = 404;
                 $data['msg'] = '账号或密码错误';
