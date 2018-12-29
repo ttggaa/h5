@@ -1,6 +1,6 @@
 <?php
 
-class UserGamesController extends F_Controller_Backend
+class UsergamesController extends F_Controller_Backend
 {
     protected function beforeList()
     {
