@@ -50,6 +50,7 @@ class SdkapiController extends Yaf_Controller_Abstract
                 $info['game_id'] = $request['game_id'] ?? 0;
                 $data['info'] = $info;
                 //记录登录
+                $m_user->addPlayGame($info['user_id'], $info['game_id']);//无法统计区服
                 $m_user->addPlayServer($info['user_id'], $info['game_id'], 0);//无法统计区服
             }
         } else {
