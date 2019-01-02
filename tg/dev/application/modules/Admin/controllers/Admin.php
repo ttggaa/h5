@@ -12,6 +12,11 @@ class AdminController extends F_Controller_Backend
         $channel_ids_condition=$s->get('channel_ids_condition');
         if( $search ) {
             $cmm = '';
+            if(!empty($search['username'])){
+                $conds .= "{$cmm}username LIKE '%{$search['username']}%'";
+                unset($search['username']);
+                $cmm=' AND';
+            }
             foreach ($search as $k=>$v)
             {
                 if( empty($v) ) {
