@@ -94,7 +94,7 @@ class FeedbackController extends F_Controller_Backend
         $m_feedbackreply=new FeedbackreplyModel();
         $now_time=time();
         $rs=$m_feedbackreply->insert(['feed_id'=>$data['feed_id'],'content'=>$data['content'],'create_time'=>$now_time,'reply_name'=>$_SESSION['admin_id']]);
-        if($_SESSION['admin_id']==1){
+        if($_SESSION['cps_type']==1){
             $feedback=new FeedbackModel();
             $feedback->update(['now_reply'=>'是'],['feed_id'=>$data['feed_id']]);
         }

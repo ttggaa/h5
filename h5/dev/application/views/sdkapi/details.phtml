@@ -22,14 +22,14 @@
     <div class="layui-card-body">
         <ul class="reply">
             <li">
-                <span style="color: #9da7b0"><?php if($data['feedback']['admin_id']==1):?>管理员:<?php else:;?>自己:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$data['feedback']['create_time'])?></span>
+                <span style="color: #9da7b0"><?php if($data['feedback']['admin_id']==1||$value['reply_name']==724):?>管理员:<?php else:;?>自己:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$data['feedback']['create_time'])?></span>
                 <br/>
                 <span style="color: #0b0b0b!important;"><?=$data['feedback']['content']?></span>
             </li>
             <hr/>
             <?php foreach ($data['feedbackreply'] as $key=>$value):?>
             <li <?php if($value['reply_name']==1):?>style="background-color:yellow!important;"    <?php endif;?>
-                 <span style="color: #9da7b0"><?php if($value['reply_name']==1):?>管理员:<?php else:;?>自己:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$value['create_time'])?></span>
+                 <span style="color: #9da7b0"><?php if($value['reply_name']==1||$value['reply_name']==724) :?>管理员:<?php else:;?>自己:<?php endif;?>     发表于  <?=date('Y-m-d H:i:s',$value['create_time'])?></span>
                 <br/>
                 <span style="color: #0b0b0b!important;"><?=$value['content']?></span>
             </li>
