@@ -6,7 +6,7 @@
 **/
 
 .container{
-    /*width: 960px;*/
+    min-width: 1200px!important;
 }
 .swipe{
     overflow:hidden;
