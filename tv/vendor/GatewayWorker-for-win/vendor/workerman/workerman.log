@@ -1,0 +1,438 @@
+2017-09-01 10:41:08 Bad request for Register service. Request info(IP:127.0.0.1, Request Buffer:GET / HTTP/1.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 10:41:08 Bad request for Register service. Request info(IP:127.0.0.1, Request Buffer:GET / HTTP/1.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 10:41:18 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:44 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:44 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:45 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:45 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:46 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:46 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:47 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:47 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:48 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:46:48 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 11:50:04 PDOException: SQL:SELECT * FROM `ap_user` WHERE uid=3 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(56): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-01 11:55:09 PDOException: SQL:SELECT * FROM `ap_user` WHERE uid=3 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(54): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-01 11:55:31 PDOException: SQL:SELECT * FROM `ap_user` WHERE uid=3 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(51): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-01 12:02:26 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:02:27 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:02:27 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:02:28 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:02:28 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:02:29 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:03:00 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:03:01 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:58:30 PDOException: SQL:SELECT * FROM `ap_user` WHERE uid=3 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(55): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-01 12:59:20 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:20 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2017-09-01 12:59:20 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2017-09-01 12:59:21 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:21 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:22 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:22 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:23 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:23 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:24 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:24 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:25 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:25 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:26 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:26 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:27 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:27 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:28 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:28 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:29 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:29 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 12:59:30 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-09-01 13:03:42 PDOException: SQL:SELECT * FROM `ap_user` WHERE uid=3 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(55): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '\xE5\x8F\x91\xE9\x80\x81\xE6\x95\xB0\xE6\x8D\xAE')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-01 14:00:15 PDOException: SQL:DELETE FROM `ap_login_code` WHERE client_id=7f0000010b5400000001 SQLSTATE[42S22]: Column not found: 1054 Unknown column '7f0000010b5400000001' in 'where clause' in E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 E:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1824): Workerman\MySQL\Connection->execute('DELETE FROM `ap...', Array)
+#1 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(89): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onClose('7f0000010b54000...')
+#3 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 E:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-14 22:16:23 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:17:45 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:19:27 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:21:04 PDOException: SQL:SELECT * FROM `ap_login_code` WHERE uid= SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1894): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(41): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{\n  "Uid" : 5,\n...')
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', '{\n  "Uid" : 5,\n...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-09-14 22:24:45 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:24:45 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2017-09-14 22:25:53 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:27:50 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:28:25 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:29:05 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:29:28 Error: Call to a member function delete() on null in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php:75
+Stack trace:
+#0 [internal function]: Events::onClose('7f0000010b54000...')
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(390): call_user_func('Events::onClose', '7f0000010b54000...')
+#2 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#11 {main}
+2017-09-14 22:32:09 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://wiki.workerman.net/Error3 for detail
+2017-09-14 23:29:22 Exception: You can't send(array) to client, you need to convert it to a string.  in D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Protocols\Websocket.php:225
+Stack trace:
+#0 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(310): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\Gateway.php(558): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #30)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\Gateway.php(279): Workerman\Worker->run()
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\Gateway->run()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_gateway.php(63): Workerman\Worker::runAll()
+#11 {main}
+2017-11-15 23:11:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:08 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:09 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:34 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:35 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:36 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:37 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:38 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:39 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:40 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:41 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:42 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:43 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:44 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:45 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:46 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:47 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:48 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:49 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:50 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:51 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:52 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:53 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:54 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:55 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:56 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:57 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:58 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:11:59 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:00 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:01 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:02 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:03 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:04 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:05 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:06 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-15 23:12:07 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:10 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:11 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:12 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:13 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:14 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:20 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:21 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:22 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:23 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 20:53:24 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-17 23:01:11 exception 'PDOException' with message 'SQL:SELECT * FROM `ap_user` WHERE id= SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1894): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(42): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', 'heart')
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', 'heart')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-11-17 23:27:06 exception 'PDOException' with message 'SQL:SELECT * FROM `ap_user` WHERE id= SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1766
+Stack trace:
+#0 D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1894): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(42): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', 'heart')
+#3 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(384): call_user_func('Events::onMessa...', '7f0000010b54000...', 'heart')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#7 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#11 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#12 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#13 {main}
+2017-11-21 09:13:28 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-21 09:13:29 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-21 09:13:30 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-21 09:13:31 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-21 09:13:32 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-21 09:13:33 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-25 16:39:33 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:34 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:34 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:35 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:35 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:36 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:36 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:37 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:37 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:38 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-25 16:39:38 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-11-30 18:21:15 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-30 18:21:16 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-30 18:21:17 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-30 18:21:18 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-11-30 18:21:19 Gateway: Worker->name conflict. Key:127.0.0.1:YourAppBusinessWorker:0
+2017-12-06 23:38:26 Bad request for Register service. Request info(IP:146.0.72.194, Request Buffer:  /*à     Cookie: mstshash=Administr). See http://wiki.workerman.net/Error4 for detail
+2017-12-07 08:08:48 Bad request for Register service. Request info(IP:146.0.72.194, Request Buffer:  /*à     Cookie: mstshash=Administr). See http://wiki.workerman.net/Error4 for detail
+2017-12-29 03:59:06 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+' in D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php:1709
+Stack trace:
+#0 D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1709): PDO->__construct('mysql:dbname=ad...', 'root', 'root', Array)
+#1 D:\phpStudy\WWW\vendor\mysql-master\src\Connection.php(1695): Workerman\MySQL\Connection->connect()
+#2 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\Events.php(34): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'admin')
+#3 [internal function]: Events::onConnect('7f0000010b54000...')
+#4 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(379): call_user_func('Events::onConne...', '7f0000010b54000...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Connection\TcpConnection.php(629): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #29)
+#8 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Events\Select.php(286): call_user_func_array(Array, Array)
+#9 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(856): Workerman\Events\Select->loop()
+#10 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\gateway-worker-for-win\src\BusinessWorker.php(190): Workerman\Worker->run()
+#11 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(473): GatewayWorker\BusinessWorker->run()
+#12 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\vendor\workerman\workerman-for-win\Worker.php(382): Workerman\Worker::runAllWorkers()
+#13 D:\phpStudy\WWW\vendor\GatewayWorker-for-win\Applications\YourApp\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}

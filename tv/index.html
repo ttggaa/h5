@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>千月影视4.0</title>
+		<link href="./css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+	
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,300,700,800,400,600' rel='stylesheet' type='text/css'>
+	
+			<script src="./js/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+		<script type="text/javascript" src="./js/move-top.js"></script>
+		<script type="text/javascript" src="./js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+
+
+		<link href="./css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="./js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+
+	</head>
+	<body>
+		<!-- header -->
+		<div id="home" class="heder">
+			<!-- container -->
+			<div class="container">
+				<div class="header-top">
+					<div class="heder-logo">
+						<h1><a href="#">云梦新视界</a></h1>
+					</div>
+					<div class="top-nav">
+					<span class="menu"><img src="./images/menu.png" alt=""></span>
+						<ul class="nav1">
+							<li><a class="scroll" href="#home">首页</a></li>
+							<li><a class="scroll" href="#services">APP下载</a></li>
+							<li><a class="scroll" href="#portfolio">案例展示</a></li>
+							<li><a class="scroll" href="#about">常见问题</a></li>
+					    <li><a class="scroll" href="#contact">联系我们</a></li>
+							<li><a class="Signup play-icon popup-with-zoom-anim" href="#small-dialog2">代理加盟</a></li>
+						</ul>
+						<!-- script-for-menu -->
+							 <script>
+							   $( "span.menu" ).click(function() {
+								 $( "ul.nav1" ).slideToggle( 300, function() {
+								 // Animation complete.
+								  });
+								 });
+							</script>
+						<!-- /script-for-menu -->
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- header -->
+		<!-- banner -->
+		<div class="banner">
+			<!-- container -->
+			<div class="container">
+				<div class="banner-info wow bounceIn" data-wow-delay="0.4s">
+					<a class="play-icon popup-with-zoom-anim" href="#small-dialog">
+						<span> </span>
+					</a>
+					<div class="banner-text">
+						<h2>看电影 来这里！</h2>
+						<p><a class="play-icon popup-with-zoom-anim" href="#small-dialog">聚合全网36家影视平台</a></p>
+					</div>
+					<!--pop-up-box-->
+					<script type="text/javascript" src="./js/modernizr.custom.min.js"></script>    
+					<link href="./css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+					<script src="./js/jquery.magnific-popup.js" type="text/javascript"></script>
+					<!--//pop-up-box-->
+				<div id="small-dialog" class="mfp-hide">
+					<iframe src="http://player.vimeo.com/video/38584262"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
+				</div>
+				<div id="small-dialog2" class="mfp-hide">
+					<div class="signup">
+						<h3>代理加盟</h3>
+					  <h4>全国总代理一年298元免费拿卡，公司直招，默认支付宝支付,付款后加客服微信提供订单编号，微信付款加客服18361381188</h4>
+						
+					  <input type="text" value="输入姓名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '输入姓名';}" />
+					  <input type="text" value="手机" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '手机';}" />
+					  <input type="text" class="email"value="微信" onfocus="this.value = '';" onblur="if (this.value == '微信') {this.value = 'Email';}"  />
+                      <input type="text" value="付款支付宝账号" onfocus="this.value = '';" onblur="if (this.value == '付款支付宝账号') {this.value = 'First Name';}" />
+					  <a href="http://app.98oo.cn/pay/?name=全国总代一年免费提卡&fee=298"><input type="submit"  value="确认提交"/></a>
+					</div>
+				</div>	
+				 <script>
+						$(document).ready(function() {
+						$('.popup-with-zoom-anim').magnificPopup({
+							type: 'inline',
+							fixedContentPos: false,
+							fixedBgPos: true,
+							overflowY: 'auto',
+							closeBtnInside: true,
+							preloader: false,
+							midClick: true,
+							removalDelay: 300,
+							mainClass: 'my-mfp-zoom-in'
+						});
+																						
+						});
+				</script>				
+				</div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- banner -->
+		<!-- services -->
+		<div id="services" class="services">
+			<!-- container -->
+			<div class="container">
+			  <div class="col-md-4 services-hedding wow bounceIn" data-wow-delay="0.4s">
+<h3>APP下载.<a href="https://cw.pub/4693"><img src="images/anzhuo.png" name="aznhuo" width="193" height="46" hspace="85" id="aznhuo"></a><a href="https://cw.pub/4693"><img src="images/ios.png" name="ios" width="193" height="46" hspace="85" id="ios"></a></div></h3>
+				<div class="col-md-4 services-info wow bounceIn" data-wow-delay="0.4s">
+					<div class="col-md-3 img-grid">
+						<span> </span>
+					</div>
+					<div class="col-md-9 img-grid-text">
+						<h4>Feature 1</h4>
+						<p>爱奇艺 腾讯 优酷 芒果等36家平台！</p>
+					</div>
+				</div>
+		  <div class="col-md-4 services-info wow bounceIn" data-wow-delay="0.4s">
+					<div class="col-md-3 img-grid">
+						<span class="food"> </span>
+					</div>
+					<div class="col-md-9 img-grid-text">
+						<h4>Feature 2</h4>
+						<p>最新电影 电视直播 游戏直播！</p>
+					</div>
+				</div>
+				<div class="col-md-4 services-info wow bounceIn" data-wow-delay="0.4s">
+					<div class="col-md-3 img-grid">
+						<span class="power"> </span>
+					</div>
+					<div class="col-md-9 img-grid-text">
+						<h4>Feature 3</h4>
+						<p>广告 界面功能 随意设置 后台管理！</p>
+					</div>
+				</div>
+				<div class="col-md-4 services-info wow bounceIn" data-wow-delay="0.4s">
+					<div class="col-md-3 img-grid">
+						<span class="wood"> </span>
+					</div>
+					<div class="col-md-9 img-grid-text">
+						<h4>Feature 4</h4>
+						<p>无限代理 周卡月卡季卡年卡终身卡！</p>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- container -->
+	</div>
+		<!-- services -->
+		<!-- icons -->
+		<div class="icons">
+			<!-- container -->
+			<div class="container">
+				<ul class="wow bounceIn" data-wow-delay="0.4s">
+					<li>
+						<span class="light"> </span>
+					</li>
+					<li>
+						<span class="glob"> </span>
+					</li>
+					<li>
+						<span class="camra"> </span>
+					</li>
+					<li>
+						<span class="setting"> </span>
+					</li>
+					<li>
+						<span class="mike"> </span>
+					</li>
+					<li>
+						<span class="money"> </span>
+					</li>
+				</ul>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- icons -->
+		<!-- works -->
+		<div id="portfolio" class="works">
+			<!-- container -->
+			<div class="container">
+				<div class="works-hedding wow bounceIn" data-wow-delay="0.4s">
+					<h3>案例展示.</h3>
+				</div>
+				<ul id="filters">
+					<li><span class="filter active wow bounceIn" data-wow-delay="0.4s"" data-filter="app card icon logo web">全部</span></li>
+					<li><span class="filter wow bounceIn" data-wow-delay="0.4s"" data-filter="ios">苹果APP安装方法必看</span></li>
+					<li><span class="filter wow bounceIn" data-wow-delay="0.4s"" data-filter="app">后台</span></li>
+					<li><span class="filter wow bounceIn" data-wow-delay="0.4s"" data-filter="card">前端</span></li>
+				</ul>
+				<div id="portfoliolist">
+			  <div class="portfolio ios mix_all" data-cat="ios" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog" class="b-link-stripe b-animate-go">
+						     <img src="./images/qwe.png" alt="" />
+		                </div>
+					</div>				
+			  <div class="portfolio ios mix_all" data-cat="ios" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/qwer.png" alt="" />
+		                </div>
+					</div>	
+			  <div class="portfolio ios mix_all" data-cat="ios" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/qaz.png" alt="" />
+		                </div>
+					</div>    
+			  <div class="portfolio ios mix_all" data-cat="ios" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/qsx.png" alt="" />
+		                </div>
+					</div>	
+			  <div class="portfolio ios mix_all" data-cat="ios" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/qwsd.png" alt="" />
+		                </div>
+					</div>                   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog" class="b-link-stripe b-animate-go">
+						     <img src="./images/ball.png" alt="" />
+		                </div>
+					</div>				
+					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/rr.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/ss.png" alt="" />
+		                </div>
+					</div>    
+					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/dd.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog1" class="b-link-stripe b-animate-go">
+						     <img src="./images/ff.png" alt="" />
+		                </div>
+					</div>                                     	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog2" class="b-link-stripe b-animate-go">
+					      <img src="./images/hh.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog2" class="b-link-stripe b-animate-go">
+					      <img src="./images/qq.png" alt="" />
+		                </div>
+					</div>                    
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+						     <img src="./images/Icc.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/ipc.png" alt="" />
+		                </div>
+					</div>
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+						     <img src="./images/qqq.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+						     <img src="./images/ddd.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+						     <img src="./images/ggg.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog2" class="b-link-stripe b-animate-go">
+					      <img src="./images/lll.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/www.png" alt="" />
+		                </div>
+					</div>	
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/eee.png" alt="" />
+		                </div>
+					</div>
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/rrr.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/ttt.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/yyy.png" alt="" />
+		                </div>
+					</div>  
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/uuu.png" alt="" />
+		                </div>
+					</div>
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/aaa.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/iii.png" alt="" />
+		                </div>
+					</div>  
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/hhh.png" alt="" />
+		                </div>
+					</div>   
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn" data-wow-delay="0.4s">		
+							<a href="#small-dialog4" class="b-link-stripe b-animate-go">
+					      <img src="./images/jjj.png" alt="" />
+		                </div>
+					</div>
+					<div class="clearfix"></div>	
+				</div>
+				<!-- Script for gallery Here -->
+			  <script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
+			  <script type="text/javascript">
+					$(function () {
+						
+						var filterList = {
+						
+							init: function () {
+							
+								// MixItUp plugin
+								// http://mixitup.io
+								$('#portfoliolist').mixitup({
+									targetSelector: '.portfolio',
+									filterSelector: '.filter',
+									effects: ['fade'],
+									easing: 'snap',
+									// call the hover effect
+									onMixEnd: filterList.hoverEffect()
+								});				
+							
+							},
+							
+							hoverEffect: function () {
+							
+								// Simple parallax effect
+								$('#portfoliolist .portfolio').hover(
+									function () {
+										$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+										$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+									},
+									function () {
+										$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+										$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+									}		
+								);				
+							
+							}
+				
+						};
+						
+						// Run the show!
+						filterList.init();	
+					});	
+					</script>
+			<!-- Gallery Script Ends -->
+				<div class="clearfix"></div>
+				<div class="plus wow fadeInLeft"> 
+					<a href="#"><img src="./images/plus.png" alt="" /></a>
+				</div>
+			</div>
+			<!-- container -->
+	</div>
+		<!-- works -->
+		<!-- works-bottom -->
+		<div class="work-bottom">
+			<!-- container -->
+			<div class="container">
+			<!-- banner Slider starts Here -->
+	  			<script src="./js/responsiveslides.min.js"></script>
+			 <script>
+			    // You can also use "$(window).load(function() {"
+			    $(function () {
+			      // Slideshow 4
+			      $("#slider4").responsiveSlides({
+			        auto: true,
+			        pager: true,
+			        nav: false,
+			        speed: 500,
+			        namespace: "callbacks",
+			        before: function () {
+			          $('.events').append("<li>before event fired.</li>");
+			        },
+			        after: function () {
+			          $('.events').append("<li>after event fired.</li>");
+			        }
+			      });
+			
+			    });
+			  </script>
+			<!--//End-slider-script-->
+				<div  id="top" class="callbacks_container">
+			      <ul class="rslides" id="slider4">
+			        <li>
+			          <div class="slider-top wow bounceIn" data-wow-delay="0.4s">
+			          	<p>独家观看记录功能</p>
+			          	<img src="./images/user2.png" alt="" />
+						<p class="title">Jack Efron</p>
+			          </div>
+			        </li>
+			        <li>
+			          <div class="slider-top wow bounceIn" data-wow-delay="0.4s">
+			          	<p>强大的代理商分销系统，帮助您快速推广</p>
+			          	<img src="./images/user.png" alt="" />
+						<p class="title">Jack Efron</p>
+			          </div>
+			        </li>
+			        <li>
+			          <div class="slider-top wow bounceIn" data-wow-delay="0.4s">
+			          	<p>系统广告位较多，可加淘客和小说</p>
+			          	<img src="./images/user1.png" alt="" />
+						<p class="title">Jack Efron</p>
+			          </div>
+			        </li>
+			      </ul>
+			    </div>
+			    <div class="clearfix"> </div>
+	  			<!-- banner Slider Ends Here --> 
+			</div>
+			<!-- container -->
+		</div>
+		<!-- team -->
+		<!-- team-bottom -->
+		<div class="team-bottom">
+			<!-- container -->
+			<div class="container">
+				<div class="col-md-3 gift wow bounceIn" data-wow-delay="0.4s">
+					<span> </span>
+					<p>2009</p>
+					<p class="text">每天新增人数</p>
+				</div>
+				<div class="col-md-3 gift wow bounceIn" data-wow-delay="0.4s">
+					<span class="comments"> </span>
+					<p>13,562</p>
+					<p class="text">全国代理</p>
+				</div>
+				<div class="col-md-3 gift wow bounceIn" data-wow-delay="0.4s">
+					<span class="cups"> </span>
+					<p>8,710</p>
+					<p class="text">区域代理</p>
+				</div>
+			<!-- container -->
+		</div>
+		<!-- team-bottom -->
+		<!-- skills -->
+		<div id="about" class="skills">
+			<!-- container -->
+			<div class="container">
+				<div class="skills-hedding wow bounceIn" data-wow-delay="0.4s">
+					<h3>常见问题.</h3>
+				</div>
+				<div class="col-md-9">
+					<div class="col-md-3 skills-grid">
+						<div class="circle" id="circles-1"></div>
+					</div>
+					<div class="col-md-3 skills-grid">
+						<div class="circle" id="circles-2"></div>
+					</div>
+					<div class="col-md-3 skills-grid">
+						<div class="circle" id="circles-3"></div>
+					</div>
+					<div class="col-md-3 skills-grid">
+						<div class="circle" id="circles-4"></div>
+					</div>
+					<div class="clearfix"> </div>
+					<!-->
+				 <script type="text/javascript" src="./js/circles.js"></script>
+					         <script>
+								var colors = [
+										['#FFFFFF', '#42B8DD'], ['#FFFFFF', '#42B8DD'], ['#FFFFFF', '#42B8DD'], ['#FFFFFF', '#42B8DD']
+									];
+								for (var i = 1; i <= 5; i++) {
+									var child = document.getElementById('circles-' + i),
+										percentage = 40 + (i * 10);
+										
+									Circles.create({
+										id:         child.id,
+										percentage: percentage,
+										radius:     80,
+										width:      10,
+										number:   	percentage / 10,
+										text:       '%',
+										colors:     colors[i - 1]
+									});
+								}
+						
+				</script>
+				<!--/-->
+					<div class="skills-grid-text">
+						<h5 class="plus wow fadeInRight">关于影视双端APP！</h5>
+						<p class="wow bounceIn" data-wow-delay="0.4s">2018最新影视APP双端源码，支持安卓和苹果，集合全网会员免费解析。链接视频的时候会自动识别，点击中间播放就可。增加线路至9条。取消了手机号验证注册，可以支持随便账号，另外设置了两条苹果专线，速度飞起来。
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="totam">
+						<div class="tab1 wow bounceIn" data-wow-delay="0.4s">
+							<ul>
+								<li><span> </span></li>
+								<li class="text">如何观看VIP视频?</li>
+								<li class="minus">-</li>
+							</ul>
+							<p>1.点击您想观看VIP视频的网站，找到想要观看的影片或剧集，看到加载成功 点击播放点击观看即可</p>
+							<p>2.如播放失败，请点击右上角刷新播放即可正常观看</p>
+						</div>
+						<div class="tab2 wow bounceIn" data-wow-delay="0.4s">
+							<ul>
+								<li class="lock"></li>
+								<li class="sub-text">如何全屏观看，可以投屏吗?</li>
+								<li class="char">+</li>
+							</ul>
+							<p>1.打开手机自动旋转功能，播放界面加载完毕，影片正常播放过程中，手机横置，系统会自动全屏</p>
+							<p>2.投屏功能我们正在研发中，相信很快会与大家见面</p>                            
+						</div>
+						<div class="tab3 wow bounceIn" data-wow-delay="0.4s">
+							<ul>
+								<li class="tower"></li>
+								<li class="sub-text">此APP都有什么功能</li>
+								<li class="char">+</li>
+							</ul>
+							<p>1.独家观看记录</p>
+							<p>2.添加会员代理商系统</p>
+							<p>3.添加搜索功能！</p>   
+							<p>4.添加最新电影直播！</p> 
+							<p>5.我们提供升级免费解析接口和付费VIP无广告一次解析接口{PS：经营影视APP最重要的是解析接口}</p>
+							<p>6.送自动采集影视站源码</p>
+							<p>7.免费送发卡平台和支付接口，无需再为使用户续费而烦恼！</p>   
+							<p>8.主界面图标广告可后端直接更改，修复后端无需更改源码！</p>                                                         
+						</div>
+						<div class="tab4 wow bounceIn" data-wow-delay="0.4s">
+							<ul>
+								<li class="phone"></li>
+								<li class="sub-text">为什么有些影片无法观看</li>
+								<li class="char">+</li>
+							</ul>
+							<p>1.有些影片是暂时维护，稍等一会刷新一下即可正常观看</p>
+						</div>
+						<div class="tab5 wow bounceIn" data-wow-delay="0.4s">
+							<ul>
+								<li class="book"></li>
+								<li class="sub-text">成为代理有什么好处</li>
+								<li class="char">+</li>
+							</ul>
+							<p>1.每个代理商都可发展下级代理商，开代理商后端，无限裂变</p>
+							<p>2.本公司成功案例诸多，至今已有2000多个APP搭建合作用户！</p>   
+							<p>3.不论您是零售，代销，还是引流，都是绝佳的选择！</p>                                                      
+						</div>
+					</div>
+					
+						<script>
+							$(document).ready(function(){
+								$(".tab1 p").hide();
+								$(".tab2 p").hide();
+								$(".tab3 p").hide();
+								$(".tab4 p").hide();
+								$(".tab5 p").hide();
+								$(".tab1 ul").click(function(){
+									$(".tab1 p").slideToggle(300);
+									$(".tab2 p").hide();
+									$(".tab3 p").hide();
+									$(".tab4 p").hide();
+									$(".tab5 p").hide();
+								})
+								$(".tab2 ul").click(function(){
+									$(".tab2 p").slideToggle(300);
+									$(".tab1 p").hide();
+									$(".tab3 p").hide();
+									$(".tab4 p").hide();
+									$(".tab5 p").hide();
+								})
+								$(".tab3 ul").click(function(){
+									$(".tab3 p").slideToggle(300);
+									$(".tab4 p").hide();
+									$(".tab5 p").hide();
+									$(".tab2 p").hide();
+									$(".tab1 p").hide();
+								})
+								$(".tab4 ul").click(function(){
+									$(".tab4 p").slideToggle(300);
+									$(".tab3 p").hide();
+									$(".tab2 p").hide();
+									$(".tab1 p").hide();
+									$(".tab5 p").hide();
+								})
+								$(".tab5 ul").click(function(){
+									$(".tab5 p").slideToggle(300);
+									$(".tab4 p").hide();
+									$(".tab3 p").hide();
+									$(".tab2 p").hide();
+									$(".tab1 p").hide();
+									
+								})
+								
+							});
+						</script>
+						<!-- script -->
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- skills -->
+		<!-- skills-middle -->
+		<div class="skills-middle">
+			<!-- container -->
+			<div class="container">
+				<div class="skills-middle-text">
+				</div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- skills-middle -->
+		<!-- skills-bottom -->
+		<div class="skills-bottom">
+			<!-- container -->
+			<div class="container">
+				<div class="skills-images wow bounceIn" data-wow-delay="0.4s">
+					<div class="envato"><img src="./images/envato.png"></div>
+					<div class="envato"><img src="./images/word.png"></div>
+					<div class="envato"><img src="./images/dribble.png"></div>
+					<div class="envato"><img src="./images/envato.png"></div>
+					<div class="envato"><img src="./images/word.png"></div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- skills-bottom -->
+		<!-- contact -->
+		<div id="contact" class="contact">
+			<!-- container -->
+			<div class="container">
+				<div class="contact-hedding wow bounceIn" data-wow-delay="0.4s">
+					<h3>联系我们.</h3>
+				</div>
+				<p class="wow bounceIn" data-wow-delay="0.4s">微信18361381188 电话:
+				  <span>邮箱:287311037@qq.com</span>
+				</p>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- contact -->
+		<!-- footer -->
+		<div class="footer">
+			<!-- container -->
+			<div class="container">
+				<h4>千月影视4.0</h4>
+				<div class="copyright">
+					<p>
+						北京馋二哥电子商务有限公司
+				  </p>
+				</div>
+				<a class="scroll" href="#home"><img src="./images/up-arrow.png" alt="" /></a>
+			</div>
+			<!-- container -->
+		</div>
+		<!-- footer -->
+	</body>
+</html>
+
