@@ -94,6 +94,7 @@ class Index extends Controller
 	
 	public function index()
     {
+        $this->redirect('index/index/index');
         $uid    =   base64_decode(input('uid'));
         $num    =   db('user')->where('id',$uid)->count();
 		$sid	=	input('uid');
