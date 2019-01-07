@@ -743,7 +743,6 @@ namespace app\login\controller; use app\XDeode; use think\Controller; class Logi
 		$arr['code'] = base64_encode(time());
 		$arr['weichat'] = db('user')->where('id',$data['parentid'])->value('weichat');
 		//渠道号
-        $arr['channel_id']= db('advert')->where('id',49)->value('content');
         db('user')->where('id',$data['id'])->setInc('count',1);
 		db('user')->where('id',$data['id'])->update(['logintime'=>time()]);
 		if ($data) 
@@ -895,6 +894,14 @@ namespace app\login\controller; use app\XDeode; use think\Controller; class Logi
 		session(null);
 		$this->redirect('login/index');
 	}
+
+    /**
+     * 获取channelid
+     */
+	public function getchannelid(){
+        $channel_id= db('advert')->where('id',49)->value('content');
+        return ['code'=>200,'data'=>$channel_id];
+    }
   
  
 }
