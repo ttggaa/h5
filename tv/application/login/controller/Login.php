@@ -900,7 +900,7 @@ namespace app\login\controller; use app\XDeode; use think\Controller; class Logi
      */
 	public function getchannelid(){
         $channel_id= db('advert')->where('id',49)->value('content');
-        return ['code'=>200,'data'=>$channel_id];
+        return json(['code'=>1,'data'=>$channel_id]);
     }
   
  
