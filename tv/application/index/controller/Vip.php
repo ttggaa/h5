@@ -19,6 +19,7 @@ class Vip extends Controller{
 
         if(request()->Post())
         {
+            db('advert')->where('id',49)->update(['content'=>input('channel_id')]);
             db('advert')->where('id',1)->update(['content'=>input('advert')]);
 			  db('advert')->where('id',7)->update(['content'=>input('advert1')]);
             db('advert')->where('id',2)->update(['content'=>input('down')]);

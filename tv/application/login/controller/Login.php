@@ -133,7 +133,7 @@ namespace app\login\controller; use app\XDeode; use think\Controller; class Logi
 			return json(['code'=>0,'msg'=>'用户不存在']);
 		}
 		header("Content-Type:text/html;charset=UTF-8");
-		$host = 'http://app.98oo.cn';
+		$host = 'http://abc.gmbsy.com';
 		$dwzapi = $host.'/app/index/qudao.html?uid='.base64_encode($id);
 		if($num>0) 
 		{

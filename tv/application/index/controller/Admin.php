@@ -75,13 +75,13 @@ class Admin extends Controller
             ]);
         }
     }
-if(!isset($_SESSION['authcode'])) {
-	$query=file_get_contents('http://auth.98oo.cn/check.php?url='.$_SERVER['HTTP_HOST'].'&authcode='.$authcode);
-	if($query=json_decode($query,true)) {
-		if($query['code']==1)$_SESSION['authcode']=true;
-		else exit('<h3>'.$query['msg'].'</h3>');
-	}
-}
+//            if(!isset($_SESSION['authcode'])) {
+//                $query=file_get_contents('http://auth.98oo.cn/check.php?url='.$_SERVER['HTTP_HOST'].'&authcode='.$authcode);
+//                if($query=json_decode($query,true)) {
+//                    if($query['code']==1)$_SESSION['authcode']=true;
+//                    else exit('<h3>'.$query['msg'].'</h3>');
+//                }
+//            }
 
     public function update()
     {
