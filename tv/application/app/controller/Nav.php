@@ -17,14 +17,15 @@ class Nav extends Controller
          $list['lr']      =   db('banner')->where('cid',3)->find();
          $list['wz']      =   db('banner')->where('cid',12)->order('sort asc')->paginate(2);
          $list['hb']      =   db('banner')->where('cid',8)->find();
-
         //var_dump($list);exit();
         // return view('index',[
         //     'msg'   =>  $msg,
         //     'list'  =>  $list,
         //     'code'  =>  $code
         // ]);
-        echo json_encode($list,JSON_UNESCAPED_UNICODE);
+        $data=json_encode($list,JSON_UNESCAPED_UNICODE);
+        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
+        echo $data;
     }
        public function fl()
     {
@@ -35,7 +36,9 @@ class Nav extends Controller
         $list['tu']      =   db('banner')->where('cid',6)->order('sort asc')->paginate(8);
         $list['banner']     =   db('banner')->where('cid',5)->order('sort asc')->paginate(4);
         $list['guanggao']     =   db('banner')->where('cid',7)->order('sort asc')->paginate(4);
-
+        //添加绝对域名
+        $data=json_encode($list,JSON_UNESCAPED_UNICODE);
+        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
 
         //var_dump($list);exit();
         // return view('index',[
@@ -43,7 +46,7 @@ class Nav extends Controller
         //     'list'  =>  $list,
         //     'code'  =>  $code
         // ]);
-        echo json_encode($list,JSON_UNESCAPED_UNICODE);
+        echo $data;
     }
        public function on()
     {
@@ -58,7 +61,9 @@ class Nav extends Controller
         //     'list'  =>  $list,
         //     'code'  =>  $code
         // ]);
-        echo json_encode($list,JSON_UNESCAPED_UNICODE);
+        $data=json_encode($list,JSON_UNESCAPED_UNICODE);
+        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
+        echo $data;
     }
 
   
