@@ -14,9 +14,9 @@ class Nav extends Controller
         $list['vip']      =   db('banner')->where('cid',2)->order('sort asc')->paginate(12);
         $list['tj']      =   db('banner')->where('cid',4)->order('sort asc')->paginate(4);
         $list['banner']      =   db('banner')->where('cid',1)->order('sort asc')->paginate(4);
-         $list['lr']      =   db('banner')->where('cid',3)->find();
-         $list['wz']      =   db('banner')->where('cid',12)->order('sort asc')->paginate(2);
-         $list['hb']      =   db('banner')->where('cid',8)->find();
+        $list['lr']      =   db('banner')->where('cid',3)->find();
+        $list['wz']      =   db('banner')->where('cid',12)->order('sort asc')->paginate(2);
+        $list['hb']      =   db('banner')->where('cid',8)->find();
         //var_dump($list);exit();
         // return view('index',[
         //     'msg'   =>  $msg,
