@@ -24,7 +24,7 @@ class Nav extends Controller
         //     'code'  =>  $code
         // ]);
         $data=json_encode($list,JSON_UNESCAPED_UNICODE);
-        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
+        $data = str_replace("picurl\":\"", "picurl\":\""."http:".$_SERVER['HTTP_HOST'], $data);
         echo $data;
     }
        public function fl()
@@ -38,7 +38,7 @@ class Nav extends Controller
         $list['guanggao']     =   db('banner')->where('cid',7)->order('sort asc')->paginate(4);
         //添加绝对域名
         $data=json_encode($list,JSON_UNESCAPED_UNICODE);
-        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
+        $data = str_replace("picurl\":\"", "picurl\":\""."http:".$_SERVER['HTTP_HOST'], $data);
 
         //var_dump($list);exit();
         // return view('index',[
@@ -62,7 +62,7 @@ class Nav extends Controller
         //     'code'  =>  $code
         // ]);
         $data=json_encode($list,JSON_UNESCAPED_UNICODE);
-        $data = str_replace("picurl\":\"", "picurl\":\"".$_SERVER['HTTP_HOST'], $data);
+        $data = str_replace("picurl\":\"", "picurl\":\""."http:".$_SERVER['HTTP_HOST'], $data);
         echo $data;
     }
 
