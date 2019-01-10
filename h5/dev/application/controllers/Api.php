@@ -1168,11 +1168,31 @@ class ApiController extends Yaf_Controller_Abstract
         $selects = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
         $m_game = new GameModel();
         $games = $m_game->fetchAll("visible=1 and game_type='{$game_type}'", $pn, $limit, $selects, $order);
-        foreach ($games as &$row) {
-            $row['grade'] = $m_game->gradeHtml($row['grade']);
-            $row['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
+        $now_games=array();
+        foreach ($games as $key=>$row) {
+            $now_games[$key]['id']=$row['game_id'];
+            $now_games[$key]['dtype']=4;//h5
+            $now_games[$key]['cp']=$row['game_id'];//h5
+            $now_games[$key]['rank']=$row['game_id'];//h5
+            $now_games[$key]['packageName']='';//h5
+            $now_games[$key]['minVersion']='4.0';//h5
+            $now_games[$key]['minVersionCode']='15';//h5
+            $now_games[$key]['name']=$row['name'];//h5
+            $now_games[$key]['categoryName']=$row['classic'];//h5
+            $now_games[$key]['description']=$row['in_short'];//h5
+            $now_games[$key]['direction_screen']=1;//h5
+            $now_games[$key]['host']=$row['game_id'];//h5
+            $now_games[$key]['incomeShare']=$row['game_id'];//h5
+            $now_games[$key]['rating']=$row['game_id'];//h5
+            $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
+            $now_games[$key]['cp'] = $m_game->gradeHtml($row['grade']);
+            $now_games[$key]['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
         }
-        echo json_encode($games);
+        $info['total']=count($now_games);
+        $info['start']=$pn;
+        $info['num']=$pn;
+        $info['item']=$now_games;
+        echo json_encode($info);
     }
     //不同环境下获取真实的IP
     function getIp()
