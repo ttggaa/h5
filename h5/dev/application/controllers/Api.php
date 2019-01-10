@@ -1146,6 +1146,34 @@ class ApiController extends Yaf_Controller_Abstract
         $assign['pay'] = $pays;
         exit(json_encode($assign));
     }
+
+    /**
+     * 论坛游戏列表
+     */
+    public function applistAction(){
+//        'type' => $type,//应用类型（1-软件，2-游戏），默认不区分应用类型
+//			'page' => $page,//分页号，默认值1
+//			'pagesize' => $pagesize,//每次请求返回的记录最大数量，默认20，最大值300
+//			'starttime' => $starttime,//按时间返回获取应用的起始时间（Unix时间戳）,单位为秒
+//			'endtime' => $endt
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+        $this->checkParams($request, ['type', 'page', 'pagesize','starttime','endtime']);
+        $game_type = 'h5';
+//        $tc = $request['tc'];
+//        $tc = preg_replace('/[\%\*\'\"\\\]+/', '', $tc);
+        $pn = $request['page'] ?? 1;
+        $limit = $request['pagesize'];
+        $order = 'weight ASC';
+        $selects = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
+        $m_game = new GameModel();
+        $games = $m_game->fetchAll("visible=1 and game_type='{$game_type}'", $pn, $limit, $selects, $order);
+        foreach ($games as &$row) {
+            $row['grade'] = $m_game->gradeHtml($row['grade']);
+            $row['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
+        }
+        echo json_encode($games);
+    }
     //不同环境下获取真实的IP
     function getIp()
     {

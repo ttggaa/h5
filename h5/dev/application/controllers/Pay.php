@@ -421,6 +421,7 @@ class PayController extends Yaf_Controller_Abstract
 	//前台返回
 	public function resultAction()
 	{
+	    sleep(2);
 	    $req = $this->getRequest();
 	    $status = $req->getParam('status', '');
 	    $message = $req->getParam('message', '');
