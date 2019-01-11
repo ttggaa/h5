@@ -1009,7 +1009,7 @@ class ApiController extends Yaf_Controller_Abstract
             exit(json_encode($assign));
         }
 
-        $accounts=[['account'=>'moyou','password'=>'123456','key'=>'jdashdgkjsahdjkhasd']];
+        $accounts=[['account'=>'moyou','password'=>'123456','key'=>'jdashdgkjsahdjkhasd'],['account'=>'bbs','password'=>'123456','key'=>'jjjjfffffdddddsss']];
         $search_id= array_search( $_GET['account'],array_column($accounts, 'account'));
         if($search_id!==false){
             $arr=$accounts[$search_id];
@@ -1165,7 +1165,7 @@ class ApiController extends Yaf_Controller_Abstract
         $pn = $request['page'] ?? 1;
         $limit = $request['pagesize'];
         $order = 'weight ASC';
-        $selects = 'game_id,name,logo,corner,label,giftbag,support,grade,in_short,play_times,game_type,package_name,package_size';
+        $selects = '*';
         $m_game = new GameModel();
         $games = $m_game->fetchAll("visible=1 and game_type='{$game_type}'", $pn, $limit, $selects, $order);
         $now_games=array();
@@ -1175,8 +1175,8 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['cp']=$row['game_id'];//h5
             $now_games[$key]['rank']=$row['game_id'];//h5
             $now_games[$key]['packageName']='';//h5
-            $now_games[$key]['minVersion']='4.0';//h5
-            $now_games[$key]['minVersionCode']='15';//h5
+            $now_games[$key]['minVersion']=$row['version'];//h5
+            $now_games[$key]['minVersionCode']=$row['version'];//h5
             $now_games[$key]['name']=$row['name'];//h5
             $now_games[$key]['categoryName']=$row['classic'];//h5
             $now_games[$key]['description']=$row['in_short'];//h5
@@ -1185,14 +1185,125 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['incomeShare']=$row['game_id'];//h5
             $now_games[$key]['rating']=$row['game_id'];//h5
             $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
-            $now_games[$key]['cp'] = $m_game->gradeHtml($row['grade']);
-            $now_games[$key]['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
+            $now_games[$key]['versionName']=$row['version'];
+            $now_games[$key]['boxLabel']='0';
+            $now_games[$key]['priceInfo']='0';
+            $now_games[$key]['tag']=$row['type'];
+            $now_games[$key]['downloadTimes']=$row['support'];
+            $now_games[$key]['apkSize']=0;
+            $now_games[$key]['createTime']=strtotime($row['add_time']);
+            $now_games[$key]['updateTime']=$row['add_time'];
+            $now_games[$key]['brief']=$row['search'];
+            $now_games[$key]['pay_env']=0;
+            $now_games[$key]['sort']=$row['weight'];
+            $now_games[$key]['developer']=$row['dev_id'];
+            $now_games[$key]['outList']=$row['dev_id'];
+            $now_games[$key]['profit']=$row['dev_id'];
+            $now_games[$key]['icons']=[16=>$row['logo'],32=>$row['logo'],64=>$row['logo'],96=>$row['logo'],128=>$row['logo']];
+            $now_games[$key]['iconUrl']=$row['logo'];
+            $now_games[$key]['gameType']=$row['dev_id'];
+            $now_games[$key]['gameTag']=$row['dev_id'];
+            $now_games[$key]['screenshotsUrl']=empty($row['screenshots']) ? array() : unserialize($row['screenshots']);
+            $now_games[$key]['screenshotsUrl']=rtrim(implode(',',$now_games[$key]['screenshotsUrl']), ",");
+//            $now_games[$key]['cp'] = $m_game->gradeHtml($row['grade']);
+//            $now_games[$key]['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
         }
         $info['total']=count($now_games);
         $info['start']=$pn;
-        $info['num']=$pn;
-        $info['item']=$now_games;
-        echo json_encode($info);
+        $info['num']=$pn*$limit;
+        $info['items']=$now_games;
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * 文章列表
+     */
+    function newsListAction(){
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+//        $appid='',$type=0,$keyword='',$page=1,$pagesize=20,$starttime=0,$endtime=0
+        $this->checkParams($request, ['appid', 'type', 'keyword','page','pagesize','starttime','endtime']);
+        $m_article=new ArticleModel();
+        $articles = $m_article->fetchAll("game_id={$request['appid']}", $request['page'], $request['pagesize'], 'article_id,title,type,game_id,add_time', 'up_time desc');
+        $item=array();
+        foreach ($articles as $key=>$value){
+            $item[$key]['id']=$value['article_id'];
+            $item[$key]['title']=$value['title'];
+            $item[$key]['type']=$value['type'];
+            $item[$key]['appid']=$value['game_id'];
+            $item[$key]['createTime']=date('Y-m-d H:i:s',$value['add_time']);
+        }
+        $info['total']=count($articles);
+        $info['start']=$request['page'];
+        $info['num']=$request['page']*$request['pagesize'];
+        $info['items']=$item;
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * 新闻详情
+     */
+    function newsinfoAction(){
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+//        $appid='',$type=0,$keyword='',$page=1,$pagesize=20,$starttime=0,$endtime=0
+        $this->checkParams($request, ['newsid']);
+        $m_article=new ArticleModel();
+        $articles = $m_article->fetchAll("article_id={$request['newsid']}");
+        $item=array();
+        foreach ($articles as $key=>$value){
+            $item[$key]['id']=$value['article_id'];
+            $item[$key]['title']=$value['title'];
+            $item[$key]['context']=$value['content'];
+            $item[$key]['appid']=$value['game_id'];
+            $item[$key]['type']=$value['type'];
+            $item[$key]['createTime']=date('Y-m-d H:i:s',$value['add_time']);
+        }
+        $info['total']=1;
+        $info['start']=0;
+        $info['num']=1;
+        $info['items']=$item;
+        $info['new']='adv';
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * 开服详情
+     */
+    function openListAction(){
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+//        $appid='',$page=1,$pagesize=20,$starttime=0,$endtime=0
+        $this->checkParams($request, ['page','pagesize','starttime','endtime']);
+        $game_id=$request['appid']??'';
+        $page=$request['page'];
+        $pagesize=$request['pagesize'];
+        $starttime=date('Y-m-d H:i:s');
+        $endtime=date('Y-m-d H:i:s');
+        $m_server=new ServerModel();
+        if($game_id){
+            $where="game_id={$game_id} and start_time<{$endtime}";
+            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+        }else{
+            $where="start_time < '{$endtime}'";
+            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+        }
+        $item=array();
+        foreach ($servers as $key=>$value){
+            $item[$key]['sname']=$value['name'];
+            $item[$key]['openTime']=strtotime($value['start_time']);
+            $item[$key]['appid']=$value['game_id'];
+            $item[$key]['dtype']=4;
+            $item[$key]['appname']=$value['game_name'];
+            $item[$key]['categoryName']='';
+            $item[$key]['downloadUrl']='';
+        }
+        $info['items']=$item;
+        $info['total']=count($servers);
+        $info['start']=$page;
+        $info['num']=$pagesize*$page;
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+
     }
     //不同环境下获取真实的IP
     function getIp()
@@ -1222,13 +1333,13 @@ class ApiController extends Yaf_Controller_Abstract
             if (!array_key_exists($value, $request)) {
                 $rs['status'] = 1001;
                 $rs['msg'] = $value . "参数必须!";
-                echo json_encode($rs);
+                echo json_encode($rs,JSON_UNESCAPED_UNICODE);
                 die;
             }
             if ($request[$value] === '') {
                 $rs['status'] = 1002;
                 $rs['msg'] = $value . "参数值必须!";
-                echo json_encode($rs);
+                echo json_encode($rs,JSON_UNESCAPED_UNICODE);
                 die;
             }
         }
