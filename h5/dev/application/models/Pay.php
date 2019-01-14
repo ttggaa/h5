@@ -28,7 +28,7 @@ class PayModel extends F_Model_Pdo
 		        if( empty($row) ) return '支付ID';
 		        return sprintf('%16.0f', $row['pay_id']);
 		    },
-//		    'username' => '支付账号',
+		    'user_id' => '玩家id',
 		    'to_user' => '充入账号',
 		    'role_id' => '角色id',
 		    'game_name' => '游戏名称',
@@ -93,6 +93,7 @@ class PayModel extends F_Model_Pdo
 	        'pay_status'=>array('支付状态','select',$this->_payTypes,''),
 	        'type' => array('付款方式', 'select', $this->_types, ''),
 	        'pay_id' => array('支付ID', 'input', null, ''),
+	        'user_id' => array('玩家id', 'input', null, ''),
 	        'username' => array('用户名', 'input', null, ''),
 	        'game_name' => array('游戏名', 'input', null, ''),
 	        'server_id' => array('区/服ID', 'input', null, ''),

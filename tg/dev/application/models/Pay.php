@@ -28,6 +28,7 @@ class PayModel extends F_Model_Pdo
                 if( empty($row) ) return '支付ID';
                 return sprintf('%16.0f', $row['pay_id']);
             },
+            'user_id' => '玩家id',
             'username' => function(&$row){
                 if( empty($row) ) return '玩家账号';
                 if($row['player_channel']){
@@ -163,6 +164,7 @@ class PayModel extends F_Model_Pdo
             'pay_type' => array('付款方式', 'select', $this->_types, ''),
             'tg_channel' => array('渠道id', 'input', null, ''),
             'pay_id' => array('支付ID', 'input', null, ''),
+            'user_id' => array('玩家id', 'input', null, ''),
             'username' => array('用户名', 'input', null, ''),
             'game_id' => array('游戏ID', 'input', null, ''),
             'game_name' => array('游戏名字', 'input', null, ''),
