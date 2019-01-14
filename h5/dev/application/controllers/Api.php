@@ -1179,7 +1179,7 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['minVersionCode']=$row['version'];//h5
             $now_games[$key]['name']=$row['name'];//h5
             $now_games[$key]['categoryName']=$row['classic'];//h5
-            $now_games[$key]['description']=$row['in_short'];//h5
+            $now_games[$key]['description']=$row['details'];//h5
             $now_games[$key]['direction_screen']=1;//h5
             $now_games[$key]['host']=$row['game_id'];//h5
             $now_games[$key]['incomeShare']=$row['game_id'];//h5
