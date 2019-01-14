@@ -1254,7 +1254,7 @@ class ApiController extends Yaf_Controller_Abstract
         foreach ($articles as $key=>$value){
             $item[$key]['id']=$value['article_id'];
             $item[$key]['title']=$value['title'];
-            $item[$key]['context']=$value['content'];
+            $item[$key]['context']= str_replace("src=\"/", "src=\"http://h5.zyttx.com/", $value['content']);
             $item[$key]['appid']=$value['game_id'];
             $item[$key]['type']=$value['type'];
             $item[$key]['createTime']=date('Y-m-d H:i:s',$value['add_time']);
