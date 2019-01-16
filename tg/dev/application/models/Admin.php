@@ -160,6 +160,7 @@ class AdminModel extends F_Model_Pdo
         if($_SESSION['admin_id']==1){
             $arr['parent_id']=['添加人', 'input', null, ''];
         }
+        $arr['admin_id']=['代理id', 'input', null, ''];
         $arr['username']=['代理账号', 'input', null, ''];
         return $arr;
     }
