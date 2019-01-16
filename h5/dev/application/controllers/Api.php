@@ -1283,10 +1283,13 @@ class ApiController extends Yaf_Controller_Abstract
         $m_server=new ServerModel();
         if($game_id){
             $where="game_id={$game_id} and start_time<{$endtime}";
-            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+//            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+            $servers = $m_server->fetchAllBySql("select h5.server.*,h5.game.game_type from h5.server  inner join h5.`game`  on h5.server.game_id = h5.`game`.game_id where h5.`game`.game_type =  'h5' and {$where} order by start_time desc");
+
         }else{
             $where="start_time < '{$endtime}'";
-            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+//            $servers=$m_server->fetchAll($where,$page,$pagesize,'*','start_time desc');
+            $servers = $m_server->fetchAllBySql("select h5.server.*,h5.game.game_type from h5.server  inner join h5.`game`  on h5.server.game_id = h5.`game`.game_id where h5.`game`.game_type =  'h5' and {$where} order by start_time desc");
         }
         $item=array();
         foreach ($servers as $key=>$value){
