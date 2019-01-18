@@ -187,7 +187,7 @@
                                 alert(aaa.message);
                             }else{
                                 alert('支付成功!');
-                                window.location.href=aaa.message;
+                                history.go(-1);
                             }
                         },
                         error:function(){
