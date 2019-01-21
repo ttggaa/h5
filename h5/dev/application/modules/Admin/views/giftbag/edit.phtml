@@ -287,9 +287,10 @@ function searchGame(obj){
         var option=options[i];
         // console.log(option);
         var now_value=option.text;
-        if(value==now_value){
+        if(now_value.indexOf(value)>=0){
             // console.log(now_value);
             $(option).attr('selected','selected');
+            break;
         }
     }
 }
