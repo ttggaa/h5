@@ -28,7 +28,7 @@ class GiftbagController extends F_Controller_Backend
             }
         }
         $params['conditions'] = $conds;
-        $params['op'] = F_Helper_Html::Op_Edit;
+        $params['op'] = F_Helper_Html::Op_ED;
         $params['orderby'] = 'add_time DESC';
         return $params;
     }
