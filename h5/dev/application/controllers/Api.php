@@ -604,13 +604,13 @@ class ApiController extends Yaf_Controller_Abstract
         $three_day_after = (string)date("Y-m-d H:i:s", strtotime("+3 day"));
         $condition = "start_time between '{$three_day_befor}' and '{$three_day_after}' and game_type='{$request['game_type']}'";
         if ($request['index'] == 0) {
-            $condition .= " and start_time< '{$now_time}'";//已开新服,时间大于当前,前三天
+            $condition .= " and start_time< '{$now_time}' and visible=1";//已开新服,时间大于当前,前三天
             $order = 'start_time desc';
             $servers_list = $m_server->fetchAllBySql("select h5.game.*,h5.server.*,h5.server.name as server_name,h5.server.add_time as server_add_time from h5.server left join h5.game on h5.game.game_id=h5.server.game_id  where {$condition}  order by {$order}  LIMIT {$offset},{$limit}");
             $servers['start'] = $servers_list;
         }
         if ($request['index'] == 1) {
-            $condition .= " and start_time> '{$now_time}'";//新服预告
+            $condition .= " and start_time> '{$now_time}' and visible=1";//新服预告
             $servers_list = $m_server->fetchAllBySql("select h5.game.*,h5.server.*,h5.server.name as server_name,h5.server.add_time as server_add_time from h5.server left join h5.game on h5.game.game_id=h5.server.game_id  where {$condition}  order by {$order}  LIMIT {$offset},{$limit}");
             $servers['will_start'] = $servers_list;
         }
