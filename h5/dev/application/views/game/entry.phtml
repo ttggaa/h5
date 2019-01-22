@@ -267,7 +267,7 @@
 
     function initList(game_id, user_id) {
         $.ajax({
-            url: 'http://h5.zyttx.com/api/getOpenGame',
+            url: "/api/getOpenGame",
             method: 'get',
             data: {game_id: game_id, user_id: user_id},
             success: function (data) {
@@ -375,7 +375,7 @@
             var gift_id = $(obj).attr('data-id');
             var user_id = <?=$user_id?>;
             $.ajax({
-                url: 'http://h5.zyttx.com/api/getGift',
+                url: '/api/getGift',
                 method: 'post',
                 data: {
                     user_id: user_id,
