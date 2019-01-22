@@ -56,6 +56,10 @@ var SuspendedBall = {
             // return false;//取消元素事件向下冒泡
         });
         $(".SuspendedBall").bind(PublicJs.Mouse.Down, function (e) {
+            $('.SuspendedBall').removeClass("ToLeft25");
+            $('.SuspendedBall').removeClass("ToTop25");
+            $('.SuspendedBall').removeClass("ToBottom25");
+            $('.SuspendedBall').removeClass("ToRight25");
             //#region 去除原有的动画样式
             var right = $(window).width() - $(this).width();
             var bottom = $(window).height() - $(this).height();
@@ -129,21 +133,25 @@ var SuspendedBall = {
                     if (MoveTo == "x") {
                         if (ToLeftOrRight == "left") {
                             $(_this).addClass("ToLeft");
+                            var int=self.setTimeout("init_ball('left')",5000);
                         }
                         else {
                             $(_this).addClass("ToRight");
+                            var int=self.setTimeout("init_ball('right')",5000);
+
                         }
                     }
                     else {
                         if (ToTopOrBottom == "top") {
                             $(_this).addClass("ToTop");
+                            var int=self.setTimeout("init_ball('top')",5000);
                         }
                         else {
                             $(_this).addClass("ToBottom");
+                            var int=self.setTimeout("init_ball('bottom')",5000);
                         }
                     }
-                }
-                else {
+                }else {
                     if (typeof (UpFun) == "function") {
                         UpFun();
                     }
@@ -178,7 +186,35 @@ var SuspendedBall = {
         return null;
     }
 };
-$('')
+var int=self.setTimeout("init_ball('right')",5000);
+function init_ball(position){
+  console.log(position);
+  // return false;
+  switch (position) {
+    case 'left':
+      $('.SuspendedBall').removeClass("ToLeft");
+      $('.SuspendedBall').addClass("ToLeft25");
+      break;
+    case 'top':
+      $('.SuspendedBall').removeClass('ToTop');
+      $('.SuspendedBall').addClass('ToTop25');
+      break;
+    case 'right':
+      $('.SuspendedBall').removeClass('ToRight');
+      $('.SuspendedBall').addClass('ToRight25');
+      break;
+    case 'bottom':
+      $('.SuspendedBall').removeClass('ToBottom');
+      $('.SuspendedBall').addClass('ToBottom25');
+      break;
+    default:
+  }
+}
+// function half(){
+//   $('.SuspendedBall').css('opacity','0.8');
+//   $('.SuspendedBall').css('left','-25px');
+//   console.log('半隐藏');
+// }
 //frame页面点击隐藏顶级父页面悬浮球菜单的方法
 // function FrameBodyClick() {
 //     var topWin = (function (p, c) {
@@ -199,4 +235,3 @@ $('')
 // $(function () {
 //     FrameBodyClick();
 // })
-

@@ -1,41 +1,416 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta charset="UTF-8">
-    <meta name="generator" content="namiyx.dxj">
-    <meta content="yes" name="apple-touch-fullscreen"><meta content="yes" name="full-screen">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title><?=$game_name?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="yes" name="full-screen">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title><?= $params['game_name'] ?></title>
+    <link rel="stylesheet" type="text/css" href="/styles/aui.css"/>
+    <link href="/suspendedball/SuspendedBall.css" media="screen" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/styles/user_center.css"/>
     <style>
-        html,body,iframe,object{margin:0; padding:0;}
-        iframe,object{height:100%; height:100vh; width:100%; overflow:hidden; position:relative;}
-        .namiyx{background-color:#000; width:100%; height:100vh; position:absolute; left:0; top:0; z-index:2;}
-        .namiyx img{width:202px; height:48px; position:absolute; left:50%; top:50%; margin:-24px auto auto -99px;}
+        html, body, iframe, object {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe, object {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .namiyx {
+            background-color: #000;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .namiyx img {
+            width: 202px;
+            height: 48px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -24px auto auto -99px;
+        }
+
+        .item {
+            display: flex;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            /*display: block;*/
+        }
+
+        .item .btn {
+            background-color: orange;
+            width: 80%;
+            height: 30px;
+            color: #ffffff;
+            line-height: 30px;
+            border-radius: 5px;
+            text-align: center;
+            margin-left: 10%;
+        }
+
+        .close {
+            width: 100%;
+            display: block;
+            text-align: right;
+            color: red;
+            font-size: 2rem;
+            padding-right: 10px;
+        }
+
+        .close_win,
+        .btn {
+            cursor: pointer;
+            position: absolute;
+            bottom: 5%;
+        }
+
+        .tab-content {
+            height: 90%
+        }
+
+        .pay-list span {
+            width: 33.3%;
+            text-align: center;
+        }
+
+        .list-right-button {
+            margin-right: 0.5rem;
+        }
+
     </style>
 </head>
 <body>
-<div class="namiyx"><img src="/public/images/namiyx.jpg"/></div>
+<!--<script src="/suspendedball/api.js"></script>-->
+<script src="/suspendedball/aui-tab.js"></script>
 <script src="/public/scripts/jquery-1.11.1.min.js"></script>
 <script src="/public/scripts/jquery.mobile.min.js"></script>
+<script src="/suspendedball/PublicJs.js"></script>
+<script src="/suspendedball/SuspendedBall.js"></script>
+<script src="/js/jquery-zclip/jquery.zclip.js"></script>
 <script>
-    (function(){
+    (function () {
         var h = $(window).height(),
             w = $(window).width(),
-            lt = '<?=$load_type?>',
-            url = '<?=$url?>';
-        if(lt == 'iframe') {
-            var obj = '<iframe src="'+url+'" scrolling="no" frameborder="0" style="height:'+h+'px; width:'+w+'px;" marginheight="0" marginwidth="0"></iframe>';
+            lt = '<?=$params['load_type']?>',
+            url = '<?=$params['url']?>';
+        if (lt == 'iframe') {
+            var obj = '<iframe src="' + url + '" scrolling="no" frameborder="0" style="height:' + h + 'px; width:' + w + 'px;" marginheight="0" marginwidth="0"></iframe>';
         } else {
-            var obj = '<object data="'+url+'" type="text/html" border="0" style="height:'+h+'px; width:'+w+'px;"></object>';
+            var obj = '<object data="' + url + '" type="text/html" border="0" style="height:' + h + 'px; width:' + w + 'px;"></object>';
         }
         document.write(obj);
-        $(window).on("orientationchange", function(){
+        $(window).on("orientationchange", function () {
             $('iframe, object').css({height: $(window).height(), width: $(window).width()});
         });
-        setTimeout(function(){
+        setTimeout(function () {
             $('.namiyx').fadeOut();
         }, 2000);
+        var user_info = '<?=json_encode($user)?>';
+        var user_info = JSON.parse(user_info);
+        var head_img = "/public/images/default_img.png";
+        if (user_info.avatar != '') {
+            if (user_info.app == 'qq') {
+                head_img = user_info.avatar;
+            } else {
+                head_img = "http://h5.zyttx.com" + user_info.avatar;
+            }
+        }
+        var MenuInfo =
+            "<div id=\"MenuInfo\">\
+                <div class=\"aui-tab\" id='tab'>\
+                    <div class=\"aui-tab-item tapmode aui-active\">游戏礼包</div>\
+                    <div class=\"aui-tab-item tapmode\">玩家中心</div>\
+                    <div class=\"aui-tab-item tapmode\">客服中心</div>\
+                    <div class=\"aui-tab-item tapmode close_game\">申请返利</div>\
+                </div>\
+                <div class=\"tab-content\">\
+                    <div class=\"tab-content-item game_type_list\">\
+                        <ul class=\"aui-list aui-list-in\" id=\"游戏礼包\">\
+                        </ul>\
+                    </div>\
+                    <div class=\"tab-content-item aui-hide game_type_list\">\
+                        <ul class=\"aui-list aui-list-in\" id=\"玩家中心\">\
+                        <section class=\"user_info block_bg border_line\">\
+                            <figure class=\"fl user_img\">\
+                                   <img src=\"" +
+            head_img +
+            "\"   alt=\"请登录\"/>\
+                            </figure>\
+                            <ul class=\"fl information\">\
+                                <li>\
+                                    <i class=\"icons i_porstion\"></i>\
+                                    <span>欢迎您：</span>\
+                                    <a>" +
+            user_info.username +
+            "</a>\
+                                </li>\
+                                <li>\
+                                    <i class=\"icons i_gold\"></i>\
+                                    <span>平台币：</span>\
+                                    <a class=\"green\">" +
+            user_info.money +
+            "￥</a>\
+                                </li>\
+                            </ul>\
+                        </section>\
+                        <li class=\"aui-list-item pay-list\">\
+                            <div class=\"aui-info-item\" style=\"width:100%\">\
+                                <div style=\"flex-direction:column;width:100%\" class=\"list-column\">\
+                                    <div class=\"aui-info-item aui-margin-l-5\" style=\"width:100%\">\
+                                        <span class=\"aui-margin-l-5\">充入用户</span>\
+                                        <span class=\"aui-margin-l-5\">充值金额</span>\
+                                        <span class=\"aui-margin-l-5\">充值时间</span>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </li>\
+                        </ul>\
+                    </div>\
+                     <div class=\"tab-content-item aui-hide server_center\">\
+              <ul class=\"aui-list aui-list-in\" id=\"客服中心\" style='text-align: center'>\
+                    <div>客服QQ:" + user_info.qq1 + "</div>\
+                    <div>玩家Q群:" + user_info.qq2 + "</div>\
+                    <div>投诉电话:028-67877616</div>\
+              </ul>\
+              </div>\
+              <div class=\"tab-content-item aui-hide server_center\">\
+              <ul class=\"aui-list aui-list-in\" id=\"申请返利\" style='text-align: center'>\
+                    <div>客服QQ:" + user_info.qq1 + "</div>\
+                    <div>玩家Q群:" + user_info.qq2 + "</div>\
+                    <div>投诉电话:028-67877616</div>\
+              </ul>\
+              </div>\
+                </div>\
+                <div class=\"close_win item\">\
+                    <div class=\"btn\">关闭</div>\
+                </div>\
+             </div>\
+            </div>";
+        SuspendedBall.Add();//添加悬浮球
+        SuspendedBall.BoxHtml("<div class=\"SMenu\">" + MenuInfo + "</div>"); //
+        SuspendedBall.Move();//这个就是让悬浮球动起来的方法。为啥单独写个不写到add方法里面呢？因为你可以在页面中直接写入悬浮球的两个div。这个方法里面可以添加一个参数，这个参数是个function。当鼠标抬起的时候会调用到这个方法。
+        $(document).on('click', '.close_game', function () {
+            event.stopPropagation();    //  阻止事件冒泡
+            // document.write('');
+                window.open("http://zyttx.com/index/channel/index?channel=<?=$channel_id?>");
+                window.close();
+            return false;
+        });
+        $(document).on('click', '.close_win', function () {
+            event.stopPropagation(); //  阻止事件冒泡
+            var _this = $('.SuspendedBall');
+            $(".SuspendedBall").show();
+            $(".BallBox").hide();
+            var move = {
+                x: $(_this).offset().left,
+                y: $(_this).offset().top
+            };
+            var width = $(window).width() / 2;
+            var height = $(window).height() / 2;
+            var ToLeftOrRight = "left";
+            var ToTopOrBottom = "top";
+            var MoveTo = "x";
+            if (move.x > width) {
+                ToLeftOrRight = "right";
+                move.x = 2 * width - move.x; //左右边距
+            }
+            if (move.y > height) {
+                ToTopOrBottom = "bottom";
+                move.y = 2 * height - move.y; //上下边距
+            }
+            if (move.x > move.y) {
+                MoveTo = "y";
+            }
+            if (MoveTo == "x") {
+                if (ToLeftOrRight == "left") {
+                    var int = self.setTimeout("init_ball('left')", 5000);
+                } else {
+                    var int = self.setTimeout("init_ball('right')", 5000);
+                }
+            } else {
+                if (ToTopOrBottom == "top") {
+                    var int = self.setTimeout("init_ball('top')", 5000);
+                } else {
+                    var int = self.setTimeout("init_ball('bottom')", 5000);
+                }
+            }
+            return false;
+        })
+        //tab
+        var tab = new auiTab({
+            element: document.getElementById("tab"),
+            index: 1,
+            repeatClick: false
+        }, function (ret) {
+            console.log(ret.index);
+            $('.tab-content .tab-content-item').addClass('aui-hide');
+            $('.tab-content .tab-content-item').eq(ret.index - 1).removeClass('aui-hide');
+        });
+        initList("<?=$game_id?>", "<?=$user_id?>");
     })();
+
+    function initList(game_id, user_id) {
+        $.ajax({
+            url: 'http://h5.zyttx.com/api/getOpenGame',
+            method: 'get',
+            data: {game_id: game_id, user_id: user_id},
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                var data = JSON.parse(data);
+                var count = data.length;
+                var game_gift_list = '';
+                $.each(data.gift, function (index, e) {
+                    var name = e.name;
+                    var game_name = e.game_name;
+                    var nums = e.nums;
+                    var used = e.used;
+                    var gift_id = e.gift_id;
+                    var content = e.content;
+                    var howget = e.howget;
+                    var logo = e.logo;
+                    if (e.content.length > 0) {
+                        var content_text = '';
+                        for (var i = 0; i < content.length; i++) {
+                            content_text += content[i]['name'] + 'x' + content[i]['nums'] + ' ';
+                        }
+                        content = content_text;
+                    } else {
+                        var content = '暂无';
+                    }
+                    var cdkey = e.cdkey;
+                    if (cdkey) {
+                        button_text = '复制';
+                    } else {
+                        button_text = '领取';
+                    }
+                    game_gift_list +=
+                        "<li class=\"aui-list-item gift-list\">\
+                          <div class=\"aui-info-item\">\
+                          <img src=\"" + logo +
+                        "\" style=\"width:2rem\" />\
+                              <div style=\"flex-direction:column\" class=\"list-column\">\
+                                  <div class=\"aui-info-item aui-margin-l-5 title\"><span class=\"aui-margin-l-5\">" +
+                        name + "</span></div>";
+                    game_gift_list += "<span class=\"aui-margin-l-5\">" + howget + "</span>";
+
+                    game_gift_list += "<span class=\"aui-margin-l-5\">" + content +
+                        "</span>\
+                              </div>\
+                          </div>\
+                          <div class=\"list-right-button gift_btn\" data-id=\"" + gift_id +
+                        "\" data-key=" + cdkey +
+                        ">\
+                              <div class=\"Bars\">\
+                                <div style=\"width: 0%;font-size:0.7rem\" class=\"proccess\">\
+                                      <span class=\"gift_get\">" +
+                        button_text + "</span>\
+                                  </div>\
+                              </div>\
+                          </div>\
+                      </li>"
+                });
+                if (game_gift_list == '') {
+                    game_gift_list = '<div class="center">暂无数据</div>';
+                }
+                $('#游戏礼包').append(game_gift_list);
+                //充值记录
+                var info_list_length = data.length;
+                $.each(data.pay, function (index, e) {
+                    // var pay_id = e.pay_id;
+                    var to_user = e.to_user;
+                    var game_name = e.game_name;
+                    if (game_name == '') {
+                        game_name = '平台币';
+                    }
+                    var money = e.money;
+                    var add_time = formatUnixtimestamp(e.add_time);
+                    var game_gift_list = '';
+                    game_gift_list +=
+                        "<li class=\"aui-list-item pay-list\">\
+                          <div class=\"aui-info-item\" style=\"width:100%\">\
+                              <div style=\"flex-direction:column;width:100%\" class=\"list-column\">\
+                                  <div class=\"aui-info-item aui-margin-l-5\" style=\"width:100%\">\
+                                      <span class=\"aui-margin-l-5\">" +
+                        to_user + "</span>\
+                                      <span class=\"aui-margin-l-5\">" + money + "元</span>\
+                                      <span class=\"aui-margin-l-5\">" + add_time +
+                        "</span>\
+                                  </div>\
+                              </div>\
+                          </div>\
+                      </li>";
+                    $('#玩家中心').append(game_gift_list);
+                });
+            }
+        });
+    }
+
+    $(document).on('click', '.gift_btn', function (event) {
+        event.stopPropagation(); //阻止事件冒泡即可
+        var obj = $(this);
+        var status = $(obj).find('span').html();
+        var data_key = $(obj).attr('data-key');
+        if (status == '复制') {
+            console.log(data_key);
+            copyText(data_key, function () {
+                alert('礼包码已复制');
+            })
+        } else if (status == '领取') {
+            var gift_id = $(obj).attr('data-id');
+            var user_id = <?=$user_id?>;
+            $.ajax({
+                url: 'http://h5.zyttx.com/api/getGift',
+                method: 'post',
+                data: {
+                    user_id: user_id,
+                    gift_id: gift_id
+                },
+                async: false,
+                success: function (data) {
+                    var data = JSON.parse(data);
+                    console.log(data.cdkey);
+                    $(obj).find('span').html('复制');
+                    $(obj).attr('data-key', data.cdkey);
+                    $(obj).parents('li').find('.title').after("<span class=\"aui-margin-l-5\">cdkey:" + data.cdkey + "</span>");
+                }
+            });
+            var data_key = $(obj).attr('data-key');
+            copyText(data_key, function () {
+                alert('礼包码已复制');
+            })
+        }
+    });
+
+    // 复制的方法
+    function copyText(text, callback) { // text: 要复制的内容， callback: 回调
+        var tag = document.createElement('input');
+        tag.setAttribute('id', 'cp_hgz_input');
+        tag.value = text;
+        document.getElementsByTagName('body')[0].appendChild(tag);
+        document.getElementById('cp_hgz_input').select();
+        document.execCommand('copy');
+        document.getElementById('cp_hgz_input').remove();
+        if (callback) {
+            callback(text)
+        }
+    }
+
 </script>
 </body>
 </html>

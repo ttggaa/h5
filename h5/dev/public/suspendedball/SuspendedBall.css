@@ -1,5 +1,5 @@
 .SuspendedBall {
-    background-image: url(./button0.png);
+    background-image: url(./button3.png);
     position: fixed;
     width: 50px;
     height: 50px;
@@ -10,12 +10,12 @@
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
-    -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
-    opacity: 0.5; /*其他，透明度50%*/
+    filter: alpha(opacity=100); /*IE滤镜，透明度50%*/
+    -moz-opacity: 1; /*Firefox私有，透明度50%*/
+    opacity: 1; /*其他，透明度50%*/
     z-index: 999; /*最高的层级*/
     top: 100px;
-    left: 0px;
+    right: 0px;
     display: block;
 }
 
@@ -42,8 +42,6 @@
         display: block;
     }
 }
-
-
 @keyframes SuspendedBallToLeft {
     100% {
         left: 0px;
@@ -52,21 +50,48 @@
 
 @-webkit-keyframes SuspendedBallToLeft {
     100% {
-        left: 0px;
+      left: 0px;
     }
 }
 
 @-moz-keyframes SuspendedBallToLeft {
     100% {
-        left: 0px;
+      left: 0px;
+    }
+}
+@keyframes SuspendedBallToLeft25 {
+    100% {
+        left: -25px;
     }
 }
 
+@-webkit-keyframes SuspendedBallToLeft25 {
+    100% {
+      left: -25px;
+    }
+}
 
-.ToLeft {
+@-moz-keyframes SuspendedBallToLeft25 {
+    100% {
+      left: -25px;
+    }
+}
+
+.ToLeft{
     animation: SuspendedBallToLeft 1s normal;
     -moz-animation: SuspendedBallToLeft 1s normal; /* Firefox */
     -webkit-animation: SuspendedBallToLeft 1s normal; /* Safari 和 Chrome */
+    animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
+    -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
+    animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.ToLeft25{
+    animation: SuspendedBallToLeft25 0.001s normal;
+    -moz-animation: SuspendedBallToLeft25 0.001s normal; /* Firefox */
+    -webkit-animation: SuspendedBallToLeft25 0.001s normal; /* Safari 和 Chrome */
     animation-iteration-count: 1;
     -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
     -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
@@ -92,12 +117,39 @@
         top: 0px;
     }
 }
+@keyframes SuspendedBallToTop25 {
+    100% {
+        top: -25px;
+    }
+}
 
+@-webkit-keyframes SuspendedBallToTop25 {
+    100% {
+        top: -25px;
+    }
+}
+
+@-moz-keyframes SuspendedBallToTop25 {
+    100% {
+        top: -25px;
+    }
+}
 
 .ToTop {
     animation: SuspendedBallToTop 1s normal;
     -moz-animation: SuspendedBallToTop 1s normal; /* Firefox */
     -webkit-animation: SuspendedBallToTop 1s normal; /* Safari 和 Chrome */
+    animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
+    -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
+    animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.ToTop25 {
+    animation: SuspendedBallToTop25 0.001s normal;
+    -moz-animation: SuspendedBallToTop25 0.001s normal; /* Firefox */
+    -webkit-animation: SuspendedBallToTop25 0.001s normal; /* Safari 和 Chrome */
     animation-iteration-count: 1;
     -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
     -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
@@ -129,11 +181,45 @@
         top: -moz-calc(100% - 50px);
     }
 }
+@keyframes SuspendedBallToBottom25 {
+    100% {
+        top: calc(100% - 25px);
+        top: -webkit-calc(100% - 25px);
+        top: -moz-calc(100% - 25px);
+    }
+}
+
+@-webkit-keyframes SuspendedBallToBottom25 {
+    100% {
+        top: calc(100% - 25px);
+        top: -webkit-calc(100% - 25px);
+        top: -moz-calc(100% - 25px);
+    }
+}
+
+@-moz-keyframes SuspendedBallToBottom25 {
+    100% {
+        top: calc(100% - 25px);
+        top: -webkit-calc(100% - 25px);
+        top: -moz-calc(100% - 25px);
+    }
+}
 
 .ToBottom {
     animation: SuspendedBallToBottom 1s normal;
     -moz-animation: SuspendedBallToBottom 1s normal; /* Firefox */
     -webkit-animation: SuspendedBallToBottom 1s normal; /* Safari 和 Chrome */
+    animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
+    -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
+    animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+.ToBottom25 {
+    animation: SuspendedBallToBottom25 0.001s normal;
+    -moz-animation: SuspendedBallToBottom25 0.001s normal; /* Firefox */
+    -webkit-animation: SuspendedBallToBottom25 0.001s normal; /* Safari 和 Chrome */
     animation-iteration-count: 1;
     -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
     -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
@@ -165,6 +251,29 @@
         left: -moz-calc(100% - 50px);
     }
 }
+@keyframes SuspendedBallToRight25 {
+    100% {
+        left: calc(100% - 25px);
+        left: -webkit-calc(100% - 25px);
+        left: -moz-calc(100% - 25px);
+    }
+}
+
+@-webkit-keyframes SuspendedBallToRight25 {
+    100% {
+        left: calc(100% - 25px);
+        left: -webkit-calc(100% - 25px);
+        left: -moz-calc(100% - 25px);
+    }
+}
+
+@-moz-keyframes SuspendedBallToRight25 {
+    100% {
+        left: calc(100% - 25px);
+        left: -webkit-calc(100% - 25px);
+        left: -moz-calc(100% - 25px);
+    }
+}
 
 .ToRight {
     animation: SuspendedBallToRight 0.5s normal;
@@ -177,19 +286,29 @@
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
-
+.ToRight25 {
+    animation: SuspendedBallToRight25 0.001s normal;
+    -moz-animation: SuspendedBallToRight25 0.001s normal; /* Firefox */
+    -webkit-animation: SuspendedBallToRight25 0.001s normal; /* Safari 和 Chrome */
+    animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1; /* Safari 和 Chrome */
+    -webkit-animation-iteration-count: 1; /* Safari 和 Chrome */
+    animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 
 
 .BallBox {
     position: fixed;
     z-index: 999;
-    top: calc(50% - 160px);
-    left: calc(50% - 160px);
+    top: 10%;
+    left: 10%;
     display: none;
-    width: 300px;
+    width: 80%;
     border: 1px solid #808080;
     border-radius: 10px;
-    height: 300px;
+    height: 80%;
     padding: 10px;
     overflow: hidden;
     /*display: none;*/
@@ -198,26 +317,232 @@
 .BallBox > .Bg {
     position: absolute;
     z-index: 998;
-    width: 300px;
-    height: 300px;
-    background-color: #ededed;
-    background-image: url("/Images/Self.png");
+    width: 95%;
+    height: 95%;
+    background-color: #ffffff;
     background-repeat: no-repeat;
     background-size: 50% auto;
     background-position: 50% 50%;
-    filter: alpha(opacity=30);
-    -moz-opacity: 0.3;
-    opacity: 0.8;
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
 }
 
 .BallBox > .BallBoxInfo {
     position: absolute;
     z-index: 999;
-    width: 300px;
-    height: 300px;
+    width: 95%;
+    height: 95%;
     overflow: hidden;
 }
-#MenuInfo{
+/*#MenuInfo{
     display: none;
+}*/
+
+*{
+    cursor:pointer;
+}
+html, body {
+    font-size: 18px;
+    height: 100%;
 }
 
+header {
+    background-color: #FFA500!important;
+}
+
+header ul li {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: none;
+    color: #323237;
+    position: relative;
+    font-size: 18px;
+}
+
+header ul li.active {
+    display: block;
+}
+
+.aui-list {
+    color: #FFA500!important;
+}
+
+.aui-active {
+    color: #FFA500!important;
+    border-bottom: 2px solid #FFA500!important
+}
+
+.aui-tab-item .aui-active{
+    /*color: #039be5;*/
+    border-bottom: 2px solid #FFA500!important;
+    z-index: 100
+}
+
+.hover {
+    opacity: .8;
+}
+
+.flex-wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-con {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.flex-vertical {
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+}
+
+.border-t, .border-b {
+    position: relative;
+}
+
+.border-t:before, .border-b:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #ddd;
+    right: 0;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.border-b:after {
+    top: auto;
+    bottom: 0;
+}
+
+#wrap {
+    height: 100%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.list-column {
+    font-size: 0.5rem;
+    color: #707070;
+}
+
+.list-column .aui-info-item {
+    color: #000000;
+    font-size: 0.7rem;
+}
+
+.game-list, .gift-list,.article-list{
+    cursor: pointer;
+    /*margin:1rem!important;*/
+    /*padding: 0.3rem!important;*/
+    /*width: 90%;*/
+    /*border: 1px  solid red!important;*/
+    padding-top: 0.3rem!important;
+}
+
+.list-right-button {
+    display: flex;
+    justify-content: center;
+    align-items: Center;
+    margin-right: 1rem;
+}
+
+.more_game {
+    cursor: pointer;
+}
+
+.list-right-button div {
+    cursor: pointer;
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 0.2rem;
+    background-color: #FFA500;
+    color: #ffffff;
+}
+
+.download-text {
+    position: absolute;
+    left: 30px;
+    top: 20px;
+}
+
+.Bars {
+    position: relative;
+    width: 200px;
+    /* 宽度 */
+    /*border: 1px solid #B1D632;*/
+    background-color: #bbbbbb;
+    padding: 1px;
+}
+
+.Bars div {
+    display: block;
+    position: relative;
+    background: #2abcee;
+    /* 进度条背景颜色 */
+    color: #ffffff;
+    height: 100%;
+    /* 高度 */
+    line-height: 20px;
+    /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div span{
+    position: absolute;
+    width: 2.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    /* 宽度 */
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.6rem
+    /*font-weight: lighter;*/
+}
+.del{
+    border-radius: 0.2rem;
+    position: relative;
+    margin-left: 0.5rem;
+    background: rgba(0,0,0,.6)!important;
+    /* 进度条背景颜色 */
+    color: #ffffff;
+    /* 高度 */
+    width: 2.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.6rem
+}
+.game-list span, .gift-list span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+
+/*.tab-content{
+  margin-top: 50px;
+}*/

@@ -365,7 +365,7 @@ class GameController extends Yaf_Controller_Abstract
 	        $this->forward('game', 'entry', array('game_name'=>$game['name'], 'url'=>$url, 'load_type'=>$game['load_type']));
 	        return false;
 	    }
-	    
+	    return false;
 //	    if( ! isset($m_server) ) {
 //    	    $m_server = new ServerModel();
 //	    }
@@ -392,8 +392,34 @@ class GameController extends Yaf_Controller_Abstract
 	        $this->redirect($params['url']);
 	        return false;
 	    }
-	    
-	    $this->getView()->assign($params);
+        $m_user = new UsersModel();
+        $user = $m_user->getLogin();
+        if( $user ) {
+            $user = $m_user->fetch("user_id='{$user['user_id']}'");
+            if( $user['app'] == 'wx' && $user['avatar'] ) {
+                $user['avatar'] .= '/132';
+            }
+        }
+        //渠道id
+        $url=new F_Helper_Url();
+        $channel_id=$url->getUrlSign();
+        $cps_admin=new AdminModel('cps');
+        $channel_info=$cps_admin->fetch(['admin_id'=>$channel_id]);
+        $user['qq1']=$channel_info['qq1'];
+        $user['qq2']=$channel_info['qq2'];
+        if($user['qq1']==''){
+            //查找管理员的
+            $channel_info=$cps_admin->fetch(['admin_id'=>1]);
+            $user['qq1']=$channel_info['qq1'];
+        }
+        if($user['qq2']==''){
+            //查找管理员的
+            $channel_info=$cps_admin->fetch(['admin_id'=>1]);
+            $user['qq2']=$channel_info['qq2'];
+        }
+        $game_id=$_GET['game_id'];
+        $user_id=$user['user_id'];
+	    $this->getView()->assign(compact('params','user','game_id','user_id','channel_id'));
 	}
 	
 	//搜索
