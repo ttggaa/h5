@@ -260,13 +260,16 @@ function searchGame(obj){
     // console.log(value);
     var options=$('#game_id option');
     // console.log(options);
+    // $("#game_id option:selected").removeAttr("selected");
     for(var i=0;i<options.length-1;i++){
         var option=options[i];
         // console.log(option);
         var now_value=option.text;
-        if(value==now_value){
+        if(now_value.indexOf(value)>=0){
             // console.log(now_value);
             $(option).attr('selected','selected');
+            $('#game_name').val(option.text);
+            break;
         }
     }
 }
