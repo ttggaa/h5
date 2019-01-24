@@ -28,7 +28,8 @@ input.w240{width:240px !important}
             <span>搜索：</span>
             <input id="inputselect" type="text" onchange="searchGame(this)"/><br/>
             <span>游戏：</span>
-            <select id="game_id" name="info[game_id]">
+            <select id="game_id" name="info[game_id]" required>
+            <option value="">请选择游戏</option>
           <?php foreach ($games as $gm) { ?>
             <option value="<?=$gm['game_id']?>"<?php if(isset($info) && $info['game_id'] == $gm['game_id']) echo ' selected="selected"'; ?>><?=$gm['name']?></option>
           <?php } ?>
@@ -272,6 +273,12 @@ $(function(){
         });
         return false;
     });
+    $(this).keydown( function(e) {
+        var key = window.event?e.keyCode:e.which;
+        if(key.toString() == "13"){
+            return false;
+        }
+    });
 });
 
 /**
@@ -283,13 +290,14 @@ function searchGame(obj){
     // console.log(value);
     var options=$('#game_id option');
     // console.log(options);
+    $("#game_id option:selected").attr("selected",false);
     for(var i=0;i<options.length-1;i++){
         var option=options[i];
         // console.log(option);
         var now_value=option.text;
         if(now_value.indexOf(value)>=0){
             // console.log(now_value);
-            $(option).attr('selected','selected');
+            $(option).attr('selected',true);
             break;
         }
     }
