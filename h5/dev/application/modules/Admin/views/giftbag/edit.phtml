@@ -28,8 +28,7 @@ input.w240{width:240px !important}
             <span>搜索：</span>
             <input id="inputselect" type="text" onchange="searchGame(this)"/><br/>
             <span>游戏：</span>
-            <select id="game_id" name="info[game_id]" required>
-            <option value="">请选择游戏</option>
+            <select id="game_id" name="info[game_id]">
           <?php foreach ($games as $gm) { ?>
             <option value="<?=$gm['game_id']?>"<?php if(isset($info) && $info['game_id'] == $gm['game_id']) echo ' selected="selected"'; ?>><?=$gm['name']?></option>
           <?php } ?>
@@ -72,7 +71,7 @@ input.w240{width:240px !important}
             <a href="javascript:void(0);"><img style="float:left;" src="/admin/images/icons/add.gif">&nbsp;添加</a>
           </td></tr></tfoot>
           </table>
-          <textarea id="logo_selecter" style="clear:both; width:80%px; height:60px;">图标请使用本编辑器上传或查找图标路径；不再使用的图片请手动删除；修改或删除此内容毫无影响！</textarea>
+          <textarea id="logo_selecter" style="clear:both; width:80%; height:60px;">图标请使用本编辑器上传或查找图标路径；不再使用的图片请手动删除；修改或删除此内容毫无影响！</textarea>
         </p>
         
         <p>
@@ -98,35 +97,6 @@ input.w240{width:240px !important}
         </p>
         <p id="nums_p" style="display:none">
           <label>礼包限量个数</label>
-<!--          <select id="gift_nums">-->
-<!--            <option value="10">10</option>-->
-<!--            <option value="20">20</option>-->
-<!--            <option value="30">30</option>-->
-<!--            <option value="40">40</option>-->
-<!--            <option value="50">50</option>-->
-<!--            <option value="60">60</option>-->
-<!--            <option value="70">70</option>-->
-<!--            <option value="80">80</option>-->
-<!--            <option value="90">90</option>-->
-<!--            <option value="100">100</option>-->
-<!--            <option value="200">200</option>-->
-<!--            <option value="300">300</option>-->
-<!--            <option value="400">400</option>-->
-<!--            <option value="500">500</option>-->
-<!--            <option value="600">600</option>-->
-<!--            <option value="700">700</option>-->
-<!--            <option value="800">800</option>-->
-<!--            <option value="900">900</option>-->
-<!--            <option value="1000">1000</option>-->
-<!--            <option value="2000">2000</option>-->
-<!--            <option value="3000">3000</option>-->
-<!--            <option value="4000">4000</option>-->
-<!--            <option value="5000">5000</option>-->
-<!--            <option value="6000">6000</option>-->
-<!--            <option value="7000">7000</option>-->
-<!--            <option value="8000">8000</option>-->
-<!--            <option value="9000">9000</option>-->
-<!--          </select>-->
           <input type="number"  name="info[nums]" value="<?php echo isset($info) ? $info['nums'] : ''; ?>">
         </p>
     <?php if(empty($info) || $info['type'] == 'limited') { ?>
@@ -274,8 +244,8 @@ $(function(){
         return false;
     });
     $(this).keydown( function(e) {
-        var key = window.event?e.keyCode:e.which;
-        if(key.toString() == "13"){
+        if(e.keyCode==13){
+            e.preventDefault();
             return false;
         }
     });
@@ -290,15 +260,13 @@ function searchGame(obj){
     // console.log(value);
     var options=$('#game_id option');
     // console.log(options);
-    $("#game_id option:selected").attr("selected",false);
     for(var i=0;i<options.length-1;i++){
         var option=options[i];
         // console.log(option);
         var now_value=option.text;
-        if(now_value.indexOf(value)>=0){
+        if(value==now_value){
             // console.log(now_value);
-            $(option).attr('selected',true);
-            break;
+            $(option).attr('selected','selected');
         }
     }
 }
