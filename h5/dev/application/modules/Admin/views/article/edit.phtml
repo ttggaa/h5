@@ -22,6 +22,9 @@
             </p>
             <p>
               <label>所属游戏</label>
+                <span>搜索：</span>
+                <input id="inputselect" type="text" onchange="searchGame(this)"/><br/>
+                <span>游戏：</span>
               <select id="game_id" name="info[game_id]">
                 <option value="">--平台--</option>
               <?php foreach ($games as $gm) { ?>
@@ -90,4 +93,26 @@
     	    $('#game_name').val($('#game_id option:selected').text());
     	}
     });
+    /**
+     * 搜索游戏
+     * @param obj
+     */
+    function searchGame(obj){
+        var value=obj.value.trim();
+        // console.log(value);
+        var options=$('#game_id option');
+        // console.log(options);
+        // $("#game_id option:selected").removeAttr("selected");
+        for(var i=0;i<options.length-1;i++){
+            var option=options[i];
+            // console.log(option);
+            var now_value=option.text;
+            if(now_value.indexOf(value)>=0){
+                // console.log(now_value);
+                $(option).attr('selected','selected');
+                $('#game_name').val(option.text);
+                break;
+            }
+        }
+    }
 </script>
