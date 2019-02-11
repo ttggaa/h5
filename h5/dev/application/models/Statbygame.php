@@ -29,9 +29,9 @@ class StatbygameModel extends F_Model_Pdo
 	public function getFieldsSearch()
 	{
 	    return array(
-	        'ymd_begin' => array('开始日期', 'datepicker', null, ''),
-	        'ymd_end' => array('结束日期', 'datepicker', null, ''),
-	        'game_id' => array('游戏ID', 'input', null, ''),
+            'game_id' => array('游戏ID', 'input', null, ''),
+            'ymd_begin' => array('开始日期', 'datepicker', null, ''),
+            'ymd_end' => array('结束日期', 'datepicker', null, ''),
 	    );
 	}
 }
