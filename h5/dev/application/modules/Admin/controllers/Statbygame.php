@@ -4,7 +4,7 @@ class StatbygameController extends F_Controller_Backend
 {
     protected function beforeList()
     {
-        $params['orderby'] = 'ymd DESC';
+        $params['orderby'] = 'ymd DESC,game_id DESC';
         $params['op'] = F_Helper_Html::Op_Null;
         
         $search = $this->getRequest()->getQuery('search', array());
