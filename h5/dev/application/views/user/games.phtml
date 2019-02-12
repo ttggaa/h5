@@ -25,7 +25,7 @@
             <ul class="game_list block_bg">
             <?php if($games) { foreach ($games as $row) { ?>
                 <li>
-                    <a target="_top" href="/game/detail.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="50" height="50" alt="<?=$row['name']?>"/></a>
+                    <a target="_top" href="/game/play.html?game_id=<?=$row['game_id']?>"><img src="<?=$row['logo']?>" width="50" height="50" alt="<?=$row['name']?>"/></a>
                 </li>
             <?php } } else { ?>
                 <li style="width:98%">
