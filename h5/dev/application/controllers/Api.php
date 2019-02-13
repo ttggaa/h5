@@ -1311,9 +1311,9 @@ class ApiController extends Yaf_Controller_Abstract
     //bbs盒子下载地址
     function getDownloadUrlAction(){
         Yaf_Dispatcher::getInstance()->disableView();
-        $request = $_GET;
-        $this->checkParams($request, ['tg_channel']);
-        $info['url']="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$request['tg_channel'];
+        $f_url=new F_Helper_Url();
+        $tg_channel=$f_url->getUrlSign();
+        $info['url']="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$tg_channel;
         echo json_encode($info,JSON_UNESCAPED_UNICODE);
     }
     //不同环境下获取真实的IP
