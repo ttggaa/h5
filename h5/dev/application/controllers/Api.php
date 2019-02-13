@@ -1308,6 +1308,14 @@ class ApiController extends Yaf_Controller_Abstract
         echo json_encode($info,JSON_UNESCAPED_UNICODE);
 
     }
+    //bbs盒子下载地址
+    function getDownloadUrl(){
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+        $this->checkParams($request, ['tg_channel']);
+        $info['url']="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$request['tg_channel'];
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+    }
     //不同环境下获取真实的IP
     function getIp()
     {
