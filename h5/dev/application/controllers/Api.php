@@ -1309,7 +1309,7 @@ class ApiController extends Yaf_Controller_Abstract
 
     }
     //bbs盒子下载地址
-    function getDownloadUrl(){
+    function getDownloadUrlAction(){
         Yaf_Dispatcher::getInstance()->disableView();
         $request = $_GET;
         $this->checkParams($request, ['tg_channel']);
