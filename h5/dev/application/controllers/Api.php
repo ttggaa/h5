@@ -1313,7 +1313,8 @@ class ApiController extends Yaf_Controller_Abstract
         Yaf_Dispatcher::getInstance()->disableView();
         $f_url=new F_Helper_Url();
         $tg_channel=$f_url->getUrlSign();
-        $info['url']="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$tg_channel;
+        $info['android_url']="http://yun.zyttx.com/index/apkgame3?&tg_channel=".$tg_channel;
+        $info['ios_url']="http://yun.zyttx.com/index/apkgame4?&tg_channel=".$tg_channel;
         echo json_encode($info,JSON_UNESCAPED_UNICODE);
     }
     //不同环境下获取真实的IP
