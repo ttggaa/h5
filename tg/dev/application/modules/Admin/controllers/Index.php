@@ -122,8 +122,10 @@ class IndexController extends Yaf_Controller_Abstract
         $articles=$m_article->fetchAll(['type'=>'代理公告'],$pn = 1, $limit = 20, $selects = '*', $orderby = 'add_time desc');
         $this->getView()->assign('articles',$articles);
         //检查是否补全代理信息
-        $nickname=$s->get('nickname');
-        $pay_number=$s->get('pay_number');
+        $admin=new AdminModel();
+        $user_info=$admin->fetch(['admin_id'=>$s->get('admin_id')]);
+        $nickname=$user_info['nickname'];
+        $pay_number=$user_info['pay_number'];
         $is_show_alert=false;
         if(!$nickname || !$pay_number){
             $is_show_alert=true;
