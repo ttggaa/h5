@@ -24,7 +24,7 @@ class AdminModel extends F_Model_Pdo
 			'username' => '代理帐号',
             'nickname' => '真实姓名',
             'pay_number' => '支付宝',
-			'boxname' => '盒子名字',
+			'boxname' => '网站或公会名字',
 			'divide_into' =>
                 function(&$row){
                     if( empty($row) ) return '分成比例';
