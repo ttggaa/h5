@@ -1190,7 +1190,7 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['priceInfo']='0';
             $now_games[$key]['tag']=$row['type'];
             $now_games[$key]['downloadTimes']=$row['support'];
-            $now_games[$key]['apkSize']=0;
+            $now_games[$key]['apkSize']=$row['package_size'];
             $now_games[$key]['createTime']=strtotime($row['add_time']);
             $now_games[$key]['updateTime']=$row['add_time'];
             $now_games[$key]['brief']=$row['search'];
@@ -1261,7 +1261,7 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['priceInfo']='0';
             $now_games[$key]['tag']=$row['type'];
             $now_games[$key]['downloadTimes']=$row['support'];
-            $now_games[$key]['apkSize']=0;
+            $now_games[$key]['apkSize']=$row['package_size'];
             $now_games[$key]['createTime']=strtotime($row['add_time']);
             $now_games[$key]['updateTime']=$row['add_time'];
             $now_games[$key]['brief']=$row['search'];

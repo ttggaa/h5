@@ -104,43 +104,48 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgameAction()
     {
-        $game_id = $_GET['game_id'] ?? die('游戏id必须');
-        $channe_id = $_GET['tg_channel'] ?? 1;
-        $admin_id = $channe_id;
-        //获取游戏名字
-        $m_game = new GameModel();
-        $download_name = $m_game->fetch(['game_id' => $game_id], 'download_name');
-        if (!$download_name) {
-            die('游戏下载名字不存在,请联系客服!');
-        }
-        $download_name = $download_name['download_name'];
-        if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk")) {
-            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
-        } else {
-            $zip = new ZipArchive();
-            $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
-            //复制一份到当前
-            //判断游戏目录是否存在
-            $path = APPLICATION_PATH . "/public/game/apk/{$game_id}";
-            if (!is_dir($path)) {
-                mkdir($path);
+        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+            //提示
+            $this->display('wx');
+        }else {
+            $game_id = $_GET['game_id'] ?? die('游戏id必须');
+            $channe_id = $_GET['tg_channel'] ?? 1;
+            $admin_id = $channe_id;
+            //获取游戏名字
+            $m_game = new GameModel();
+            $download_name = $m_game->fetch(['game_id' => $game_id], 'download_name');
+            if (!$download_name) {
+                die('游戏下载名字不存在,请联系客服!');
             }
-            shell_exec(" 
+            $download_name = $download_name['download_name'];
+            if (file_exists("/www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk")) {
+                $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
+            } else {
+                $zip = new ZipArchive();
+                $filename = "/www2/wwwroot/code/h5/open/dev/public/game/apk/{$game_id}.apk";//母包位置
+                //复制一份到当前
+                //判断游戏目录是否存在
+                $path = APPLICATION_PATH . "/public/game/apk/{$game_id}";
+                if (!is_dir($path)) {
+                    mkdir($path);
+                }
+                shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
         cp {$filename}  /www2/wwwroot/code/h5/tg/dev/public/game/apk/{$game_id}/{$download_name}{$admin_id}.apk;
         > /dev/null 2>&1 &");
-            sleep(5);
-            $now_path = $path . "/{$download_name}{$admin_id}.apk";
-            if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
-                exit("cannot open <$filename> ");
+                sleep(5);
+                $now_path = $path . "/{$download_name}{$admin_id}.apk";
+                if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
+                    exit("cannot open <$filename> ");
+                }
+                $zip->addFromString("META-INF/jiule_channelid", "{$admin_id}");
+                $zip->addFromString("META-INF/jiule_gameid", "{$game_id}");
+                $zip->close();
+                $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
             }
-            $zip->addFromString("META-INF/jiule_channelid", "{$admin_id}");
-            $zip->addFromString("META-INF/jiule_gameid", "{$game_id}");
-            $zip->close();
-            $this->redirect("http://yun.zyttx.com/game/apk/{$game_id}/{$download_name}{$admin_id}.apk");
+            Yaf_Dispatcher::getInstance()->disableView();
         }
-        Yaf_Dispatcher::getInstance()->disableView();
     }
 
     /**
@@ -148,6 +153,7 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function akpgame2Action()
     {
+        $this->checkWx();
         $admin_id = $_REQUEST['tg_channel'];
         $admin = new AdminModel();
         //1.修改文件
@@ -204,6 +210,7 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgame3Action()
     {
+        $this->checkWx();
         $admin_id = $_REQUEST['tg_channel'] ?? 1;
         if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/youxihezi{$admin_id}.apk")) {
             $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$admin_id}.apk");
@@ -344,6 +351,16 @@ $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
             echo fread($file, filesize($file_dir . $file_name));
             fclose($file);
             exit ();
+        }
+    }
+
+    /**
+     * 检查微信浏览器
+     */
+    public function checkWx(){
+        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+            //提示
+
         }
     }
 }
