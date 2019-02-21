@@ -1242,7 +1242,7 @@ class ApiController extends Yaf_Controller_Abstract
                 $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
             }else{
                 $now_games[$key]['dtype']=1;//h5
-                $now_games[$key]['downloadUrl']='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'].'&tg_channel='.$channel_id;//h5
+                $now_games[$key]['downloadUrl']='http://yun.zyttx.com/index/apkgame?game_id='.$row['game_id'];//h5
             }
             $now_games[$key]['cp']=$row['game_id'];//h5
             $now_games[$key]['rank']=$row['game_id'];//h5
