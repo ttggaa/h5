@@ -1159,7 +1159,7 @@ class ApiController extends Yaf_Controller_Abstract
         Yaf_Dispatcher::getInstance()->disableView();
         $request = $_GET;
         $this->checkParams($request, ['type', 'page', 'pagesize','starttime','endtime']);
-//        $game_type = 'h5';
+        $game_type = 'h5';
 //        $tc = $request['tc'];
 //        $tc = preg_replace('/[\%\*\'\"\\\]+/', '', $tc);
         $pn = $request['page'] ?? 1;
@@ -1167,19 +1167,11 @@ class ApiController extends Yaf_Controller_Abstract
         $order = 'weight ASC';
         $selects = '*';
         $m_game = new GameModel();
-        $games = $m_game->fetchAll("visible=1", $pn, $limit, $selects, $order);
+        $games = $m_game->fetchAll("visible=1 and game_type='{$game_type}'", $pn, $limit, $selects, $order);
         $now_games=array();
-        $url=new F_Helper_Url();
-        $channel_id = $url->getUrlSign();
         foreach ($games as $key=>$row) {
             $now_games[$key]['id']=$row['game_id'];
-            if($row['type']=='h5'){
-                $now_games[$key]['dtype']=4;//h5
-                $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
-            }else{
-                $now_games[$key]['downloadUrl']="http://yun.zyttx.com/index/apkgame?game_id={$row['game_id']}&tg_channel={$channel_id}";
-                $now_games[$key]['dtype']=1;//h5
-            }
+            $now_games[$key]['dtype']=4;//h5
             $now_games[$key]['cp']=$row['game_id'];//h5
             $now_games[$key]['rank']=$row['game_id'];//h5
             $now_games[$key]['packageName']='';//h5
@@ -1192,6 +1184,7 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['host']=$row['game_id'];//h5
             $now_games[$key]['incomeShare']=$row['game_id'];//h5
             $now_games[$key]['rating']=$row['game_id'];//h5
+            $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
             $now_games[$key]['versionName']=$row['version'];
             $now_games[$key]['boxLabel']='0';
             $now_games[$key]['priceInfo']='0';
