@@ -1233,8 +1233,6 @@ class ApiController extends Yaf_Controller_Abstract
         $m_game = new GameModel();
         $games = $m_game->fetchAll("visible=1", $pn, $limit, $selects, $order);
         $now_games=array();
-        $url=new F_Helper_Url();
-        $channel_id=$url->getUrlSign();
         foreach ($games as $key=>$row) {
             $now_games[$key]['id']=$row['game_id'];
             if($row['game_type']=='h5'){
