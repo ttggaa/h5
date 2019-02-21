@@ -152,43 +152,45 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function akpgame2Action()
     {
-        $this->checkWx();
-        $admin_id = $_REQUEST['tg_channel'];
-        $admin = new AdminModel();
-        //1.修改文件
-        $file_dir = "/www2/wwwroot/tool/1/assets/apps/default/www/manifest.json";
-        $json_string = file_get_contents($file_dir);
-        $data = json_decode($json_string, true);
-        $launch_path = "http://{$admin_id}.h5.zyttx.com";
-        $developer_url = "http://{$admin_id}.h5.zyttx.com";
-        $boxname = $admin->fetch(['admin_id' => $admin_id], 'boxname');
-        if ($boxname == '') {
-            $boxname = '游戏盒子';
-        } else {
-            $boxname = $boxname['boxname'];
-        }
-        // 把JSON字符串转成PHP数组
-        $data['name'] = $boxname;
-        $data['launch_path'] = $launch_path;
-        $data['developer']['url'] = $developer_url;
-        $json_strings = json_encode($data);
-        file_put_contents($file_dir, $json_strings);//写入
-        //修改APP名字
-        $file_dir2 = "/www2/wwwroot/tool/1/res/values/strings.xml";
-        $doc = new DOMDocument();
-        $doc->load($file_dir2);
-        $strings = $doc->getElementsByTagName("string");
-        //遍历
-        foreach ($strings as $string) {
-            //将id=3的title设置为33333
-            if ($string->getAttribute('name') == 'app_name') {
-                $string->nodeValue = $boxname;
+        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+            //提示
+        }else {
+            $admin_id = $_REQUEST['tg_channel'];
+            $admin = new AdminModel();
+            //1.修改文件
+            $file_dir = "/www2/wwwroot/tool/1/assets/apps/default/www/manifest.json";
+            $json_string = file_get_contents($file_dir);
+            $data = json_decode($json_string, true);
+            $launch_path = "http://{$admin_id}.h5.zyttx.com";
+            $developer_url = "http://{$admin_id}.h5.zyttx.com";
+            $boxname = $admin->fetch(['admin_id' => $admin_id], 'boxname');
+            if ($boxname == '') {
+                $boxname = '游戏盒子';
+            } else {
+                $boxname = $boxname['boxname'];
             }
-        }
-        //对文件做修改后，一定要记得重新sava一下，才能修改掉原文件
-        $doc->save($file_dir2);
-        //2. 编译app
-        shell_exec("
+            // 把JSON字符串转成PHP数组
+            $data['name'] = $boxname;
+            $data['launch_path'] = $launch_path;
+            $data['developer']['url'] = $developer_url;
+            $json_strings = json_encode($data);
+            file_put_contents($file_dir, $json_strings);//写入
+            //修改APP名字
+            $file_dir2 = "/www2/wwwroot/tool/1/res/values/strings.xml";
+            $doc = new DOMDocument();
+            $doc->load($file_dir2);
+            $strings = $doc->getElementsByTagName("string");
+            //遍历
+            foreach ($strings as $string) {
+                //将id=3的title设置为33333
+                if ($string->getAttribute('name') == 'app_name') {
+                    $string->nodeValue = $boxname;
+                }
+            }
+            //对文件做修改后，一定要记得重新sava一下，才能修改掉原文件
+            $doc->save($file_dir2);
+            //2. 编译app
+            shell_exec("
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin:/home/java/jdk1.8.0_181:/home/java/jdk1.8.0_181/lib/:/home/java/jdk1.8.0_181/bin;export PATH;
         export JAVA_HOME CLASSPATH PATH;
         cd /www2/wwwroot/tool;
@@ -199,9 +201,10 @@ class IndexController extends Yaf_Controller_Abstract
         mv -f /www2/wwwroot/tool/{$admin_id}.apk  /www2/wwwroot/xgame.zyttx.com/apk/;
         rm -rf /www2/wwwroot/tool/1.apk;
          > /dev/null 2>&1 &");
-        sleep(5);
-        $this->redirect("http://xgame.zyttx.com/apk/new{$admin_id}.apk");
-        Yaf_Dispatcher::getInstance()->disableView();
+            sleep(5);
+            $this->redirect("http://xgame.zyttx.com/apk/new{$admin_id}.apk");
+            Yaf_Dispatcher::getInstance()->disableView();
+        }
     }
 
     /**
@@ -209,35 +212,38 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgame3Action()
     {
-        $this->checkWx();
-        $admin_id = $_REQUEST['tg_channel'] ?? 1;
-        if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/youxihezi{$admin_id}.apk")) {
-            $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$admin_id}.apk");
-        } else {
-            $channe_id = $admin_id ?? 1;
-            $zip = new ZipArchive();
-            $filename = "/www2/wwwroot/xgame.zyttx.com/apk/base.apk";//母包位置
-            //复制一份到当前
-            //判断游戏目录是否存在
-            $path = "/www2/wwwroot/xgame.zyttx.com/apk/";
-            if (!is_dir($path)) {
-                mkdir($path);
-            }
-            shell_exec(" 
+        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+            //提示
+        }else {
+            $admin_id = $_REQUEST['tg_channel'] ?? 1;
+            if (file_exists("/www2/wwwroot/xgame.zyttx.com/apk/youxihezi{$admin_id}.apk")) {
+                $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$admin_id}.apk");
+            } else {
+                $channe_id = $admin_id ?? 1;
+                $zip = new ZipArchive();
+                $filename = "/www2/wwwroot/xgame.zyttx.com/apk/base.apk";//母包位置
+                //复制一份到当前
+                //判断游戏目录是否存在
+                $path = "/www2/wwwroot/xgame.zyttx.com/apk/";
+                if (!is_dir($path)) {
+                    mkdir($path);
+                }
+                shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
         cp {$filename}  /www2/wwwroot/xgame.zyttx.com/apk/youxihezi{$channe_id}.apk;
         > /dev/null 2>&1 &");
-            sleep(5);
-            $now_path = $path . "/youxihezi{$channe_id}.apk";
-            if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
-                exit("cannot open <$filename> ");
+                sleep(5);
+                $now_path = $path . "/youxihezi{$channe_id}.apk";
+                if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
+                    exit("cannot open <$filename> ");
+                }
+                $zip->addFromString("META-INF/jiule_channelid", "{$channe_id}");
+                $zip->close();
+                $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$channe_id}.apk");
             }
-            $zip->addFromString("META-INF/jiule_channelid", "{$channe_id}");
-            $zip->close();
-            $this->redirect("http://xgame.zyttx.com/apk/youxihezi{$channe_id}.apk");
+            Yaf_Dispatcher::getInstance()->disableView();
         }
-        Yaf_Dispatcher::getInstance()->disableView();
     }
 
     /**
@@ -245,31 +251,34 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function apkgame4Action()
     {
-        $admin_id = $_REQUEST['tg_channel'] ?? null;
-        if (!$admin_id) {
-            die('tg_channel必须');
-        }
-        if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
-            $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
-        } else {
-            $zip = new ZipArchive();
-            $filename = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/base.ipa";//母包位置
-            //复制一份到当前
-            //判断游戏目录是否存在
-            $path = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/";
-            if (!is_dir($path)) {
-                mkdir($path);
+        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+            //提示
+        }else {
+            $admin_id = $_REQUEST['tg_channel'] ?? null;
+            if (!$admin_id) {
+                die('tg_channel必须');
             }
-            shell_exec(" 
+            if (file_exists("/www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa")) {
+                $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
+            } else {
+                $zip = new ZipArchive();
+                $filename = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/base.ipa";//母包位置
+                //复制一份到当前
+                //判断游戏目录是否存在
+                $path = "/www2/wwwroot/xgame.zyttx.com/ios/ipa/";
+                if (!is_dir($path)) {
+                    mkdir($path);
+                }
+                shell_exec(" 
         PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin;~/bin;
         export PATH;
         cp {$filename}  /www2/wwwroot/xgame.zyttx.com/ios/ipa/{$admin_id}.ipa;
         cp /www2/wwwroot/xgame.zyttx.com/ios/plist/base.plist  /www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist;
         > /dev/null 2>&1 &");
-            //复制plist文件
-            sleep(5);
-            //添加下载文件
-$content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+                //复制plist文件
+                sleep(5);
+                //添加下载文件
+                $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
 <dict>
@@ -318,16 +327,17 @@ $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     </array>
 </dict>
 </plist>";
-            file_put_contents("/www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist", $content);
-            $now_path = $path . "/{$admin_id}.ipa";
-            if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
-                exit("cannot open <$filename> ");
+                file_put_contents("/www2/wwwroot/xgame.zyttx.com/ios/plist/{$admin_id}.plist", $content);
+                $now_path = $path . "/{$admin_id}.ipa";
+                if ($zip->open($now_path, ZIPARCHIVE::CREATE) !== TRUE) {
+                    exit("cannot open <$filename> ");
+                }
+                $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$admin_id}");
+                $zip->close();
+                $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
             }
-            $zip->addFromString("Payload/UZApp.app/_CodeSignature/jiule_channelid", "{$admin_id}");
-            $zip->close();
-            $this->redirect("https://ipa.zyttx.com/index.php?channel={$admin_id}");
+            Yaf_Dispatcher::getInstance()->disableView();
         }
-        Yaf_Dispatcher::getInstance()->disableView();
     }
 
     private function downFile($file_name, $file_dir)
@@ -350,16 +360,6 @@ $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
             echo fread($file, filesize($file_dir . $file_name));
             fclose($file);
             exit ();
-        }
-    }
-
-    /**
-     * 检查微信浏览器
-     */
-    public function checkWx(){
-        if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
-            //提示
-
         }
     }
 }
