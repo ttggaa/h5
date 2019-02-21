@@ -1217,7 +1217,7 @@ class ApiController extends Yaf_Controller_Abstract
     /**
      * 论坛游戏列表
      */
-    public function applistActionV2(){
+    public function applistV2Action(){
 //        'type' => $type,//应用类型（1-软件，2-游戏），默认不区分应用类型
 //			'page' => $page,//分页号，默认值1
 //			'pagesize' => $pagesize,//每次请求返回的记录最大数量，默认20，最大值300
