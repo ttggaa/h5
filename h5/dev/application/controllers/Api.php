@@ -1214,6 +1214,75 @@ class ApiController extends Yaf_Controller_Abstract
         $info['items']=$now_games;
         echo json_encode($info,JSON_UNESCAPED_UNICODE);
     }
+    /**
+     * 论坛游戏列表
+     */
+    public function applistActionV2(){
+//        'type' => $type,//应用类型（1-软件，2-游戏），默认不区分应用类型
+//			'page' => $page,//分页号，默认值1
+//			'pagesize' => $pagesize,//每次请求返回的记录最大数量，默认20，最大值300
+//			'starttime' => $starttime,//按时间返回获取应用的起始时间（Unix时间戳）,单位为秒
+//			'endtime' => $endt
+        Yaf_Dispatcher::getInstance()->disableView();
+        $request = $_GET;
+        $this->checkParams($request, ['type', 'page', 'pagesize','starttime','endtime']);
+        $pn = $request['page'] ?? 1;
+        $limit = $request['pagesize'];
+        $order = 'weight ASC';
+        $selects = '*';
+        $m_game = new GameModel();
+        $games = $m_game->fetchAll("visible=1", $pn, $limit, $selects, $order);
+        $now_games=array();
+        foreach ($games as $key=>$row) {
+            $now_games[$key]['id']=$row['game_id'];
+            if($row['game_type']=='h5'){
+                $now_games[$key]['dtype']=4;//h5
+                $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
+            }else{
+                $now_games[$key]['dtype']=1;//h5
+                $now_games[$key]['downloadUrl']=$_SERVER['HTTP_HOST'].'/game/play.html?game_id='.$row['game_id'];//h5
+            }
+            $now_games[$key]['cp']=$row['game_id'];//h5
+            $now_games[$key]['rank']=$row['game_id'];//h5
+            $now_games[$key]['packageName']='';//h5
+            $now_games[$key]['minVersion']=$row['version'];//h5
+            $now_games[$key]['minVersionCode']=$row['version'];//h5
+            $now_games[$key]['name']=$row['name'];//h5
+            $now_games[$key]['categoryName']=$row['classic'];//h5
+            $now_games[$key]['description']=$row['details'];//h5
+            $now_games[$key]['direction_screen']=1;//h5
+            $now_games[$key]['host']=$row['game_id'];//h5
+            $now_games[$key]['incomeShare']=$row['game_id'];//h5
+            $now_games[$key]['rating']=$row['game_id'];//h5
+            $now_games[$key]['versionName']=$row['version'];
+            $now_games[$key]['boxLabel']='0';
+            $now_games[$key]['priceInfo']='0';
+            $now_games[$key]['tag']=$row['type'];
+            $now_games[$key]['downloadTimes']=$row['support'];
+            $now_games[$key]['apkSize']=0;
+            $now_games[$key]['createTime']=strtotime($row['add_time']);
+            $now_games[$key]['updateTime']=$row['add_time'];
+            $now_games[$key]['brief']=$row['search'];
+            $now_games[$key]['pay_env']=0;
+            $now_games[$key]['sort']=$row['weight'];
+            $now_games[$key]['developer']=$row['dev_id'];
+            $now_games[$key]['outList']=$row['dev_id'];
+            $now_games[$key]['profit']=$row['dev_id'];
+            $now_games[$key]['icons']=[16=>$row['logo'],32=>$row['logo'],64=>$row['logo'],96=>$row['logo'],128=>$row['logo']];
+            $now_games[$key]['iconUrl']=$row['logo'];
+            $now_games[$key]['gameType']=$row['dev_id'];
+            $now_games[$key]['gameTag']=$row['dev_id'];
+            $now_games[$key]['screenshotsUrl']=empty($row['screenshots']) ? array() : unserialize($row['screenshots']);
+            $now_games[$key]['screenshotsUrl']=rtrim(implode(',',$now_games[$key]['screenshotsUrl']), ",");
+//            $now_games[$key]['cp'] = $m_game->gradeHtml($row['grade']);
+//            $now_games[$key]['support'] = $m_game->supportFormat($row['support'] + $row['play_times']);
+        }
+        $info['total']=count($now_games);
+        $info['start']=$pn;
+        $info['num']=$pn*$limit;
+        $info['items']=$now_games;
+        echo json_encode($info,JSON_UNESCAPED_UNICODE);
+    }
 
     /**
      * 文章列表
