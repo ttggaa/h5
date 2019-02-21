@@ -107,7 +107,7 @@ class IndexController extends Yaf_Controller_Abstract
         if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
             //提示
             $v = $this->getView();
-            $tpl = $this->getViewpath().'/index/wx/';
+            $tpl = $this->getViewpath().'/index/wx.pthml';
             $v->display($tpl);
         }else {
             $game_id = $_GET['game_id'] ?? die('游戏id必须');
