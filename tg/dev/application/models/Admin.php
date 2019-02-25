@@ -20,11 +20,11 @@ class AdminModel extends F_Model_Pdo
 //	    $this->_tmp_m_g = F_Model_Pdo::getInstance('Admingroup');
 //        渠道ID  渠道帐号 盒子名字  分成比例  最后登录时间 最后登录IP 添加时间 状态  添加人  操作
 		return array(
-			'admin_id' => '代理ID',
+			'admin_id' => '渠道ID',
 			'username' => '代理帐号',
             'nickname' => '真实姓名',
             'pay_number' => '支付宝',
-			'boxname' => '网站或公会名字',
+			'boxname' => '渠道名字',
 			'divide_into' =>
                 function(&$row){
                     if( empty($row) ) return '分成比例';
