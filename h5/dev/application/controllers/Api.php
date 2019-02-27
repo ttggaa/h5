@@ -1262,7 +1262,7 @@ class ApiController extends Yaf_Controller_Abstract
             $now_games[$key]['apkSize']=$row['package_size'];
             $now_games[$key]['createTime']=strtotime($row['add_time']);
             $now_games[$key]['updateTime']=$row['add_time'];
-            $now_games[$key]['brief']=$row['search'];
+            $now_games[$key]['brief']=$row['in_short'];
             $now_games[$key]['pay_env']=0;
             $now_games[$key]['sort']=$row['weight'];
             $now_games[$key]['developer']=$row['dev_id'];
